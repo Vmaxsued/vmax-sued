@@ -1,0 +1,23 @@
+<script>
+(function() {
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var content = this.nextElementSibling;
+      var icon = this.querySelector('.faq-icon');
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+
+      document.querySelectorAll('.faq-toggle').forEach(function(other) {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          other.nextElementSibling.classList.add('hidden');
+          other.querySelector('.faq-icon').style.transform = '';
+        }
+      });
+
+      this.setAttribute('aria-expanded', !expanded);
+      content.classList.toggle('hidden');
+      icon.style.transform = expanded ? '' : 'rotate(45deg)';
+    });
+  });
+})();
+</script>

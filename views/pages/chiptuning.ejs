@@ -1,11 +1,196 @@
 <%- include('../layouts/main') %>
 
-<section class="pt-32 section-spacing">
-  <div class="container-vmax">
-    <p class="label-caps text-accent mb-4">VMAX Süd</p>
-    <h1 class="font-display text-4xl md:text-display-section font-medium uppercase tracking-tight"><%= title.split(' — ')[0] %></h1>
-    <p class="text-text-secondary mt-6">Diese Seite wird in den nächsten Deliverables ausgebaut.</p>
+<!-- Hero -->
+<section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+  <div class="absolute inset-0 bg-bg-secondary">
+    <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=80'); background-size: cover; background-position: center;"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-bg-primary/40"></div>
+  </div>
+  <div class="container-vmax relative z-10">
+    <nav class="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-text-secondary transition-colors">Start</a>
+      <span class="mx-2">/</span>
+      <span class="text-text-secondary">Chiptuning</span>
+    </nav>
+    <span class="label-caps text-accent block mb-4">Leistungssteigerung</span>
+    <h1 class="font-display text-4xl md:text-5xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05] max-w-4xl">
+      Chiptuning &amp; Kennfeldoptimierung
+    </h1>
+    <p class="mt-6 text-lg text-text-secondary max-w-2xl">
+      Einzelabstimmung auf dem Prüfstand. Kein Softwarepaket aus der Dose — sondern individuelle Kennfeldoptimierung, zugeschnitten auf Ihren Motor.
+    </p>
   </div>
 </section>
 
+<!-- Editorial + Sidebar -->
+<section class="section-spacing">
+  <div class="container-vmax">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Content -->
+      <div class="lg:col-span-7 order-2 lg:order-1">
+        <div class="space-y-6 text-text-secondary text-lg leading-relaxed">
+          <p>
+            Chiptuning ist nicht gleich Chiptuning. Der Unterschied zwischen einer generischen Softwarelösung und einer professionellen Einzelabstimmung ist vergleichbar mit dem Unterschied zwischen einem Anzug von der Stange und einem Maßanzug. Beides sitzt — aber nur eines passt wirklich.
+          </p>
+          <p>
+            Bei VMAX Süd wird jedes Fahrzeug einzeln auf dem Prüfstand abgestimmt. Wir messen den Ist-Zustand Ihres Motors, analysieren die Daten und optimieren die Kennfelder Schritt für Schritt. Dabei überwachen wir permanent alle relevanten Parameter: Ladedruck, Zündwinkel, Lambda-Werte, Abgastemperaturen.
+          </p>
+          <p>
+            Das Ergebnis ist eine Leistungssteigerung, die nicht nur auf dem Papier beeindruckt, sondern sich im Alltag spürbar und sicher anfühlt. Und die auf Wunsch auch den TÜV besteht.
+          </p>
+        </div>
+
+        <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight text-text-primary mt-14 mb-6">
+          Unsere Stufen
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border border-border-subtle p-6 bg-bg-tertiary">
+            <p class="label-caps text-accent mb-2">Stage 1</p>
+            <p class="font-display text-lg font-medium text-text-primary uppercase">Software</p>
+            <p class="text-text-secondary text-sm mt-3 leading-relaxed">
+              Reine Kennfeldoptimierung ohne Hardware-Änderungen. Typisch <span class="font-mono text-accent">+20–30%</span> Mehrleistung.
+            </p>
+          </div>
+          <div class="border border-border-subtle p-6 bg-bg-tertiary">
+            <p class="label-caps text-accent mb-2">Stage 2</p>
+            <p class="font-display text-lg font-medium text-text-primary uppercase">Soft + Hardware</p>
+            <p class="text-text-secondary text-sm mt-3 leading-relaxed">
+              Optimierte Software plus Downpipe, Ansaugung oder Ladeluftkühler. Typisch <span class="font-mono text-accent">+30–50%</span> Mehrleistung.
+            </p>
+          </div>
+          <div class="border border-border-subtle p-6 bg-bg-tertiary">
+            <p class="label-caps text-accent mb-2">Individual</p>
+            <p class="font-display text-lg font-medium text-text-primary uppercase">Maßarbeit</p>
+            <p class="text-text-secondary text-sm mt-3 leading-relaxed">
+              Vollständig individueller Umbau mit dedizierter Abstimmung. Für Kunden mit klaren Leistungszielen.
+            </p>
+          </div>
+        </div>
+
+        <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight text-text-primary mt-14 mb-6">
+          Was Sie von uns bekommen
+        </h2>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Prüfstandslauf vor und nach der Optimierung — Sie sehen den Unterschied schwarz auf weiß
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Daten-Report zum Mitnehmen mit allen Messwerten
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Möglichkeit der TÜV-Eintragung — auf Wunsch direkt im Anschluss
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Rückrüstung jederzeit möglich — Ihre Originalsoftware wird gesichert
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-5 order-1 lg:order-2">
+        <div class="lg:sticky lg:top-28 space-y-6">
+          <div class="border border-border-subtle p-6 bg-bg-tertiary">
+            <p class="label-caps text-accent mb-4">Auf einen Blick</p>
+            <dl class="space-y-4">
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Dauer</dt><dd class="font-mono text-text-primary text-sm">2–4 Stunden</dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Preisspanne</dt><dd class="font-mono text-text-primary text-sm">ab 499 €</dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">TÜV-fähig</dt><dd class="text-accent-success text-sm font-medium">Ja</dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Rückrüstung</dt><dd class="text-accent-success text-sm font-medium">Jederzeit</dd></div>
+            </dl>
+          </div>
+          <div class="border border-accent/30 p-6 bg-bg-tertiary">
+            <p class="font-display text-lg font-medium uppercase tracking-tight text-text-primary mb-2">Interesse?</p>
+            <p class="text-text-secondary text-sm mb-6">Nennen Sie uns Ihr Fahrzeug — wir sagen Ihnen, was möglich ist.</p>
+            <a href="/kontakt" class="btn-primary w-full justify-center text-sm">Unverbindlich anfragen</a>
+            <a href="tel:<%= phone %>" class="btn-ghost w-full justify-center text-sm mt-3">Oder direkt anrufen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-spacing bg-bg-secondary">
+  <div class="container-vmax max-w-3xl">
+    <span class="label-caps text-accent block mb-4">Häufige Fragen</span>
+    <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight mb-10">Chiptuning — FAQ</h2>
+
+    <div class="space-y-4">
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Ist Chiptuning schädlich für den Motor?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Bei einer professionellen Einzelabstimmung innerhalb der Sicherheitsreserven des Motors: Nein. Wir bewegen uns immer im Rahmen dessen, was die Mechanik und Thermik sicher verträgt. Generische Softwarelösungen ohne individuelle Prüfung sind dagegen ein echtes Risiko.</p>
+        </div>
+      </div>
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Verliere ich meine Herstellergarantie?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Bei einem Neuwagen kann die Herstellergarantie betroffen sein — das kommunizieren wir offen. Allerdings muss der Hersteller im Schadensfall nachweisen, dass die Optimierung ursächlich war. Eine TÜV-Eintragung schafft zusätzliche Rechtssicherheit.</p>
+        </div>
+      </div>
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Kann das Tuning rückgängig gemacht werden?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Ja, jederzeit. Vor jeder Optimierung sichern wir die Original-Software. Eine Rückrüstung auf den Serienzustand ist damit problemlos möglich — z.B. vor einem Werkstattbesuch oder Verkauf.</p>
+        </div>
+      </div>
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Wie lange dauert eine Abstimmung?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Eine Stage-1-Abstimmung dauert in der Regel 2–4 Stunden. Bei Stage 2 oder individuellen Umbauten planen wir einen ganzen Tag ein. Wir vereinbaren vorab einen festen Termin.</p>
+        </div>
+      </div>
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Steigt der Verbrauch nach dem Tuning?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Nicht zwangsläufig. Bei zurückhaltendem Fahrstil kann der Verbrauch sogar leicht sinken, da der Motor effizienter arbeitet. Wer die Mehrleistung regelmäßig abruft, wird naturgemäß einen höheren Verbrauch feststellen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Links -->
+<section class="py-16 border-t border-border-subtle">
+  <div class="container-vmax">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="text-text-muted text-sm">Weiterführend</p>
+        <div class="flex flex-wrap gap-4 mt-2">
+          <a href="/tuev-eintragung" class="text-text-secondary hover:text-accent transition-colors text-sm">TÜV-Eintragung &rarr;</a>
+          <a href="/komplettumbauten" class="text-text-secondary hover:text-accent transition-colors text-sm">Komplettumbauten &rarr;</a>
+          <a href="/b2b" class="text-text-secondary hover:text-accent transition-colors text-sm">B2B-Prüftechnik &rarr;</a>
+        </div>
+      </div>
+      <a href="/kontakt" class="btn-primary text-sm py-3 px-6">Termin anfragen</a>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/faq-script') %>
 <%- include('../layouts/end') %>
