@@ -1,0 +1,256 @@
+<%- include('../layouts/main') %>
+
+<!-- Hero -->
+<section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+  <div class="absolute inset-0 bg-bg-secondary">
+    <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/70 to-bg-primary/30"></div>
+  </div>
+  <div class="container-vmax relative z-10">
+    <nav class="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-text-secondary transition-colors">Start</a>
+      <span class="mx-2">/</span>
+      <a href="/chiptuning" class="hover:text-text-secondary transition-colors">Chiptuning</a>
+      <span class="mx-2">/</span>
+      <span class="text-text-secondary"><%= vehicle.brand %> <%= vehicle.model %></span>
+    </nav>
+    <span class="label-caps text-accent block mb-4"><%= vehicle.brand %></span>
+    <h1 class="font-display text-4xl md:text-5xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05]">
+      <%= vehicle.model %> Chiptuning
+    </h1>
+    <p class="mt-4 text-lg text-text-secondary max-w-2xl">
+      Professionelle Einzelabstimmung für Ihren <%= vehicle.brand %> <%= vehicle.model %> (<%= vehicle.engine %>) in Westendorf bei Augsburg.
+    </p>
+  </div>
+</section>
+
+<!-- Leistungstabelle + Content -->
+<section class="section-spacing">
+  <div class="container-vmax">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Content -->
+      <div class="lg:col-span-7">
+
+        <!-- Leistungstabelle -->
+        <div class="border border-border-subtle overflow-hidden mb-12">
+          <div class="bg-bg-tertiary px-6 py-4 border-b border-border-subtle">
+            <p class="label-caps text-accent">Leistungsdaten <%= vehicle.brand %> <%= vehicle.model %></p>
+          </div>
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-border-subtle text-left">
+                <th class="px-6 py-3 text-text-muted text-xs uppercase tracking-wider font-medium"></th>
+                <th class="px-6 py-3 text-text-muted text-xs uppercase tracking-wider font-medium">Leistung</th>
+                <th class="px-6 py-3 text-text-muted text-xs uppercase tracking-wider font-medium">Drehmoment</th>
+                <th class="px-6 py-3 text-text-muted text-xs uppercase tracking-wider font-medium hidden sm:table-cell">Differenz</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-border-subtle">
+                <td class="px-6 py-4 text-text-secondary text-sm font-medium">Serie</td>
+                <td class="px-6 py-4 font-mono text-text-primary"><%= vehicle.stock.ps %> PS</td>
+                <td class="px-6 py-4 font-mono text-text-primary"><%= vehicle.stock.nm %> Nm</td>
+                <td class="px-6 py-4 text-text-muted text-sm hidden sm:table-cell">—</td>
+              </tr>
+              <tr class="border-b border-border-subtle bg-bg-tertiary/50">
+                <td class="px-6 py-4 text-text-primary text-sm font-medium">Stage 1</td>
+                <td class="px-6 py-4 font-mono text-text-primary font-medium"><%= vehicle.stage1.ps %> PS</td>
+                <td class="px-6 py-4 font-mono text-text-primary font-medium"><%= vehicle.stage1.nm %> Nm</td>
+                <td class="px-6 py-4 font-mono text-accent text-sm hidden sm:table-cell">+<%= vehicle.stage1.ps - vehicle.stock.ps %> PS / +<%= vehicle.stage1.nm - vehicle.stock.nm %> Nm</td>
+              </tr>
+              <% if (vehicle.stage2) { %>
+              <tr class="bg-bg-tertiary/30">
+                <td class="px-6 py-4 text-text-primary text-sm font-medium">Stage 2</td>
+                <td class="px-6 py-4 font-mono text-text-primary font-medium"><%= vehicle.stage2.ps %> PS</td>
+                <td class="px-6 py-4 font-mono text-text-primary font-medium"><%= vehicle.stage2.nm %> Nm</td>
+                <td class="px-6 py-4 font-mono text-accent text-sm hidden sm:table-cell">+<%= vehicle.stage2.ps - vehicle.stock.ps %> PS / +<%= vehicle.stage2.nm - vehicle.stock.nm %> Nm</td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Highlight-Zahlen -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+          <div class="border border-border-subtle p-5 text-center bg-bg-tertiary">
+            <p class="font-mono text-3xl text-accent font-medium">+<%= vehicle.stage1.ps - vehicle.stock.ps %></p>
+            <p class="text-text-muted text-xs uppercase tracking-wider mt-1">PS (Stage 1)</p>
+          </div>
+          <div class="border border-border-subtle p-5 text-center bg-bg-tertiary">
+            <p class="font-mono text-3xl text-accent font-medium">+<%= vehicle.stage1.nm - vehicle.stock.nm %></p>
+            <p class="text-text-muted text-xs uppercase tracking-wider mt-1">Nm (Stage 1)</p>
+          </div>
+          <% if (vehicle.stage2) { %>
+          <div class="border border-border-subtle p-5 text-center bg-bg-tertiary">
+            <p class="font-mono text-3xl text-accent font-medium">+<%= vehicle.stage2.ps - vehicle.stock.ps %></p>
+            <p class="text-text-muted text-xs uppercase tracking-wider mt-1">PS (Stage 2)</p>
+          </div>
+          <% } %>
+        </div>
+
+        <!-- Editorial -->
+        <div class="space-y-6 text-text-secondary text-lg leading-relaxed">
+          <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight text-text-primary">
+            Warum sich der <%= vehicle.model %> besonders eignet
+          </h2>
+          <p>
+            Der <%= vehicle.engine %>-Motor im <%= vehicle.brand %> <%= vehicle.model %> (<%= vehicle.year %>) gehört zu den Aggregaten, die ab Werk bereits über ein solides Fundament verfügen. Die Sicherheitsreserven in der Serienabstimmung ermöglichen eine spürbare Leistungssteigerung, ohne die Langzeitbetriebssicherheit zu gefährden.
+          </p>
+          <p>
+            Bei einer Stage-1-Einzelabstimmung auf unserem Prüfstand optimieren wir die Kennfelder für Ladedruck, Zündwinkel und Einspritzung individuell. Das Ergebnis: <span class="font-mono text-accent">+<%= vehicle.stage1.ps - vehicle.stock.ps %>&nbsp;PS</span> und <span class="font-mono text-accent">+<%= vehicle.stage1.nm - vehicle.stock.nm %>&nbsp;Nm</span> — messbar auf dem Prüfstand und spürbar auf der Straße.
+          </p>
+          <% if (vehicle.stage2) { %>
+          <p>
+            Für den Stage-2-Ausbau empfehlen wir je nach Motorvariante eine optimierte Ansaugung, einen Ladeluftkühler-Upgrade oder eine Downpipe. In Kombination mit der darauf abgestimmten Software sind bis zu <span class="font-mono text-accent"><%= vehicle.stage2.ps %>&nbsp;PS</span> und <span class="font-mono text-accent"><%= vehicle.stage2.nm %>&nbsp;Nm</span> realistisch.
+          </p>
+          <% } %>
+          <p>
+            Selbstverständlich ist bei jeder Stufe eine TÜV-Eintragung möglich. Sie fahren legal — mit Nachweis.
+          </p>
+        </div>
+
+        <!-- Prozess -->
+        <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight text-text-primary mt-14 mb-6">
+          So läuft Ihr Termin ab
+        </h2>
+        <div class="space-y-4">
+          <div class="flex gap-4 items-start">
+            <span class="font-mono text-accent text-lg font-medium w-8 flex-shrink-0">01</span>
+            <div>
+              <p class="text-text-primary font-medium">Beratungsgespräch</p>
+              <p class="text-text-secondary text-sm">Zieldefinition, Zustandscheck, realistische Einschätzung.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="font-mono text-accent text-lg font-medium w-8 flex-shrink-0">02</span>
+            <div>
+              <p class="text-text-primary font-medium">Ist-Messung auf dem Prüfstand</p>
+              <p class="text-text-secondary text-sm">Dokumentation der Serienleistung vor der Optimierung.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="font-mono text-accent text-lg font-medium w-8 flex-shrink-0">03</span>
+            <div>
+              <p class="text-text-primary font-medium">Einzelabstimmung</p>
+              <p class="text-text-secondary text-sm">Iterative Kennfeldoptimierung, Kontrolle aller Parameter.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="font-mono text-accent text-lg font-medium w-8 flex-shrink-0">04</span>
+            <div>
+              <p class="text-text-primary font-medium">Ergebnis-Messung + Report</p>
+              <p class="text-text-secondary text-sm">Vergleichsmessung und Daten-Report zum Mitnehmen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-5">
+        <div class="lg:sticky lg:top-28 space-y-6">
+          <!-- Vehicle Card -->
+          <div class="border border-border-subtle bg-bg-tertiary overflow-hidden">
+            <div class="h-48 bg-bg-secondary flex items-center justify-center">
+              <p class="text-text-muted text-sm">Fahrzeugbild wird nachgeliefert</p>
+            </div>
+            <div class="p-6">
+              <p class="label-caps text-text-muted mb-1"><%= vehicle.brand %></p>
+              <p class="font-display text-xl font-medium uppercase tracking-tight"><%= vehicle.model %></p>
+              <dl class="mt-4 space-y-2">
+                <div class="flex justify-between text-sm"><dt class="text-text-muted">Motor</dt><dd class="font-mono text-text-primary"><%= vehicle.engine %></dd></div>
+                <div class="flex justify-between text-sm"><dt class="text-text-muted">Baujahr</dt><dd class="font-mono text-text-primary"><%= vehicle.year %></dd></div>
+                <div class="flex justify-between text-sm"><dt class="text-text-muted">Serie</dt><dd class="font-mono text-text-primary"><%= vehicle.stock.ps %> PS / <%= vehicle.stock.nm %> Nm</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="border border-accent/30 p-6 bg-bg-tertiary">
+            <p class="font-display text-lg font-medium uppercase tracking-tight text-text-primary mb-2">
+              <%= vehicle.model %> Tuning anfragen
+            </p>
+            <p class="text-text-secondary text-sm mb-6">
+              Lassen Sie sich unverbindlich beraten. Wir sagen Ihnen, was bei Ihrem konkreten Fahrzeug möglich ist.
+            </p>
+            <a href="/kontakt" class="btn-primary w-full justify-center text-sm">
+              Termin anfragen
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="tel:<%= phone %>" class="btn-ghost w-full justify-center text-sm mt-3">Oder direkt anrufen</a>
+          </div>
+
+          <!-- Quick Facts -->
+          <div class="border border-border-subtle p-6 bg-bg-tertiary">
+            <p class="label-caps text-accent mb-4">Auf einen Blick</p>
+            <dl class="space-y-3">
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Methode</dt><dd class="text-text-primary text-sm">Einzelabstimmung</dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Dauer</dt><dd class="font-mono text-text-primary text-sm">2–4 Stunden</dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">TÜV-fähig</dt><dd class="text-accent-success text-sm font-medium">Ja</dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Rückrüstung</dt><dd class="text-accent-success text-sm font-medium">Jederzeit</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-spacing bg-bg-secondary">
+  <div class="container-vmax max-w-3xl">
+    <span class="label-caps text-accent block mb-4">Häufige Fragen</span>
+    <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight mb-10"><%= vehicle.brand %> <%= vehicle.model %> Tuning — FAQ</h2>
+
+    <div class="space-y-4">
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Wie viel PS bringt ein Chiptuning beim <%= vehicle.model %>?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Bei einer Stage-1-Einzelabstimmung des <%= vehicle.engine %>-Motors erzielen wir typischerweise +<%= vehicle.stage1.ps - vehicle.stock.ps %> PS und +<%= vehicle.stage1.nm - vehicle.stock.nm %> Nm Drehmoment.<%= vehicle.stage2 ? ' Mit Stage 2 (inkl. Hardware-Upgrades) sind bis zu +' + (vehicle.stage2.ps - vehicle.stock.ps) + ' PS möglich.' : '' %></p>
+        </div>
+      </div>
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Ist das Tuning für meinen <%= vehicle.model %> TÜV-fähig?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Ja. Wir bieten für den <%= vehicle.brand %> <%= vehicle.model %> die Möglichkeit der TÜV-Eintragung an. Auf Wunsch begleiten wir Sie direkt zum Prüftermin und stellen alle notwendigen Unterlagen bereit.</p>
+        </div>
+      </div>
+      <div class="border border-border-subtle">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" aria-expanded="false">
+          <span class="text-text-primary font-medium text-sm pr-4">Was kostet das Chiptuning für den <%= vehicle.model %>?</span>
+          <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-content hidden px-5 pb-5">
+          <p class="text-text-secondary text-sm leading-relaxed">Die Kosten für eine Stage-1-Abstimmung beginnen bei 499 €. Der genaue Preis hängt von Motorvariante und gewünschtem Umfang ab. Kontaktieren Sie uns für ein individuelles Angebot für Ihren <%= vehicle.model %>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Weitere Fahrzeuge -->
+<section class="py-16 border-t border-border-subtle">
+  <div class="container-vmax">
+    <p class="label-caps text-accent mb-6">Weitere Fahrzeuge</p>
+    <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+      <% otherVehicles.forEach(function(v) { %>
+      <a href="/tuning/<%= v.brandSlug %>/<%= v.slug %>" class="flex-shrink-0 w-[220px] border border-border-subtle p-4 bg-bg-tertiary hover:border-accent/30 hover:-translate-y-1 transition-all duration-300">
+        <p class="label-caps text-text-muted text-[10px] mb-1"><%= v.brand %></p>
+        <p class="font-display text-sm font-medium uppercase tracking-tight"><%= v.model %></p>
+        <p class="font-mono text-accent text-sm mt-2">+<%= v.stage1.ps - v.stock.ps %> PS</p>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/faq-script') %>
+<%- include('../layouts/end') %>

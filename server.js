@@ -69,9 +69,11 @@ app.use((req, res, next) => {
 // Routes
 const pageRoutes = require('./src/server/routes/pages');
 const apiRoutes = require('./src/server/routes/api');
+const dynamicRoutes = require('./src/server/routes/dynamic');
 
 app.use('/', pageRoutes);
 app.use('/api', apiRoutes);
+app.use('/', dynamicRoutes);
 
 // 404
 app.use((req, res) => {

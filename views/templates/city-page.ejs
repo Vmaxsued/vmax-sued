@@ -1,0 +1,106 @@
+<%- include('../layouts/main') %>
+
+<!-- Hero -->
+<section class="pt-32 pb-16 lg:pt-40 lg:pb-20">
+  <div class="container-vmax">
+    <nav class="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-text-secondary transition-colors">Start</a>
+      <span class="mx-2">/</span>
+      <a href="/chiptuning" class="hover:text-text-secondary transition-colors">Chiptuning</a>
+      <span class="mx-2">/</span>
+      <span class="text-text-secondary"><%= city.name %></span>
+    </nav>
+    <span class="label-caps text-accent block mb-4">Chiptuning in Ihrer Nähe</span>
+    <h1 class="font-display text-4xl md:text-5xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05] max-w-4xl">
+      Chiptuning <%= city.name %>
+    </h1>
+    <p class="mt-4 text-lg text-text-secondary max-w-2xl">
+      Professionelle Einzelabstimmung auf dem Prüfstand — nur <%= city.distance %> (<%= city.driveTime %>) von <%= city.name %> entfernt.
+    </p>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="pb-section-mobile lg:pb-section">
+  <div class="container-vmax">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <div class="lg:col-span-7">
+        <div class="space-y-6 text-text-secondary text-lg leading-relaxed">
+          <p>
+            Sie suchen professionelles Chiptuning in <%= city.name %>? VMAX Süd in Westendorf ist Ihr Spezialist für Einzelabstimmung und TÜV-konforme Leistungssteigerung — und nur <%= city.distance %> von <%= city.name %> entfernt. Die Anfahrt dauert etwa <%= city.driveTime %>.
+          </p>
+          <p>
+            Anders als bei Anbietern, die mit Paketlösungen aus der Ferne arbeiten, wird bei VMAX Süd jedes Fahrzeug einzeln auf dem Prüfstand abgestimmt. Das bedeutet: Ihr Motor, Ihre Kennfelder, Ihre Abstimmung — nicht eine generische Software, die auf tausend verschiedene Fahrzeuge gespielt wird.
+          </p>
+          <p>
+            Ob VW Golf GTI, Audi RS3, Tiguan R oder ein anderes Modell aus dem VAG-Konzern — wir kennen die Motoren und deren Potential. Über 80% aller gängigen Modelle können wir abdecken.
+          </p>
+        </div>
+
+        <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight text-text-primary mt-14 mb-6">
+          Unsere Leistungen für Kunden aus <%= city.name %>
+        </h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Chiptuning mit Einzelabstimmung auf dem Prüfstand
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            TÜV-Eintragung und Einzelabnahme
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Komplettumbauten mit StVO-Abnahme
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <svg class="w-5 h-5 text-accent-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Vorher-Nachher-Messung mit Daten-Report
+          </li>
+        </ul>
+
+        <!-- Beliebte Fahrzeuge -->
+        <h2 class="font-display text-2xl md:text-display-card font-medium uppercase tracking-tight text-text-primary mt-14 mb-6">
+          Beliebte Fahrzeuge aus <%= city.name %>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% vehicles.forEach(function(v) { %>
+          <a href="/tuning/<%= v.brandSlug %>/<%= v.slug %>" class="flex items-center justify-between p-4 border border-border-subtle bg-bg-tertiary hover:border-accent/30 transition-colors">
+            <div>
+              <p class="text-text-primary text-sm font-medium"><%= v.brand %> <%= v.model %></p>
+              <p class="text-text-muted text-xs mt-0.5"><%= v.engine %></p>
+            </div>
+            <p class="font-mono text-accent text-sm">+<%= v.stage1.ps - v.stock.ps %> PS</p>
+          </a>
+          <% }); %>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-5">
+        <div class="lg:sticky lg:top-28 space-y-6">
+          <!-- Anfahrt -->
+          <div class="border border-border-subtle p-6 bg-bg-tertiary">
+            <p class="label-caps text-accent mb-4">Anfahrt von <%= city.name %></p>
+            <dl class="space-y-3">
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Entfernung</dt><dd class="font-mono text-text-primary text-sm"><%= city.distance %></dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Fahrzeit</dt><dd class="font-mono text-text-primary text-sm">ca. <%= city.driveTime %></dd></div>
+              <div class="border-t border-border-subtle"></div>
+              <div class="flex justify-between items-baseline"><dt class="text-text-secondary text-sm">Adresse</dt><dd class="text-text-primary text-sm text-right"><%= address.street %><br><%= address.zip %> <%= address.city %></dd></div>
+            </dl>
+          </div>
+          <div class="border border-accent/30 p-6 bg-bg-tertiary">
+            <p class="font-display text-lg font-medium uppercase tracking-tight text-text-primary mb-2">Termin vereinbaren</p>
+            <p class="text-text-secondary text-sm mb-6">Rufen Sie an oder schreiben Sie uns — wir finden einen passenden Termin für Sie.</p>
+            <a href="/kontakt" class="btn-primary w-full justify-center text-sm">Jetzt anfragen</a>
+            <a href="tel:<%= phone %>" class="btn-ghost w-full justify-center text-sm mt-3">Direkt anrufen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../layouts/end') %>
