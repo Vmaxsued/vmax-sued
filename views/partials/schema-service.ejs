@@ -1,0 +1,71 @@
+<% if (typeof schema !== 'undefined' && schema) { %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "<%= schema.name %>",
+  "description": "<%= schema.description %>",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "VMAX Süd",
+    "url": "<%= siteUrl %>"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Bayern"
+  }<% if (schema.price) { %>,
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "price": "<%= schema.price %>",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "EUR",
+      "price": "<%= schema.price %>",
+      "unitText": "ab"
+    }
+  }<% } %>
+}
+</script>
+<% } %>
+<% if (typeof breadcrumbs !== 'undefined' && breadcrumbs) { %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Start",
+      "item": "<%= siteUrl %>"
+    }<% breadcrumbs.forEach(function(crumb, i) { %>,
+    {
+      "@type": "ListItem",
+      "position": <%= i + 2 %>,
+      "name": "<%= crumb.name %>",
+      "item": "<%= siteUrl %><%= crumb.path %>"
+    }<% }); %>
+  ]
+}
+</script>
+<% } %>
+<% if (typeof faq !== 'undefined' && faq && faq.length > 0) { %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    <% faq.forEach(function(item, i) { %>{
+      "@type": "Question",
+      "name": "<%- item.q.replace(/"/g, '\\"') %>",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<%- item.a.replace(/"/g, '\\"') %>"
+      }
+    }<%= i < faq.length - 1 ? ',' : '' %>
+    <% }); %>
+  ]
+}
+</script>
+<% } %>
