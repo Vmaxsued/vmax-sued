@@ -3,17 +3,20 @@
 <!-- Hero -->
 <section class="pt-32 pb-12 lg:pt-40 lg:pb-16">
   <div class="container-vmax">
-    <nav class="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-text-secondary transition-colors">Start</a>
+    <nav class="font-mono text-[11px] tracking-wider text-titan/60 uppercase mb-8" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-text-primary transition-colors">Start</a>
       <span class="mx-2">/</span>
-      <span class="text-text-secondary">Galerie</span>
+      <span class="text-burnt">Galerie</span>
     </nav>
-    <span class="label-caps text-accent block mb-4">Projekte</span>
-    <h1 class="font-display text-4xl md:text-5xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05]">
-      Galerie
+    <div class="flex items-center gap-3 mb-6">
+      <span class="slash-accent"></span>
+      <span class="label-caps text-titan">Echte Kundenfahrzeuge · Prüfstand-Impressionen</span>
+    </div>
+    <h1 class="font-display text-display-hero uppercase leading-[0.95] tracking-tight">
+      Projekte vom<br><span class="text-burnt">Prüfstand.</span>
     </h1>
-    <p class="mt-4 text-lg text-text-secondary max-w-2xl">
-      Kundenfahrzeuge, Prüfstands-Sessions und abgeschlossene Projekte. Echte Ergebnisse — kein Stock-Material.
+    <p class="mt-6 text-lg text-text-secondary max-w-2xl">
+      Kundenfahrzeuge, Prüfstands-Sessions und abgeschlossene Projekte. Echte Ergebnisse aus Westendorf — kein Stock-Material.
     </p>
   </div>
 </section>
@@ -22,11 +25,12 @@
 <section class="pb-8">
   <div class="container-vmax">
     <div class="flex flex-wrap gap-2" id="gallery-filters">
-      <button class="gallery-filter active px-4 py-2 text-sm font-medium border border-border-subtle bg-bg-tertiary text-text-primary transition-colors" data-filter="all">Alle</button>
-      <button class="gallery-filter px-4 py-2 text-sm font-medium border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="volkswagen">Volkswagen</button>
-      <button class="gallery-filter px-4 py-2 text-sm font-medium border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="audi">Audi</button>
-      <button class="gallery-filter px-4 py-2 text-sm font-medium border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="seat">SEAT / CUPRA</button>
-      <button class="gallery-filter px-4 py-2 text-sm font-medium border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="andere">Andere</button>
+      <button class="gallery-filter active font-condensed uppercase tracking-wider px-4 py-2 text-xs border border-border-subtle bg-bg-tertiary text-text-primary transition-colors" data-filter="all">Alle</button>
+      <button class="gallery-filter font-condensed uppercase tracking-wider px-4 py-2 text-xs border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="bmw">BMW</button>
+      <button class="gallery-filter font-condensed uppercase tracking-wider px-4 py-2 text-xs border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="audi">Audi</button>
+      <button class="gallery-filter font-condensed uppercase tracking-wider px-4 py-2 text-xs border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="opel">Opel</button>
+      <button class="gallery-filter font-condensed uppercase tracking-wider px-4 py-2 text-xs border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="ford">Ford</button>
+      <button class="gallery-filter font-condensed uppercase tracking-wider px-4 py-2 text-xs border border-border-subtle text-text-muted hover:text-text-primary transition-colors" data-filter="prufstand">Prüfstand</button>
     </div>
   </div>
 </section>
@@ -37,29 +41,32 @@
     <div class="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5" id="gallery-grid">
 
       <% var galleryItems = [
-        { img: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800&q=80', brand: 'volkswagen', label: 'VW Golf 7 GTI', desc: 'Stage 1 — +70 PS', tall: true },
-        { img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=80', brand: 'audi', label: 'Audi RS3 8V', desc: 'Stage 2 — +120 PS', tall: false },
-        { img: 'https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800&q=80', brand: 'volkswagen', label: 'VW Golf 8 R', desc: 'Stage 1 — +80 PS', tall: false },
-        { img: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80', brand: 'audi', label: 'Audi TT RS', desc: 'Stage 1 — +60 PS', tall: true },
-        { img: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80', brand: 'seat', label: 'SEAT Leon Cupra', desc: 'Stage 1 — +70 PS', tall: false },
-        { img: 'https://images.unsplash.com/photo-1606611013016-969c19ba27a5?w=800&q=80', brand: 'volkswagen', label: 'VW Tiguan R', desc: 'Stage 1 — +70 PS', tall: false },
-        { img: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80', brand: 'seat', label: 'CUPRA Formentor VZ', desc: 'Stage 1 — +70 PS', tall: true },
-        { img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80', brand: 'andere', label: 'Prüfstand-Session', desc: 'Kennfeldoptimierung', tall: false },
-        { img: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80', brand: 'andere', label: 'Komplettumbau', desc: 'StVO-Abnahme bestanden', tall: false },
+        { img: '/images/vehicles/opt-01.jpg', brand: 'bmw',       label: 'BMW · TwinPower Turbo',      desc: 'Einzelabstimmung am Prüfstand · Westendorf', tall: false },
+        { img: '/images/vehicles/opt-02.jpg', brand: 'opel',      label: 'Opel Astra J OPC',           desc: 'Kundenfahrzeug · TÜV-eingetragen',          tall: true  },
+        { img: '/images/vehicles/opt-03.jpg', brand: 'audi',      label: 'Audi A6 · 3.0 TDI',          desc: 'Kennfeldoptimierung · Prüfstand-Session',   tall: false },
+        { img: '/images/vehicles/opt-04.jpg', brand: 'opel',      label: 'Opel Kadett C Coupé',        desc: 'Klassiker · Kundenprojekt',                 tall: true  },
+        { img: '/images/vehicles/opt-05.jpg', brand: 'prufstand', label: 'Tuner-Treffen "Fraktion Sued"', desc: 'Kundenkreis · Augsburger Region',           tall: false },
+        { img: '/images/vehicles/opt-06.jpg', brand: 'ford',      label: 'Ford Focus RS Mk2',          desc: 'Kennfeldoptimierung · Stage 1',             tall: false },
+        { img: '/images/vehicles/opt-07.jpg', brand: 'ford',      label: 'Ford Focus RS Mk2',          desc: 'Detail · ultimate-grün Lackierung',         tall: true  },
+        { img: '/images/vehicles/opt-08.jpg', brand: 'ford',      label: 'Ford Focus RS Mk2',          desc: 'Heckansicht · nach Abstimmung',             tall: false },
+        { img: '/images/vehicles/opt-09.jpg', brand: 'ford',      label: 'Ford Focus RS Mk2',          desc: 'Bühne · Vorbereitung Eintragung',           tall: true  },
+        { img: '/images/vehicles/opt-10.jpg', brand: 'opel',      label: 'Opel Corsa D OPC',           desc: 'Auf dem Prüfstand · Westendorf',            tall: false }
       ]; %>
 
       <% galleryItems.forEach(function(item) { %>
       <div class="gallery-item break-inside-avoid group cursor-pointer" data-brand="<%= item.brand %>">
-        <div class="relative overflow-hidden border border-border-subtle bg-bg-tertiary">
+        <div class="relative overflow-hidden border border-border-subtle bg-bg-tertiary hover:border-burnt transition-colors duration-300">
           <img src="<%= item.img %>" alt="<%= item.label %>"
-               class="w-full <%= item.tall ? 'h-[400px]' : 'h-[260px]' %> object-cover group-hover:scale-105 transition-transform duration-700"
+               class="w-full <%= item.tall ? 'h-[460px]' : 'h-[280px]' %> object-cover group-hover:scale-105 transition-transform duration-700"
                loading="lazy" decoding="async">
-          <!-- Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-bg-primary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-            <div>
-              <p class="text-text-primary font-medium text-sm"><%= item.label %></p>
-              <p class="text-text-muted text-xs mt-0.5"><%= item.desc %></p>
-            </div>
+          <!-- Permanent label overlay (subtle) -->
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg-primary/95 via-bg-primary/40 to-transparent p-5">
+            <p class="font-condensed uppercase tracking-wider text-text-primary text-sm font-semibold"><%= item.label %></p>
+            <p class="font-mono text-[11px] text-titan mt-1"><%= item.desc %></p>
+          </div>
+          <!-- Hover overlay with zoom hint -->
+          <div class="absolute top-3 right-3 w-9 h-9 bg-bg-primary/80 border border-border-strong flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <svg class="w-4 h-4 text-burnt" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18V8.25m-18 0V6a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6zM7.5 6h.008v.008H7.5V6zm2.25 0h.008v.008H9.75V6z"/></svg>
           </div>
         </div>
       </div>
@@ -67,9 +74,8 @@
 
     </div>
 
-    <!-- Hinweis -->
     <div class="mt-12 text-center">
-      <p class="text-text-muted text-sm">Weitere Projekte folgen. Echte Kundenfahrzeuge werden nach Abschluss mit Einverständnis hinzugefügt.</p>
+      <p class="font-mono text-[11px] text-text-muted/70 tracking-wider uppercase">Bilder aus dem Archiv von Vmax Sued · weitere Kundenfahrzeuge werden laufend ergänzt</p>
     </div>
   </div>
 </section>
@@ -83,13 +89,18 @@
 </div>
 
 <!-- CTA -->
-<section class="py-16 border-t border-border-subtle">
+<section class="py-20 border-t border-border-subtle">
   <div class="container-vmax text-center">
-    <p class="text-text-secondary text-lg mb-6">Ihr Fahrzeug soll das nächste Projekt sein?</p>
-    <a href="/kontakt" class="btn-primary">
-      Termin anfragen
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-    </a>
+    <p class="font-display text-3xl md:text-4xl uppercase tracking-tight text-text-primary mb-3">
+      Ihr Fahrzeug soll das nächste Projekt sein?
+    </p>
+    <p class="text-text-secondary text-base mb-8 max-w-xl mx-auto">
+      Termin anfragen — wir prüfen Machbarkeit, Stage-Optionen und Eintragungs-Aussichten. Festpreis-Angebot binnen 24 Stunden.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="/kontakt" class="btn-cta">Termin anfragen <span aria-hidden="true">→</span></a>
+      <a href="tel:<%= phone %>" class="btn-primary">Direkt anrufen</a>
+    </div>
   </div>
 </section>
 

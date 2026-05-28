@@ -4,8 +4,8 @@ const router = express.Router();
 // Startseite
 router.get('/', (req, res) => {
   res.render('pages/index', {
-    title: 'VMAX Süd — Chiptuning & Leistungssteigerung in Westendorf bei Augsburg',
-    description: 'Einzelabstimmung statt Softwarepaket. Chiptuning, TÜV-Eintragung und Komplettumbauten bei VMAX Süd in Westendorf. Partner der VMAX Performance Gruppe seit 1997.',
+    title: 'Vmax Sued — Chiptuning & Leistungssteigerung in Westendorf bei Augsburg',
+    description: 'Einzelabstimmung am Prüfstand und komplette TÜV-Eintragung aus einer Hand. Chiptuning bei Vmax Sued in Westendorf bei Augsburg.',
     schema: null,
     breadcrumbs: null,
     faq: null,
@@ -15,12 +15,12 @@ router.get('/', (req, res) => {
 // Leistungsseiten
 router.get('/chiptuning', (req, res) => {
   res.render('pages/chiptuning', {
-    title: 'Chiptuning & Leistungssteigerung — VMAX Süd',
-    description: 'Professionelles Chiptuning mit Einzelabstimmung auf dem Prüfstand. Stage 1, Stage 2 und individuelle Kennfeldoptimierung bei VMAX Süd in Westendorf.',
+    title: 'Chiptuning ab 699 € · Einzelabstimmung am Prüfstand — Vmax Sued',
+    description: 'Stage 1 ab 699 €. Einzelabstimmung statt Software-Datei am Prüfstand. TÜV-Eintragung komplett übernommen.',
     schema: {
       name: 'Chiptuning & Kennfeldoptimierung',
       description: 'Professionelle Einzelabstimmung auf dem Prüfstand. Stage 1, Stage 2 und individuelle Kennfeldoptimierung für alle gängigen Fahrzeuge.',
-      price: '499',
+      price: '699',
     },
     breadcrumbs: [{ name: 'Chiptuning', path: '/chiptuning' }],
     faq: [
@@ -35,52 +35,35 @@ router.get('/chiptuning', (req, res) => {
 
 router.get('/tuev-eintragung', (req, res) => {
   res.render('pages/tuev-eintragung', {
-    title: 'TÜV-Eintragung & Einzelabnahme — VMAX Süd',
-    description: 'TÜV-Eintragung für Tuning-Teile und Umbauten. Teilegutachten, Einzelabnahme und Begleitung bis zur Zulassung bei VMAX Süd.',
+    title: 'TÜV-Eintragung komplett übernommen — Vmax Sued',
+    description: 'Wir übernehmen die komplette TÜV-Eintragung für Sie: Vorbereitung, Fahrt zum Sachverständigen, Termin und Eintrag. Sie geben Ihr Fahrzeug ab — und holen es eingetragen wieder ab.',
     schema: {
-      name: 'TÜV-Eintragung & Einzelabnahme',
-      description: 'Vollständige Begleitung bei TÜV-Eintragung und Einzelabnahme. Teilegutachten-Erstellung und Kooperation mit GTÜ, Dekra, TÜV.',
+      name: 'TÜV-Eintragung · Komplettübernahme',
+      description: 'Komplette Abwicklung der TÜV-Eintragung von Tuning-Teilen. Die Eintragung selbst erfolgt durch einen amtlich anerkannten Sachverständigen (GTÜ, Dekra, TÜV).',
       price: '89',
     },
     breadcrumbs: [{ name: 'TÜV-Eintragung', path: '/tuev-eintragung' }],
     faq: [
-      { q: 'Muss ich mein Chiptuning eintragen lassen?', a: 'Ja. Jede leistungsverändernde Maßnahme am Fahrzeug erfordert eine Eintragung, um die Betriebserlaubnis aufrechtzuerhalten.' },
+      { q: 'Muss ich mein Chiptuning eintragen lassen?', a: 'Ja. Jede leistungsverändernde Maßnahme am Fahrzeug erfordert eine Eintragung, um die Betriebserlaubnis aufrechtzuerhalten. Die Eintragung erfolgt durch einen amtlich anerkannten Sachverständigen.' },
       { q: 'Was ist der Unterschied zwischen ABE, Teilegutachten und Einzelabnahme?', a: 'Eine ABE gilt bundesweit für ein bestimmtes Teil. Ein Teilegutachten erfordert eine Abnahme durch einen Sachverständigen. Die Einzelabnahme ist für Umbauten ohne vorhandenes Gutachten.' },
-      { q: 'Wie lange dauert der Eintragungsprozess?', a: 'Eine kleine Eintragung mit vorhandenem Gutachten ist in 1–2 Stunden erledigt. Einzelabnahmen dauern je nach Umfang einen halben bis ganzen Tag.' },
-      { q: 'Kann ich auch Teile eintragen lassen, die woanders verbaut wurden?', a: 'Ja. Wir prüfen den Verbau, kontrollieren die Gutachten und begleiten Sie zur Abnahme — unabhängig davon, wo der Einbau stattfand.' },
-    ],
-  });
-});
-
-router.get('/komplettumbauten', (req, res) => {
-  res.render('pages/komplettumbauten', {
-    title: 'Komplettumbauten mit StVO-Abnahme — VMAX Süd',
-    description: 'Vom Konzept bis zur Straßenzulassung. Komplettumbauten, Einzelstücke und Eigenbauten mit Abnahme nach StVO bei VMAX Süd.',
-    schema: {
-      name: 'Komplettumbauten mit StVO-Abnahme',
-      description: 'Vom Konzept bis zur Straßenzulassung. Motortausch, Fahrwerksumbauten, Karosserie und Eigenbauten mit vollständiger Abnahme.',
-    },
-    breadcrumbs: [{ name: 'Komplettumbauten', path: '/komplettumbauten' }],
-    faq: [
-      { q: 'Kann jeder Umbau abgenommen werden?', a: 'Nein, nicht jeder. Manche Umbauten sind technisch oder regulatorisch nicht genehmigungsfähig. Genau deshalb prüfen wir die Machbarkeit vorab.' },
-      { q: 'Was kostet ein Komplettumbau?', a: 'Das hängt stark vom Umfang ab. Ein einfacher Fahrwerksumbau mit Eintragung beginnt im dreistelligen Bereich. Ein Motorswap kann im fünfstelligen Bereich liegen.' },
-      { q: 'Ich habe den Umbau selbst gemacht — könnt ihr trotzdem die Abnahme begleiten?', a: 'Ja. Wir prüfen den Umbau, identifizieren eventuelle Nacharbeiten und begleiten Sie dann zum Prüftermin.' },
+      { q: 'Wie lange dauert der Eintragungsprozess?', a: 'Eine kleine Eintragung mit vorhandenem Gutachten ist in 1–2 Stunden erledigt. Einzelabnahmen dauern je nach Umfang einen halben bis ganzen Tag — sie wird durch den Sachverständigen vor Ort durchgeführt.' },
+      { q: 'Wer führt die Eintragung tatsächlich durch?', a: 'Die Eintragung selbst erfolgt ausschließlich durch einen amtlich anerkannten Sachverständigen (GTÜ, Dekra oder TÜV Süd). Wir bereiten Ihr Fahrzeug fachgerecht vor und begleiten Sie zum Termin.' },
     ],
   });
 });
 
 router.get('/b2b', (req, res) => {
   res.render('pages/b2b', {
-    title: 'B2B-Prüftechnik für Unternehmen — VMAX Süd',
-    description: 'Betriebsfestigkeits-Ermittlung, Abgastests und Teilegutachten für Tuninghersteller und Werkstätten. B2B-Services von VMAX Süd.',
+    title: 'B2B-Prüftechnik für Unternehmen — Vmax Sued',
+    description: 'Prüfstandsmessungen und Datenaufbereitung für Tuninghersteller und Partnerwerkstätten. B2B-Service von Vmax Sued in Kooperation mit zugelassenen Sachverständigen.',
     schema: {
-      name: 'B2B-Prüftechnik & Gutachten',
-      description: 'Betriebsfestigkeits-Ermittlung, Abgastests und Teilegutachten für Tuninghersteller, Importeure und Werkstätten.',
+      name: 'B2B-Prüfstandsmessungen',
+      description: 'Prüfstandsmessungen, Abgasmessungen und Datenaufbereitung in Kooperation mit zugelassenen Sachverständigen.',
     },
     breadcrumbs: [{ name: 'B2B-Prüftechnik', path: '/b2b' }],
     faq: [
-      { q: 'Wie läuft ein B2B-Projekt typischerweise ab?', a: 'Erstkontakt, Sichtung der Unterlagen, Angebotserstellung, Prüfung/Messung vor Ort, Dokumentation und Einreichung bei der Prüforganisation.' },
-      { q: 'Arbeitet ihr auch mit Unternehmen außerhalb Bayerns?', a: 'Ja. Unser B2B-Service ist bundesweit verfügbar. Die Prüfungen finden an unserem Standort in Westendorf statt.' },
+      { q: 'Wie läuft ein B2B-Projekt typischerweise ab?', a: 'Erstkontakt, Sichtung der Unterlagen, Angebotserstellung, Prüfstandsmessung vor Ort, Datenaufbereitung. Die Erstellung der finalen Gutachten erfolgt durch unsere Partner-Sachverständigen.' },
+      { q: 'Arbeitet ihr auch mit Unternehmen außerhalb Bayerns?', a: 'Ja. Unser B2B-Service ist bundesweit verfügbar. Die Messungen finden an unserem Standort in Westendorf statt.' },
       { q: 'Ist Vertraulichkeit bei Produktentwicklungen gewährleistet?', a: 'Selbstverständlich. Wir unterzeichnen auf Wunsch NDAs und behandeln alle Projektdetails vertraulich.' },
     ],
   });
@@ -89,24 +72,24 @@ router.get('/b2b', (req, res) => {
 // Weitere Seiten
 router.get('/galerie', (req, res) => {
   res.render('pages/galerie', {
-    title: 'Galerie — VMAX Süd',
-    description: 'Kundenfahrzeuge, Projekte und Prüfstands-Ergebnisse von VMAX Süd in Westendorf.',
+    title: 'Galerie — Vmax Sued',
+    description: 'Kundenfahrzeuge, Projekte und Prüfstands-Ergebnisse von Vmax Sued in Westendorf.',
     schema: null, breadcrumbs: [{ name: 'Galerie', path: '/galerie' }], faq: null,
   });
 });
 
 router.get('/team', (req, res) => {
   res.render('pages/team', {
-    title: 'Über uns — Stefan Jung & VMAX Süd',
-    description: 'Stefan Jung und das VMAX Süd Team. Erfahrung, Philosophie und Werkstatt in Westendorf bei Augsburg.',
+    title: 'Über uns — Stefan Jung & Vmax Sued',
+    description: 'Stefan Jung und Vmax Sued. Erfahrung, Philosophie und Tuning-Studio in Westendorf bei Augsburg.',
     schema: null, breadcrumbs: [{ name: 'Über uns', path: '/team' }], faq: null,
   });
 });
 
 router.get('/kontakt', (req, res) => {
   res.render('pages/kontakt', {
-    title: 'Kontakt & Termin anfragen — VMAX Süd',
-    description: 'Termin für Chiptuning, TÜV-Eintragung oder Beratung anfragen. VMAX Süd in Westendorf bei Augsburg.',
+    title: 'Kontakt & Termin anfragen — Vmax Sued',
+    description: 'Termin für Chiptuning, TÜV-Eintragung oder Beratung anfragen. Vmax Sued in Westendorf bei Augsburg.',
     schema: null, breadcrumbs: [{ name: 'Kontakt', path: '/kontakt' }], faq: null,
   });
 });
@@ -114,24 +97,24 @@ router.get('/kontakt', (req, res) => {
 // Rechtliches
 router.get('/impressum', (req, res) => {
   res.render('pages/impressum', {
-    title: 'Impressum — VMAX Süd',
-    description: 'Impressum der VMAX Süd, Westendorf.',
+    title: 'Impressum — Vmax Sued',
+    description: 'Impressum der Vmax Sued, Westendorf.',
     schema: null, breadcrumbs: null, faq: null,
   });
 });
 
 router.get('/datenschutz', (req, res) => {
   res.render('pages/datenschutz', {
-    title: 'Datenschutzerklärung — VMAX Süd',
-    description: 'Datenschutzerklärung der VMAX Süd, Westendorf.',
+    title: 'Datenschutzerklärung — Vmax Sued',
+    description: 'Datenschutzerklärung der Vmax Sued, Westendorf.',
     schema: null, breadcrumbs: null, faq: null,
   });
 });
 
 router.get('/agb', (req, res) => {
   res.render('pages/agb', {
-    title: 'AGB — VMAX Süd',
-    description: 'Allgemeine Geschäftsbedingungen der VMAX Süd, Westendorf.',
+    title: 'AGB — Vmax Sued',
+    description: 'Allgemeine Geschäftsbedingungen der Vmax Sued, Westendorf.',
     schema: null, breadcrumbs: null, faq: null,
   });
 });

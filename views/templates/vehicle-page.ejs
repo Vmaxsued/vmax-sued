@@ -101,7 +101,7 @@
           </p>
           <% if (vehicle.stage2) { %>
           <p>
-            Für den Stage-2-Ausbau empfehlen wir je nach Motorvariante eine optimierte Ansaugung, einen Ladeluftkühler-Upgrade oder eine Downpipe. In Kombination mit der darauf abgestimmten Software sind bis zu <span class="font-mono text-accent"><%= vehicle.stage2.ps %>&nbsp;PS</span> und <span class="font-mono text-accent"><%= vehicle.stage2.nm %>&nbsp;Nm</span> realistisch.
+            Für den Stage-2-Ausbau empfehlen wir je nach Motorvariante eine optimierte Ansaugung, einen Ladeluftkühler-Upgrade oder eine Downpipe. Der mechanische Verbau erfolgt durch unseren Kfz-Meisterbetriebspartner — die darauf abgestimmte Software liefern wir. In Kombination sind bis zu <span class="font-mono text-burnt"><%= vehicle.stage2.ps %>&nbsp;PS</span> und <span class="font-mono text-burnt"><%= vehicle.stage2.nm %>&nbsp;Nm</span> realistisch.
           </p>
           <% } %>
           <p>
@@ -139,7 +139,7 @@
             <span class="font-mono text-accent text-lg font-medium w-8 flex-shrink-0">04</span>
             <div>
               <p class="text-text-primary font-medium">Ergebnis-Messung + Report</p>
-              <p class="text-text-secondary text-sm">Vergleichsmessung und Daten-Report zum Mitnehmen.</p>
+              <p class="text-text-secondary text-sm">Sauberer Prüfstandslauf mit interner Datenprotokollierung. Diagramm auf Wunsch.</p>
             </div>
           </div>
         </div>
@@ -211,7 +211,7 @@
           <svg class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
         </button>
         <div class="faq-content hidden px-5 pb-5">
-          <p class="text-text-secondary text-sm leading-relaxed">Bei einer Stage-1-Einzelabstimmung des <%= vehicle.engine %>-Motors erzielen wir typischerweise +<%= vehicle.stage1.ps - vehicle.stock.ps %> PS und +<%= vehicle.stage1.nm - vehicle.stock.nm %> Nm Drehmoment.<%= vehicle.stage2 ? ' Mit Stage 2 (inkl. Hardware-Upgrades) sind bis zu +' + (vehicle.stage2.ps - vehicle.stock.ps) + ' PS möglich.' : '' %></p>
+          <p class="text-text-secondary text-sm leading-relaxed">Bei einer Stage-1-Einzelabstimmung des <%= vehicle.engine %>-Motors erzielen wir typischerweise +<%= vehicle.stage1.ps - vehicle.stock.ps %> PS und +<%= vehicle.stage1.nm - vehicle.stock.nm %> Nm Drehmoment.<%= vehicle.stage2 ? ' Mit Stage 2 (Software auf passenden Hardware-Komponenten, Verbau durch Kfz-Meisterpartner) sind bis zu +' + (vehicle.stage2.ps - vehicle.stock.ps) + ' PS möglich.' : '' %></p>
         </div>
       </div>
       <div class="border border-border-subtle">

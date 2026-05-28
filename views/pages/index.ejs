@@ -1,951 +1,919 @@
 <%- include('../layouts/main') %>
 
 <!-- ============================================
-     SEKTION 1 — HERO
-     Schwarzer Grund + Dyno-Hintergrund + Tech-Panel
+     HERO — Anton Mega · mit Cursor-Spotlight + Line-Reveal
      ============================================ -->
-<section class="relative min-h-screen flex items-center overflow-hidden" id="hero">
-  <!-- Background: Dyno curve as ambient element -->
-  <div class="absolute inset-0" aria-hidden="true">
-    <svg viewBox="0 0 1440 600" class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
-      <path d="M0,500 C200,490 400,400 600,300 C800,200 1000,100 1200,60 C1300,40 1400,45 1440,50"
-            fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.08"
-            id="hero-dyno-bg" style="stroke-dasharray: 1800; stroke-dashoffset: 1800;"/>
-    </svg>
+<section class="relative min-h-screen flex items-end overflow-hidden bg-bg-primary pt-32 pb-16 lg:pb-20" id="hero">
+
+  <!-- Background video: Prüfstand-Aufnahme, zentriert & gezoomt um Kennzeichen abzuschneiden -->
+  <div class="absolute inset-0 overflow-hidden z-0" aria-hidden="true">
+    <video
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-auto h-auto min-w-full min-h-full object-cover scale-[2.2] opacity-[0.7]"
+      style="object-position: 20% 70%; filter: saturate(0.8) contrast(1.15) brightness(0.95);"
+      autoplay muted loop playsinline preload="auto">
+      <source src="/videos/hero.mp4" type="video/mp4">
+    </video>
+    <!-- Dark gradient overlay — keeps text readable, video stays visible -->
+    <div class="absolute inset-0 bg-gradient-to-r from-bg-primary/85 via-bg-primary/40 to-bg-primary/75"></div>
+    <!-- Vertical fade bottom-right so text bleibt lesbar -->
+    <div class="absolute inset-0 bg-gradient-to-t from-bg-primary/85 via-transparent to-bg-primary/30"></div>
+    <!-- Radial vignette — softer -->
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at 35% 50%, transparent 0%, rgba(10,10,10,0.25) 55%, rgba(10,10,10,0.7) 100%);"></div>
   </div>
 
-  <!-- Coordinate markers -->
-  <div class="absolute top-6 left-6 lg:top-8 lg:left-12 z-20 font-micro text-[9px] text-text-muted/30 tracking-widest">
-    48.4267°N / 10.8742°E
+  <!-- Carbon weave base -->
+  <div class="absolute inset-0 opacity-[0.04] bg-carbon-weave z-[1]" aria-hidden="true"></div>
+
+  <!-- Cursor spotlight — burnt glow follows cursor -->
+  <div class="spotlight" id="hero-spotlight" aria-hidden="true"></div>
+
+  <!-- Left vertical rail -->
+  <div class="hidden lg:flex absolute left-0 top-0 bottom-0 w-12 flex-col justify-between py-10 z-20 border-r border-border-subtle" aria-hidden="true">
+    <span class="font-mono text-[10px] text-titan/50 tracking-[0.3em] [writing-mode:vertical-rl] rotate-180">
+      48.4267°N · 10.8742°E
+    </span>
+    <span class="font-mono text-[10px] text-titan/50 tracking-[0.3em] [writing-mode:vertical-rl] rotate-180">
+      VMAX · SÜD · WESTENDORF
+    </span>
   </div>
-  <div class="absolute top-6 right-6 lg:top-8 lg:right-12 z-20 font-micro text-[9px] text-text-muted/30 tracking-widest">
-    VMAX-SUED/WSDF
+
+  <!-- Right vertical rail -->
+  <div class="hidden lg:flex absolute right-0 top-0 bottom-0 w-12 flex-col justify-between py-10 z-20 border-l border-border-subtle" aria-hidden="true">
+    <span class="font-mono text-[10px] text-titan/50 tracking-[0.3em] [writing-mode:vertical-rl]">
+      REV · <%= new Date().getFullYear() %>
+    </span>
+    <span class="font-mono text-[10px] text-burnt tracking-[0.3em] [writing-mode:vertical-rl]">
+      ● LIVE · PRÜFSTAND
+    </span>
   </div>
 
-  <div class="container-vmax relative z-20 py-32 lg:py-40">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+  <div class="container-vmax relative z-10 lg:px-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
 
-      <!-- Links: Headline + CTAs (60%) -->
-      <div class="lg:col-span-7">
-        <!-- Eyebrow -->
-        <p class="font-micro text-micro uppercase text-text-muted/60 tracking-[0.15em] mb-6 opacity-0" data-reveal>
-          VMAX SÜD · EST. 2011 · WESTENDORF
-        </p>
-
-        <!-- Headline-Varianten:
-             Alt: "LEISTUNG ZUM ANFASSEN."
-             Option B: "Gemessen. Geprüft. Eingetragen."
-             Option C: "Wo Leistung Papiere hat."
-             Aktiv: "Jede Zahl. Eingetragen." -->
-        <h1 class="font-display text-display-hero italic leading-[1.05] opacity-0" data-reveal data-delay="80">
-          Jede Zahl.<br>Eingetragen.
+      <!-- Headline -->
+      <div class="lg:col-span-8">
+        <h1 class="font-display text-display-mega leading-[0.88] tracking-[-0.015em] uppercase">
+          <span class="line-reveal" data-reveal-line="1"><span>Leistung.</span></span>
+          <span class="line-reveal" data-reveal-line="2"><span>Eingetragen.</span></span>
+          <span class="line-reveal" data-reveal-line="3"><span class="text-burnt">Vertrauen erfahren.</span></span>
         </h1>
 
-        <p class="mt-6 text-lg text-text-secondary max-w-lg opacity-0" data-reveal data-delay="160">
-          Einzelabstimmung. TÜV-Eintragung. Prüftechnik aus Schwaben&nbsp;— für&nbsp;Deutschland.
+        <p class="mt-10 max-w-xl text-text-secondary text-lg leading-relaxed line-reveal" data-reveal-line="4">
+          <span>Einzelabstimmung auf dem Prüfstand. TÜV-Eintragung komplett aus einer Hand. <span class="text-titan">Keine Softwarepakete von der Stange.</span></span>
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 mt-10 opacity-0" data-reveal data-delay="240">
-          <a href="/kontakt" class="btn-primary">
-            Termin anfragen
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </a>
-          <a href="#leistungen" class="btn-ghost">
-            Leistungsspektrum
-          </a>
-        </div>
-
-        <!-- Trust markers -->
-        <div class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 font-micro text-[9px] text-text-muted/50 uppercase tracking-[0.1em] opacity-0" data-reveal data-delay="320">
-          <span>TÜV-Eintragung</span><span class="text-accent/40">·</span>
-          <span>Einzelabstimmung</span><span class="text-accent/40">·</span>
-          <span>Prüfstand</span><span class="text-accent/40">·</span>
-          <span>Seit 2011</span>
+        <div class="flex flex-col sm:flex-row gap-4 mt-12 line-reveal" data-reveal-line="5">
+          <span class="flex flex-col sm:flex-row gap-4">
+            <span class="magnetic">
+              <a href="/kontakt" class="btn-cta">
+                Termin anfragen <span aria-hidden="true">→</span>
+              </a>
+            </span>
+            <span class="magnetic">
+              <a href="#leistungen" class="btn-primary">
+                Leistungsspektrum
+              </a>
+            </span>
+          </span>
         </div>
       </div>
 
-      <!-- Rechts: Technisches Panel (40%) -->
-      <div class="lg:col-span-5 opacity-0" data-reveal data-delay="200">
-        <div class="border border-border-subtle bg-bg-primary/50 backdrop-blur-sm relative">
-          <!-- Corner brackets -->
-          <div class="absolute -top-px -left-px w-5 h-5 border-t border-l border-border-strong"></div>
-          <div class="absolute -top-px -right-px w-5 h-5 border-t border-r border-border-strong"></div>
-          <div class="absolute -bottom-px -left-px w-5 h-5 border-b border-l border-border-strong"></div>
-          <div class="absolute -bottom-px -right-px w-5 h-5 border-b border-r border-border-strong"></div>
+      <!-- Flagship Showcase (rotiert, PLATZHALTER) -->
+      <div class="lg:col-span-4 mt-12 lg:mt-0 line-reveal" data-reveal-line="3">
+        <span class="block">
+          <div class="tilt-card border-2 border-border-strong bg-bg-secondary/80 backdrop-blur-sm relative min-h-[440px] flex flex-col">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 py-3 border-b border-border-subtle">
+              <span class="label-micro text-burnt flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-burnt animate-glow-pulse"></span>
+                Flagship-Projekte
+              </span>
+              <span class="tag-placeholder">Platzhalter</span>
+            </div>
 
-          <!-- Panel Header -->
-          <div class="px-6 py-3 border-b border-border-subtle flex items-center justify-between">
-            <span class="font-micro text-[9px] text-text-muted uppercase tracking-[0.12em]">Leistungsnachweis · #A847</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-accent-success animate-glow-pulse"></span>
+            <!-- Rotating slides -->
+            <div class="relative flex-1 showcase-container" id="flagship-showcase">
+              <!-- Slide 1 -->
+              <div class="showcase-slide is-active p-6 flex flex-col justify-between">
+                <div>
+                  <p class="font-mono text-[11px] text-titan tracking-widest uppercase mb-3">Projekt 01 · Stage 2</p>
+                  <p class="font-display text-3xl uppercase leading-[0.95] mb-1">Audi RS3 8V</p>
+                  <p class="font-mono text-xs text-text-muted">2.5 TFSI · DAZA</p>
+                </div>
+                <div>
+                  <div class="flex items-end gap-3 mb-2">
+                    <span class="font-display text-2xl text-text-muted/40 line-through">367</span>
+                    <span class="font-mono text-titan">→</span>
+                    <span class="font-display text-[68px] text-text-primary leading-none">480</span>
+                    <span class="font-condensed uppercase text-titan text-xs mb-2">PS</span>
+                  </div>
+                  <p class="font-mono text-burnt text-sm">+113 PS · +150 NM</p>
+                  <p class="mt-3 flex items-center gap-2 font-mono text-[11px] text-success uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                    TÜV-eingetragen
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="showcase-slide p-6 flex flex-col justify-between">
+                <div>
+                  <p class="font-mono text-[11px] text-titan tracking-widest uppercase mb-3">Projekt 02 · Stage 2</p>
+                  <p class="font-display text-3xl uppercase leading-[0.95] mb-1">VW Golf 7 R</p>
+                  <p class="font-mono text-xs text-text-muted">2.0 TSI · Allrad</p>
+                </div>
+                <div>
+                  <div class="flex items-end gap-3 mb-2">
+                    <span class="font-display text-2xl text-text-muted/40 line-through">300</span>
+                    <span class="font-mono text-titan">→</span>
+                    <span class="font-display text-[68px] text-text-primary leading-none">420</span>
+                    <span class="font-condensed uppercase text-titan text-xs mb-2">PS</span>
+                  </div>
+                  <p class="font-mono text-burnt text-sm">+120 PS · +180 NM</p>
+                  <p class="mt-3 flex items-center gap-2 font-mono text-[11px] text-success uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                    TÜV-eingetragen
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="showcase-slide p-6 flex flex-col justify-between">
+                <div>
+                  <p class="font-mono text-[11px] text-titan tracking-widest uppercase mb-3">Projekt 03 · Stage 2+</p>
+                  <p class="font-display text-3xl uppercase leading-[0.95] mb-1">BMW M3 F80</p>
+                  <p class="font-mono text-xs text-text-muted">3.0 Biturbo · S55</p>
+                </div>
+                <div>
+                  <div class="flex items-end gap-3 mb-2">
+                    <span class="font-display text-2xl text-text-muted/40 line-through">431</span>
+                    <span class="font-mono text-titan">→</span>
+                    <span class="font-display text-[68px] text-text-primary leading-none">560</span>
+                    <span class="font-condensed uppercase text-titan text-xs mb-2">PS</span>
+                  </div>
+                  <p class="font-mono text-burnt text-sm">+129 PS · +210 NM</p>
+                  <p class="mt-3 flex items-center gap-2 font-mono text-[11px] text-success uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                    TÜV-eingetragen
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dots -->
+            <div class="flex items-center gap-2 px-6 py-4 border-t border-border-subtle">
+              <button class="showcase-dot is-active" data-slide="0" aria-label="Projekt 1"></button>
+              <button class="showcase-dot" data-slide="1" aria-label="Projekt 2"></button>
+              <button class="showcase-dot" data-slide="2" aria-label="Projekt 3"></button>
+              <span class="ml-auto font-mono text-[10px] text-text-muted tracking-widest uppercase" id="showcase-counter">01 / 03</span>
+            </div>
+          </div>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom ticker -->
+  <div class="absolute bottom-0 left-0 right-0 border-t border-border-subtle bg-bg-primary/90 backdrop-blur-sm py-3 overflow-hidden z-20">
+    <div class="flex gap-12 whitespace-nowrap animate-stripe-slide font-mono text-[11px] text-text-muted uppercase tracking-[0.25em]">
+      <% for (let i = 0; i < 2; i++) { %>
+      <span>● Chiptuning</span>
+      <span class="text-titan/40">//</span>
+      <span>Einzelabstimmung am Prüfstand</span>
+      <span class="text-titan/40">//</span>
+      <span>TÜV-Eintragung aus einer Hand</span>
+      <span class="text-titan/40">//</span>
+      <span>B2B-Prüftechnik</span>
+      <span class="text-titan/40">//</span>
+      <span>Westendorf · seit 2011</span>
+      <span class="text-titan/40">//</span>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     MEGA MARQUEE — Akrapovič-Signatur
+     Giant Anton text scrolling infinite
+     ============================================ -->
+<div class="mega-marquee" aria-hidden="true">
+  <div class="mega-marquee-track">
+    <div class="mega-marquee-item">
+      <span>EINZELABSTIMMUNG</span>
+      <span class="dot"></span>
+      <span class="is-stroke">TÜV-EINGETRAGEN</span>
+      <span class="dot"></span>
+      <span>PRÜFSTAND · WESTENDORF</span>
+      <span class="dot"></span>
+      <span class="is-stroke">Vmax Sued</span>
+      <span class="dot"></span>
+    </div>
+    <div class="mega-marquee-item" aria-hidden="true">
+      <span>EINZELABSTIMMUNG</span>
+      <span class="dot"></span>
+      <span class="is-stroke">TÜV-EINGETRAGEN</span>
+      <span class="dot"></span>
+      <span>PRÜFSTAND · WESTENDORF</span>
+      <span class="dot"></span>
+      <span class="is-stroke">Vmax Sued</span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================
+     LEISTUNGEN — 4 brutalist cards
+     ============================================ -->
+<section class="section-spacing bg-bg-primary border-t border-border-subtle" id="leistungen">
+  <div class="container-vmax">
+
+    <!-- Section header -->
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
+      <div>
+        <p class="label-caps text-burnt mb-4">§ 01 · Leistungsspektrum</p>
+        <h2 class="font-display text-display-section uppercase leading-[0.95]">
+          Drei Disziplinen.<br>
+          <span class="text-titan">Ein Standard.</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-text-secondary">
+        Jedes Fahrzeug läuft bei uns dieselbe Sequenz: Vermessen, Abstimmen, Dokumentieren. Ohne Ausnahme.
+      </p>
+    </div>
+
+    <!-- 3 service cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border-subtle border border-border-subtle">
+
+      <!-- Card 1 -->
+      <a href="/chiptuning" class="tilt-card group bg-bg-primary p-8 lg:p-12 flex flex-col gap-6 transition-colors duration-300 hover:bg-bg-secondary relative">
+        <div class="flex items-start justify-between">
+          <span class="font-mono text-xs text-titan/60 tracking-widest">01</span>
+          <span class="tag tag-burnt">ab 499 €</span>
+        </div>
+        <div>
+          <h3 class="font-display text-display-card uppercase leading-[0.95] mb-3">
+            Chiptuning &<br>Kennfeld&shy;optimierung
+          </h3>
+          <p class="text-text-secondary text-sm">
+            Stage 1, Stage 2, individuelle Abstimmung. Prüfstandgefahren, nicht aus dem Katalog.
+          </p>
+        </div>
+        <div class="mt-auto flex items-center gap-3 font-condensed uppercase tracking-[0.12em] text-sm text-burnt group-hover:text-text-primary transition-colors">
+          <span>Zur Leistung</span>
+          <span class="w-8 h-px bg-current group-hover:w-12 transition-all duration-300"></span>
+          <span aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="/tuev-eintragung" class="tilt-card group bg-bg-primary p-8 lg:p-12 flex flex-col gap-6 transition-colors duration-300 hover:bg-bg-secondary relative">
+        <div class="flex items-start justify-between">
+          <span class="font-mono text-xs text-titan/60 tracking-widest">02</span>
+          <span class="tag tag-burnt">ab 89 €</span>
+        </div>
+        <div>
+          <h3 class="font-display text-display-card uppercase leading-[0.95] mb-3">
+            Begleitung zur<br>TÜV-Eintragung
+          </h3>
+          <p class="text-text-secondary text-sm">
+            Vorbereitung Ihres Fahrzeugs und Begleitung zum Termin bei amtlich anerkannten Sachverständigen (GTÜ, Dekra, TÜV Süd).
+          </p>
+        </div>
+        <div class="mt-auto flex items-center gap-3 font-condensed uppercase tracking-[0.12em] text-sm text-burnt group-hover:text-text-primary transition-colors">
+          <span>Zur Leistung</span>
+          <span class="w-8 h-px bg-current group-hover:w-12 transition-all duration-300"></span>
+          <span aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="/b2b" class="tilt-card group bg-bg-primary p-8 lg:p-12 flex flex-col gap-6 transition-colors duration-300 hover:bg-bg-secondary relative">
+        <div class="flex items-start justify-between">
+          <span class="font-mono text-xs text-titan/60 tracking-widest">03</span>
+          <span class="tag tag-titan">B2B</span>
+        </div>
+        <div>
+          <h3 class="font-display text-display-card uppercase leading-[0.95] mb-3">
+            Prüftechnik<br>für Firmen
+          </h3>
+          <p class="text-text-secondary text-sm">
+            Prüfstandsmessungen und Datenaufbereitung in Kooperation mit zugelassenen Sachverständigen. Für Tuninghersteller, Importeure und Kfz-Fachbetriebe deutschlandweit.
+          </p>
+        </div>
+        <div class="mt-auto flex items-center gap-3 font-condensed uppercase tracking-[0.12em] text-sm text-burnt group-hover:text-text-primary transition-colors">
+          <span>Zur Leistung</span>
+          <span class="w-8 h-px bg-current group-hover:w-12 transition-all duration-300"></span>
+          <span aria-hidden="true">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     MANIFEST — brutalist statement
+     ============================================ -->
+<section class="section-spacing bg-bg-secondary border-t border-border-subtle relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 stripe-band opacity-30"></div>
+
+  <div class="container-vmax">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+      <div class="lg:col-span-7">
+        <p class="label-caps text-burnt mb-6">§ 02 · Prinzipien</p>
+        <h2 class="font-display uppercase leading-[0.9] text-[clamp(2.5rem,5vw,5.5rem)]">
+          Einzelabstimmung.<br>
+          <span class="text-stroke-titan">Kein Software-</span><br>
+          <span class="text-stroke-titan">paket.</span>
+        </h2>
+      </div>
+
+      <div class="lg:col-span-5 space-y-6">
+        <p class="text-body-lg text-text-primary">
+          Zwischen einem gekauften Tuning-File und einer echten Abstimmung liegen <span class="text-burnt">mehrere Stunden Prüfstandarbeit</span>.
+        </p>
+        <p class="text-text-secondary">
+          Wir fahren jedes Fahrzeug auf dem Allrad-Prüfstand ein. Wir messen Ist-Werte und passen Kennfelder an die individuelle Mechanik an. Was du bekommst, ist dein Tuning — nicht eine Datei, die jemand anderes gemessen hat. <span class="text-titan">Für Hardware-Verbau und mechanische Umbauten arbeiten wir mit ausgewählten Kfz-Meisterbetriebspartnern zusammen.</span>
+        </p>
+        <p class="text-titan font-condensed uppercase tracking-wider text-sm">
+          → Abgestimmt. Gemessen. Eingetragen.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     DYNO / BEWEIS — Rotierender Prüfstandbericht (5 Top-Seller)
+     ============================================ -->
+<%
+  const dynoCars = [
+    {
+      model: 'VW Golf 7 GTI',
+      engine: '2.0 TSI · EA888',
+      stage: 'Stage 2',
+      stockPS: 230, tunedPS: 320, gainPS: 90,
+      stockNM: 350, tunedNM: 480, gainNM: 130,
+      // Curves drawn in SVG coords: M(start) C(curve) — y goes from 220 (low) to 20 (high)
+      seriePath: 'M30,200 C80,194 130,176 200,144 C270,118 340,108 410,114 C440,118 470,128 480,134',
+      stagePath: 'M30,200 C80,182 130,138 200,82 C270,42 340,28 410,32 C440,36 470,46 480,52',
+      stageColor: '#C87533'
+    },
+    {
+      model: 'VW Golf 7 R',
+      engine: '2.0 TSI · 4Motion',
+      stage: 'Stage 2',
+      stockPS: 300, tunedPS: 420, gainPS: 120,
+      stockNM: 400, tunedNM: 560, gainNM: 160,
+      seriePath: 'M30,196 C80,188 130,160 200,118 C270,90 340,80 410,84 C440,88 470,96 480,100',
+      stagePath: 'M30,196 C80,170 130,116 200,60 C270,28 340,18 410,22 C440,26 470,34 480,38',
+      stageColor: '#C87533'
+    },
+    {
+      model: 'Audi RS3 8V',
+      engine: '2.5 TFSI · 5-Zylinder',
+      stage: 'Stage 2',
+      stockPS: 367, tunedPS: 500, gainPS: 133,
+      stockNM: 465, tunedNM: 640, gainNM: 175,
+      seriePath: 'M30,194 C80,180 130,148 200,108 C270,82 340,74 410,80 C440,84 470,92 480,96',
+      stagePath: 'M30,194 C80,160 130,100 200,50 C270,22 340,14 410,18 C440,22 470,28 480,32',
+      stageColor: '#C87533'
+    },
+    {
+      model: 'BMW M4 Competition F82',
+      engine: '3.0 R6 BiTurbo · S55',
+      stage: 'Stage 2+',
+      stockPS: 450, tunedPS: 580, gainPS: 130,
+      stockNM: 550, tunedNM: 760, gainNM: 210,
+      seriePath: 'M30,190 C80,168 130,128 200,86 C270,62 340,58 410,64 C440,68 470,74 480,78',
+      stagePath: 'M30,190 C80,148 130,82 200,38 C270,18 340,12 410,16 C440,18 470,22 480,26',
+      stageColor: '#C87533'
+    },
+    {
+      model: 'Audi S3 8V',
+      engine: '2.0 TFSI · Quattro',
+      stage: 'Stage 2',
+      stockPS: 310, tunedPS: 420, gainPS: 110,
+      stockNM: 400, tunedNM: 560, gainNM: 160,
+      seriePath: 'M30,196 C80,184 130,156 200,114 C270,86 340,78 410,82 C440,86 470,94 480,98',
+      stagePath: 'M30,196 C80,164 130,108 200,56 C270,26 340,18 410,22 C440,26 470,32 480,36',
+      stageColor: '#C87533'
+    }
+  ];
+%>
+
+<section class="section-spacing bg-bg-primary border-t border-border-subtle" id="beweis">
+  <div class="container-vmax">
+
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+      <div>
+        <p class="label-caps text-burnt mb-4">§ 03 · Prüfstandbericht</p>
+        <h2 class="font-display text-display-section uppercase leading-[0.95]">
+          Top-Seller<br>
+          <span class="text-titan">in Zahlen.</span>
+        </h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-success animate-glow-pulse"></span>
+        <span class="font-mono text-xs text-titan tracking-wider uppercase">Live · Beispielwerte aus Kunden-Prüfstandsläufen</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="dyno-rotator">
+
+      <!-- LEFT: Big numbers + model -->
+      <div class="lg:col-span-5 flex flex-col gap-8 justify-center">
+        <!-- Model header -->
+        <div>
+          <p class="label-micro text-text-muted mb-3" id="dyno-stage-label">STAGE 2 · KUNDENBEISPIEL</p>
+          <h3 class="font-display text-3xl lg:text-4xl uppercase leading-[1] text-text-primary mb-1" id="dyno-model">VW Golf 7 GTI</h3>
+          <p class="font-mono text-titan text-xs tracking-wider" id="dyno-engine">2.0 TSI · EA888</p>
+        </div>
+
+        <!-- Leistung -->
+        <div class="border-t border-border-subtle pt-6">
+          <p class="label-micro text-text-muted mb-2">Leistung</p>
+          <div class="flex items-baseline gap-4 flex-wrap">
+            <span class="font-display text-5xl lg:text-6xl text-text-muted/40 line-through decoration-1" id="dyno-stockPS">230</span>
+            <span class="font-mono text-titan text-xl">→</span>
+            <span class="font-display text-[80px] lg:text-[110px] text-text-primary leading-none" id="dyno-tunedPS">320</span>
+            <span class="font-condensed uppercase text-titan text-sm mb-3">PS</span>
+          </div>
+          <p class="font-mono text-burnt text-lg mt-2"><span class="text-2xl lg:text-3xl" id="dyno-gainPS">+90</span> PS Zuwachs</p>
+        </div>
+
+        <!-- Drehmoment -->
+        <div class="border-t border-border-subtle pt-6">
+          <p class="label-micro text-text-muted mb-2">Drehmoment</p>
+          <div class="flex items-baseline gap-4 flex-wrap">
+            <span class="font-display text-3xl lg:text-4xl text-text-muted/40 line-through decoration-1" id="dyno-stockNM">350</span>
+            <span class="font-mono text-titan">→</span>
+            <span class="font-display text-5xl lg:text-6xl text-text-primary leading-none" id="dyno-tunedNM">480</span>
+            <span class="font-condensed uppercase text-titan text-sm mb-2">NM</span>
+          </div>
+          <p class="font-mono text-burnt mt-1"><span class="text-xl lg:text-2xl" id="dyno-gainNM">+130</span> NM Zuwachs</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Dyno curve card -->
+      <div class="lg:col-span-7">
+        <div class="card-carbon p-6 lg:p-10 h-full flex flex-col">
+          <div class="flex items-center justify-between mb-6">
+            <span class="font-mono text-xs text-titan uppercase tracking-wider">Leistungsdiagramm</span>
+            <span class="font-mono text-xs text-text-muted">PS / U/min</span>
           </div>
 
-          <!-- Panel Content -->
-          <div class="p-6 space-y-5">
-            <!-- Vorher/Nachher -->
-            <div>
-              <p class="font-micro text-[9px] text-text-muted uppercase tracking-[0.12em] mb-3">Beispiel · VW Golf 7 GTI · 2.0 TSI</p>
-              <div class="flex items-end gap-4">
-                <div>
-                  <p class="font-micro text-[8px] text-text-muted uppercase tracking-widest">Serie</p>
-                  <p class="font-mono text-2xl text-text-secondary">230 <span class="text-xs text-text-muted">PS</span></p>
-                </div>
-                <svg class="w-6 h-6 text-accent mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                <div>
-                  <p class="font-micro text-[8px] text-accent uppercase tracking-widest">Stage 1</p>
-                  <p class="font-mono text-2xl text-text-primary">300 <span class="text-xs text-text-muted">PS</span></p>
-                </div>
-                <div class="ml-auto">
-                  <p class="font-mono text-lg text-accent">+70</p>
-                  <p class="font-micro text-[8px] text-text-muted uppercase">PS Gain</p>
-                </div>
-              </div>
-            </div>
+          <svg viewBox="0 0 500 260" class="w-full h-auto flex-1" aria-hidden="true">
+            <!-- Grid -->
+            <% for (let i = 0; i <= 5; i++) { %>
+              <line x1="<%= 30 + i*90 %>" y1="20" x2="<%= 30 + i*90 %>" y2="220" stroke="#2A2A2A" stroke-width="0.5"/>
+            <% } %>
+            <% for (let i = 0; i <= 4; i++) { %>
+              <line x1="30" y1="<%= 20 + i*50 %>" x2="480" y2="<%= 20 + i*50 %>" stroke="#2A2A2A" stroke-width="0.5"/>
+            <% } %>
 
-            <!-- Mini Dyno Curve -->
-            <div class="border-t border-border-subtle pt-4">
-              <svg viewBox="0 0 300 60" class="w-full h-auto" aria-hidden="true">
-                <path d="M0,50 C40,48 80,42 120,34 C160,26 200,20 240,18 C270,17 290,18 300,19" fill="none" stroke="#3A3A3A" stroke-width="1" stroke-dasharray="4,3"/>
-                <path d="M0,50 C40,46 80,36 120,24 C160,13 200,6 240,3 C270,1 290,2 300,3" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"
-                      id="dyno-stage" style="stroke-dasharray: 380; stroke-dashoffset: 380;"/>
-                <text x="290" y="24" fill="#6B6B6B" font-size="7" font-family="Space Mono" text-anchor="end">SERIE</text>
-                <text x="290" y="8" fill="#F59E0B" font-size="7" font-family="Space Mono" text-anchor="end" id="dyno-label" style="opacity:0">STG1</text>
-              </svg>
-            </div>
+            <!-- Serie curve (gray dashed) -->
+            <path id="dyno-serie-curve" d="<%= dynoCars[0].seriePath %>"
+                  fill="none" stroke="#8A8680" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,3" opacity="0.85"/>
+            <text x="475" y="155" fill="#8A8680" font-size="10" font-family="JetBrains Mono" text-anchor="end" id="dyno-serie-label">SERIE · 230</text>
 
-            <!-- TÜV Status -->
-            <div class="flex items-center justify-between pt-2 border-t border-border-subtle">
-              <div class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent-success"></span>
-                <span class="font-micro text-[9px] text-accent-success uppercase tracking-[0.1em]">TÜV-eingetragen</span>
+            <!-- Stage curve (burnt) -->
+            <path id="dyno-stage-curve" d="<%= dynoCars[0].stagePath %>"
+                  fill="none" stroke="#C87533" stroke-width="2.5" stroke-linecap="round"
+                  stroke-dasharray="600" stroke-dashoffset="600"/>
+            <text x="475" y="65" fill="#C87533" font-size="10" font-family="JetBrains Mono" text-anchor="end" id="dyno-stage-label-svg" style="opacity:0">STAGE 2 · 320</text>
+
+            <!-- X-axis labels -->
+            <text x="30" y="245" fill="#6B6B6B" font-size="9" font-family="JetBrains Mono">1500</text>
+            <text x="120" y="245" fill="#6B6B6B" font-size="9" font-family="JetBrains Mono">2500</text>
+            <text x="210" y="245" fill="#6B6B6B" font-size="9" font-family="JetBrains Mono">3500</text>
+            <text x="300" y="245" fill="#6B6B6B" font-size="9" font-family="JetBrains Mono">4500</text>
+            <text x="390" y="245" fill="#6B6B6B" font-size="9" font-family="JetBrains Mono">5500</text>
+            <text x="475" y="245" fill="#6B6B6B" font-size="9" font-family="JetBrains Mono" text-anchor="end">6500</text>
+          </svg>
+
+          <!-- Pagination + progress -->
+          <div class="mt-6 pt-6 border-t border-border-subtle">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <div class="flex gap-2" id="dyno-dots">
+                <% dynoCars.forEach(function(_, i) { %>
+                  <button type="button" class="dyno-dot w-8 h-1 bg-border-strong transition-colors duration-300 <%= i === 0 ? 'bg-burnt' : '' %>" data-index="<%= i %>" aria-label="Modell <%= i+1 %>"></button>
+                <% }); %>
               </div>
-              <span class="font-micro text-[8px] text-text-muted/50 tracking-wider">Gutachten 4821/24</span>
+              <span class="font-mono text-[11px] text-titan tracking-wider uppercase">
+                <span id="dyno-counter">01</span><span class="text-text-muted"> / <%= String(dynoCars.length).padStart(2,'0') %></span>
+              </span>
+            </div>
+            <div class="grid grid-cols-3 gap-6 text-center pt-4 border-t border-border-subtle">
+              <div>
+                <p class="label-micro text-text-muted">Prüfstand</p>
+                <p class="font-mono text-titan text-sm mt-1">MAHA · Allrad</p>
+              </div>
+              <div>
+                <p class="label-micro text-text-muted">Software</p>
+                <p class="font-mono text-titan text-sm mt-1">Einzelabst.</p>
+              </div>
+              <div>
+                <p class="label-micro text-text-muted">Werte</p>
+                <p class="font-mono text-titan text-sm mt-1">Beispiel-Lauf</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
     </div>
-  </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-text-muted/40 opacity-0" data-reveal data-delay="500">
-    <span class="font-micro text-[8px] tracking-[0.25em] uppercase">scroll</span>
-    <div class="w-px h-8 bg-gradient-to-b from-text-muted/40 to-transparent"></div>
-  </div>
-</section>
-
-
-<!-- Section marker -->
-<div class="section-marker py-4">— 001 —</div>
-
-<!-- ============================================
-     SEKTION 2 — KENNZAHLEN (Status-Monitor)
-     ============================================ -->
-<section class="relative z-30 bg-bg-primary" id="kennzahlen">
-  <!-- Monitor Header -->
-  <div class="border-t border-border-subtle">
-    <p class="font-micro text-[8px] text-text-muted/30 tracking-[0.2em] uppercase text-center py-3">
-      · · · VMAX SÜD STATUS MONITOR · · ·
+    <!-- Disclaimer -->
+    <p class="mt-8 font-mono text-[11px] text-text-muted/70 max-w-3xl">
+      * Werte aus repräsentativen Kunden-Prüfstandsläufen. Individuelles Ergebnis ist abhängig von Fahrzeugzustand, Mechanik-Reserven und Hardware-Konfiguration. Eintragung erfolgt durch amtlich anerkannten Sachverständigen.
     </p>
   </div>
-
-  <div class="border-y border-border-subtle relative">
-    <!-- Corner brackets -->
-    <div class="absolute -top-px -left-px w-5 h-5 border-t border-l border-border-strong pointer-events-none hidden lg:block"></div>
-    <div class="absolute -top-px -right-px w-5 h-5 border-t border-r border-border-strong pointer-events-none hidden lg:block"></div>
-    <div class="absolute -bottom-px -left-px w-5 h-5 border-b border-l border-border-strong pointer-events-none hidden lg:block"></div>
-    <div class="absolute -bottom-px -right-px w-5 h-5 border-b border-r border-border-strong pointer-events-none hidden lg:block"></div>
-
-    <div class="container-vmax py-12 lg:py-16">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-
-        <div data-reveal>
-          <p class="font-micro text-[8px] text-text-muted/40 uppercase tracking-[0.15em] mb-2">Metrik 01</p>
-          <p class="font-mono text-3xl lg:text-4xl font-medium text-text-primary" data-counter="80">
-            <span class="counter-value">0</span><span class="text-accent">%</span>
-          </p>
-          <div class="w-full h-px bg-accent/30 mt-2 mb-2"></div>
-          <p class="text-text-secondary text-xs">Fahrzeugabdeckung</p>
-          <div class="flex items-center gap-1.5 mt-2">
-            <span class="w-1 h-1 rounded-full bg-accent-success animate-glow-pulse"></span>
-            <span class="font-micro text-[8px] text-accent-success/70 uppercase tracking-wider">Active</span>
-          </div>
-        </div>
-
-        <div data-reveal data-delay="80">
-          <p class="font-micro text-[8px] text-text-muted/40 uppercase tracking-[0.15em] mb-2">Metrik 02</p>
-          <p class="font-mono text-3xl lg:text-4xl font-medium text-text-primary" data-counter="28">
-            <span class="counter-value">0</span><span class="text-accent">+</span>
-          </p>
-          <div class="w-full h-px bg-accent/30 mt-2 mb-2"></div>
-          <p class="text-text-secondary text-xs">Jahre Netzwerk-Erfahrung</p>
-          <div class="flex items-center gap-1.5 mt-2">
-            <span class="w-1 h-1 rounded-full bg-accent-success animate-glow-pulse"></span>
-            <span class="font-micro text-[8px] text-accent-success/70 uppercase tracking-wider">Verified</span>
-          </div>
-        </div>
-
-        <div data-reveal data-delay="160">
-          <p class="font-micro text-[8px] text-text-muted/40 uppercase tracking-[0.15em] mb-2">Metrik 03</p>
-          <p class="font-mono text-3xl lg:text-4xl font-medium text-text-primary" data-counter="100">
-            <span class="counter-value">0</span><span class="text-accent">%</span>
-          </p>
-          <div class="w-full h-px bg-accent/30 mt-2 mb-2"></div>
-          <p class="text-text-secondary text-xs">Einzelabstimmung vor Ort</p>
-          <div class="flex items-center gap-1.5 mt-2">
-            <span class="w-1 h-1 rounded-full bg-accent-success animate-glow-pulse"></span>
-            <span class="font-micro text-[8px] text-accent-success/70 uppercase tracking-wider">Active</span>
-          </div>
-        </div>
-
-        <div data-reveal data-delay="240">
-          <p class="font-micro text-[8px] text-text-muted/40 uppercase tracking-[0.15em] mb-2">Metrik 04</p>
-          <p class="font-mono text-3xl lg:text-4xl font-medium text-text-primary">
-            1<span class="text-accent">on</span>1
-          </p>
-          <div class="w-full h-px bg-accent/30 mt-2 mb-2"></div>
-          <p class="text-text-secondary text-xs">mit Stefan Jung persönlich</p>
-          <div class="flex items-center gap-1.5 mt-2">
-            <span class="w-1 h-1 rounded-full bg-accent-success animate-glow-pulse"></span>
-            <span class="font-micro text-[8px] text-accent-success/70 uppercase tracking-wider">Active</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 </section>
 
-
-<!-- Section marker -->
-<div class="section-marker py-4">— 002 —</div>
-
-<!-- ============================================
-     SEKTION 3 — DAS PROBLEM / DIE HALTUNG
-     ============================================ -->
-<section class="section-spacing relative" id="haltung">
-  <!-- Stamp watermark -->
-  <div class="absolute top-20 right-8 lg:right-24 hidden lg:block" aria-hidden="true">
-    <div class="stamp w-28 h-28 text-[7px] leading-tight text-center p-2" style="transform: rotate(-6deg)">
-      <span>TÜV-CERTIFIED</span><br><span>SINCE 2011</span><br><span>WESTENDORF</span>
-    </div>
-  </div>
-
-  <div class="container-vmax">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-
-      <!-- Linke Spalte: Headline -->
-      <div class="lg:col-span-5" data-reveal>
-        <span class="label-mono text-accent block mb-4">Unsere Haltung</span>
-        <!-- Ruler line -->
-        <div class="ruler-line"><% for(var i=0;i<20;i++){%><span class="tick"></span><%}%></div>
-        <h2 class="font-display text-display-section italic leading-[1.05]">
-          Warum die meisten Tunings enttäuschen.
-        </h2>
-      </div>
-
-      <!-- Rechte Spalte: Editorial-Text -->
-      <div class="lg:col-span-7 lg:pt-12" data-reveal data-delay="120">
-        <div class="space-y-6 text-text-secondary text-lg leading-relaxed">
-          <p>
-            Eine Software aus dem Netz herunterladen, auf dem Parkplatz aufspielen, Feierabend&nbsp;— das ist kein Tuning. Das ist Glücksspiel mit dem Motor Ihres Fahrzeugs.
-          </p>
-          <p>
-            Bei VMAX Süd wird jedes Fahrzeug einzeln abgestimmt. Kein Fernzugriff, keine Paketlösung. Ihr Wagen steht bei uns, wir messen, wir optimieren, wir testen&nbsp;— und Sie bekommen eine TÜV-konforme Leistungssteigerung mit Nachweis.
-          </p>
-          <p>
-            So macht das seit 1997 die VMAX Performance Gruppe. So machen wir das in&nbsp;Westendorf.
-          </p>
-        </div>
-
-        <div class="mt-10 pt-8 border-t border-border-subtle flex items-center gap-6">
-          <div class="w-12 h-px bg-accent"></div>
-          <div>
-            <p class="text-text-primary font-medium">Stefan Jung</p>
-            <p class="text-text-muted text-sm font-micro tracking-wider">Inhaber, VMAX Süd</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- Section marker -->
-<div class="section-marker py-4">— 003 —</div>
-
-<!-- ============================================
-     SEKTION 4 — LEISTUNGSSPEKTRUM (Datenblatt-Cards)
-     ============================================ -->
-<section class="section-spacing bg-bg-secondary" id="leistungen">
-  <div class="container-vmax">
-
-    <!-- Section Header -->
-    <div class="max-w-2xl mb-16" data-reveal>
-      <div class="ruler-line"><% for(var i=0;i<15;i++){%><span class="tick"></span><%}%></div>
-      <h2 class="font-display text-display-section italic leading-[1.05]">
-        Was wir für Sie tun.
-      </h2>
-      <!-- Coordinate badge -->
-      <p class="font-micro text-[8px] text-text-muted/30 tracking-widest mt-4">48.4267°N · 10.8742°E · WESTENDORF</p>
-    </div>
-
-    <!-- 2x2 Datenblatt Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-      <% var services = [
-        { num: '01', href: '/chiptuning', title: 'Chiptuning &amp; Leistungssteigerung', desc: 'Einzelabstimmung auf dem Prüfstand — nicht aus der Dose. Jedes Kennfeld wird individuell an Ihren Motor angepasst.', specs: [['PRÜFSTANDLAUF','✓'],['TÜV-EINTRAGUNG','✓'],['DOKUMENTATION','✓'],['AB-PREIS','ab 499 €']], bar: '75%' },
-        { num: '02', href: '/tuev-eintragung', title: 'TÜV-Eintragung &amp; Einzelabnahme', desc: 'Von der Begutachtung bis zum Stempel. Wir begleiten Sie durch den gesamten Eintragungsprozess.', specs: [['EINZELABNAHME','✓'],['TEILEGUTACHTEN','✓'],['GTÜ / DEKRA / TÜV','✓'],['AB-PREIS','ab 89 €']], bar: '60%' },
-        { num: '03', href: '/komplettumbauten', title: 'Komplettumbauten mit StVO-Abnahme', desc: 'Vom Konzept bis zur Straßenzulassung. Auch Eigenbauten und Einzelstücke bringen wir durch die Abnahme.', specs: [['MOTORTAUSCH','✓'],['FAHRWERK','✓'],['STVO-KONFORM','✓'],['EIGENBAUTEN','✓']], bar: '90%' },
-        { num: '04', href: '/b2b', title: 'B2B-Prüftechnik für Unternehmen', desc: 'Gutachten, Abgastests und Bauteilfreigaben für Tuninghersteller, Importeure und Werkstätten.', specs: [['BETRIEBSFESTIGKEIT','✓'],['ABGASTESTS','✓'],['TEILEGUTACHTEN','✓'],['NDA-FÄHIG','✓']], bar: '45%' }
-      ]; %>
-
-      <% services.forEach(function(s, i) { %>
-      <a href="<%= s.href %>" class="card p-0 group relative overflow-hidden" data-reveal data-delay="<%= i * 80 %>">
-        <!-- Radar indicator on hover -->
-        <div class="absolute top-4 right-4 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <svg viewBox="0 0 24 24" class="w-full h-full animate-spin" style="animation-duration:3s">
-            <circle cx="12" cy="12" r="10" fill="none" stroke="#2A2A2A" stroke-width="0.5"/>
-            <line x1="12" y1="2" x2="12" y2="12" stroke="#F59E0B" stroke-width="0.5" opacity="0.6"/>
-          </svg>
-        </div>
-
-        <!-- Header -->
-        <div class="px-6 py-3 border-b border-border-subtle">
-          <span class="font-micro text-[9px] text-text-muted/50 uppercase tracking-[0.12em]">Dienstleistung · <%= s.num %> / 04</span>
-        </div>
-
-        <!-- Content -->
-        <div class="p-6">
-          <h3 class="font-display text-display-card italic leading-tight mb-3">
-            <%- s.title %>
-          </h3>
-          <p class="text-text-secondary text-sm leading-relaxed mb-6">
-            <%= s.desc %>
-          </p>
-
-          <!-- Spec Sheet -->
-          <div class="space-y-2 mb-6">
-            <% s.specs.forEach(function(spec) { %>
-            <div class="spec-row">
-              <span class="spec-label"><%= spec[0] %></span>
-              <span class="spec-dots"></span>
-              <span class="spec-value"><%= spec[1] %></span>
-            </div>
-            <% }); %>
-          </div>
-        </div>
-
-        <!-- Progress bar -->
-        <div class="h-0.5 bg-bg-secondary">
-          <div class="h-full bg-accent/40 group-hover:bg-accent transition-colors duration-500" style="width:<%= s.bar %>"></div>
-        </div>
-      </a>
-      <% }); %>
-
-    </div>
-  </div>
-</section>
+<!-- Dyno car data for the rotator -->
+<script id="dyno-data" type="application/json"><%- JSON.stringify(dynoCars) %></script>
 
 
 <!-- ============================================
-     SEKTION 5 — VAG-SPEZIALISIERUNG
+     PROZESS — 4 Schritte brutalist
      ============================================ -->
-<section class="section-spacing" id="vag">
+<section class="section-spacing bg-bg-secondary border-t border-border-subtle" id="prozess">
   <div class="container-vmax">
 
-    <!-- Section Header -->
-    <div class="max-w-3xl mb-12" data-reveal>
-      <span class="label-caps text-accent block mb-4">Spezialisierung</span>
-      <h2 class="font-display text-3xl md:text-4xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05]">
-        Unsere Spezialität:<br>VAG-Konzern.
-      </h2>
-      <p class="mt-4 text-text-secondary text-lg">
-        Golf. GTI. R. Tiguan. RS. S-Modelle. Wir kennen jede Motorvariante.
-      </p>
-    </div>
-  </div>
-
-  <!-- Horizontale Scroll-Gallery — Full Bleed -->
-  <div class="relative">
-    <div class="flex gap-5 overflow-x-auto pb-6 px-6 md:px-8 lg:px-12 snap-x snap-mandatory scrollbar-hide" id="vag-scroll">
-
-      <!-- Golf 7 GTI -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal>
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=680&q=80" alt="VW Golf GTI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">Volkswagen</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">Golf 7 GTI</h3>
-            <p class="font-mono text-accent text-lg mt-2">+70 PS <span class="text-text-muted text-sm">/ +70 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Golf 8 R -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal data-delay="50">
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=680&q=80" alt="VW Golf R" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">Volkswagen</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">Golf 8 R</h3>
-            <p class="font-mono text-accent text-lg mt-2">+80 PS <span class="text-text-muted text-sm">/ +80 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Audi RS3 -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal data-delay="100">
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=680&q=80" alt="Audi RS3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">Audi</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">RS3 8V</h3>
-            <p class="font-mono text-accent text-lg mt-2">+60 PS <span class="text-text-muted text-sm">/ +80 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tiguan R -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal data-delay="150">
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1606611013016-969c19ba27a5?w=680&q=80" alt="VW Tiguan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">Volkswagen</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">Tiguan R</h3>
-            <p class="font-mono text-accent text-lg mt-2">+70 PS <span class="text-text-muted text-sm">/ +70 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Audi TT RS -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal data-delay="200">
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=680&q=80" alt="Audi TT RS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">Audi</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">TT RS 8S</h3>
-            <p class="font-mono text-accent text-lg mt-2">+60 PS <span class="text-text-muted text-sm">/ +80 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEAT Leon Cupra -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal data-delay="250">
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=680&q=80" alt="SEAT Leon Cupra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">SEAT</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">Leon Cupra 5F</h3>
-            <p class="font-mono text-accent text-lg mt-2">+70 PS <span class="text-text-muted text-sm">/ +80 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- CUPRA Formentor -->
-      <div class="flex-shrink-0 w-[300px] md:w-[340px] snap-start" data-reveal data-delay="300">
-        <div class="card p-0 overflow-hidden group">
-          <div class="relative h-48 bg-bg-secondary overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=680&q=80" alt="CUPRA Formentor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async">
-          </div>
-          <div class="p-6">
-            <p class="label-caps text-text-muted mb-1">CUPRA</p>
-            <h3 class="font-display text-lg font-medium uppercase tracking-tight">Formentor VZ</h3>
-            <p class="font-mono text-accent text-lg mt-2">+70 PS <span class="text-text-muted text-sm">/ +80 Nm</span></p>
-            <a href="/kontakt" class="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors mt-4 group/link">
-              Tuning anfragen
-              <svg class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Scroll-Fade rechts -->
-    <div class="absolute top-0 right-0 bottom-6 w-24 bg-gradient-to-l from-bg-primary to-transparent pointer-events-none"></div>
-  </div>
-</section>
-
-
-<!-- ============================================
-     SEKTION 6 — PROZESS IN 4 SCHRITTEN
-     ============================================ -->
-<section class="section-spacing bg-bg-secondary" id="prozess">
-  <div class="container-vmax">
-
-    <!-- Section Header -->
-    <div class="max-w-2xl mb-16" data-reveal>
-      <span class="label-caps text-accent block mb-4">So läuft es ab</span>
-      <h2 class="font-display text-3xl md:text-4xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05]">
-        Vier Schritte zur Mehrleistung.
+    <div class="mb-16 lg:mb-20">
+      <p class="label-caps text-burnt mb-4">§ 04 · Ablauf</p>
+      <h2 class="font-display text-display-section uppercase leading-[0.95] max-w-3xl">
+        Von der Anfrage<br>
+        zur <span class="text-burnt">Eintragung</span>.
       </h2>
     </div>
 
-    <!-- Timeline Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-subtle border border-border-subtle">
 
-      <!-- Step 01 -->
-      <div class="relative" data-reveal>
-        <div class="flex items-center gap-4 mb-6">
-          <span class="font-mono text-5xl font-medium text-border-strong">01</span>
-          <div class="hidden lg:block flex-1 h-px bg-border-subtle"></div>
-        </div>
-        <h3 class="font-display text-xl font-medium uppercase tracking-tight mb-3">Beratung</h3>
-        <p class="text-text-secondary text-sm leading-relaxed">
-          Fahrzeug-Check, Zieldefinition und ein realistisches Kosten-Leistungs-Gespräch. Keine leeren Versprechen&nbsp;— klare Ansagen.
-        </p>
+      <div class="bg-bg-primary p-8 lg:p-10 flex flex-col gap-4 min-h-[280px]">
+        <span class="step-number">01</span>
+        <h4 class="font-display text-2xl uppercase leading-tight">Anfrage</h4>
+        <p class="text-text-secondary text-sm">Kostenlose Erstberatung. Wir prüfen Machbarkeit, Mechanik-Reserven und Eintragungsfähigkeit.</p>
       </div>
 
-      <!-- Step 02 -->
-      <div class="relative" data-reveal data-delay="100">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="font-mono text-5xl font-medium text-border-strong">02</span>
-          <div class="hidden lg:block flex-1 h-px bg-border-subtle"></div>
-        </div>
-        <h3 class="font-display text-xl font-medium uppercase tracking-tight mb-3">Prüfstand</h3>
-        <p class="text-text-secondary text-sm leading-relaxed">
-          Ist-Messung und vollständige Datenaufnahme. Ihr Fahrzeug wird dokumentiert, bevor wir Hand anlegen.
-        </p>
+      <div class="bg-bg-primary p-8 lg:p-10 flex flex-col gap-4 min-h-[280px]">
+        <span class="step-number">02</span>
+        <h4 class="font-display text-2xl uppercase leading-tight">Einmessung</h4>
+        <p class="text-text-secondary text-sm">Fahrzeug kommt auf den Prüfstand. Ist-Werte werden aufgenommen.</p>
       </div>
 
-      <!-- Step 03 -->
-      <div class="relative" data-reveal data-delay="200">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="font-mono text-5xl font-medium text-border-strong">03</span>
-          <div class="hidden lg:block flex-1 h-px bg-border-subtle"></div>
-        </div>
-        <h3 class="font-display text-xl font-medium uppercase tracking-tight mb-3">Abstimmung</h3>
-        <p class="text-text-secondary text-sm leading-relaxed">
-          Einzelabstimmung mit iterativer Feinabstimmung. Jedes Kennfeld wird individuell auf Ihren Motor optimiert.
-        </p>
+      <div class="bg-bg-primary p-8 lg:p-10 flex flex-col gap-4 min-h-[280px]">
+        <span class="step-number">03</span>
+        <h4 class="font-display text-2xl uppercase leading-tight">Abstimmung</h4>
+        <p class="text-text-secondary text-sm">Kennfeldanpassung, Drucküberwachung, Abgastests — alles intern protokolliert.</p>
       </div>
 
-      <!-- Step 04 -->
-      <div class="relative" data-reveal data-delay="300">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="font-mono text-5xl font-medium text-accent/30">04</span>
-        </div>
-        <h3 class="font-display text-xl font-medium uppercase tracking-tight mb-3">Eintragung</h3>
-        <p class="text-text-secondary text-sm leading-relaxed">
-          TÜV-Termin, Papiere, Eintragung. Sie fahren legal&nbsp;— mit Nachweis und einem guten Gefühl.
-        </p>
+      <div class="bg-bg-primary p-8 lg:p-10 flex flex-col gap-4 min-h-[280px]">
+        <span class="step-number">04</span>
+        <h4 class="font-display text-2xl uppercase leading-tight">Eintragung</h4>
+        <p class="text-text-secondary text-sm">Gutachten und Abnahme bei der Prüforganisation. Du bekommst Papier und Stempel.</p>
       </div>
 
     </div>
-
-    <!-- CTA nach Prozess -->
-    <div class="mt-16 pt-12 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-6" data-reveal>
-      <p class="text-text-secondary text-lg">
-        Bereit für den ersten Schritt?
-      </p>
-      <a href="/kontakt" class="btn-primary">
-        Beratungstermin vereinbaren
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
-    </div>
-
   </div>
 </section>
 
 
 <!-- ============================================
-     SEKTION 7 — BEWERTUNGEN
+     TESTIMONIALS — Direct quotes, no monitor
      ============================================ -->
-<section class="section-spacing" id="bewertungen">
+<section class="section-spacing bg-bg-primary border-t border-border-subtle">
   <div class="container-vmax">
 
-    <!-- Section Header -->
-    <div class="max-w-2xl mb-16" data-reveal>
-      <span class="label-caps text-accent block mb-4">Kundenstimmen</span>
-      <h2 class="font-display text-3xl md:text-4xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05]">
-        Was unsere Kunden sagen.
+    <div class="mb-14">
+      <p class="label-caps text-burnt mb-4">§ 05 · Kunden</p>
+      <h2 class="font-display text-display-section uppercase leading-[0.95]">
+        Stimmen vom<br><span class="text-titan">Prüfstand.</span>
       </h2>
     </div>
 
-    <!-- Reviews Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <!-- Review 1 -->
-      <div class="card" data-reveal>
-        <div class="flex items-center gap-1 mb-4">
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      <% const reviews = [
+        {name: 'Markus W.', vehicle: 'VW Golf 7 GTI', text: 'Professionelle Beratung, saubere Arbeit am Prüfstand und ein spürbares Ergebnis. Die TÜV-Eintragung lief reibungslos.', source: 'Google'},
+        {name: 'Thomas K.', vehicle: 'Audi RS3 8V', text: 'Endlich ein Tuner, der nicht nur Versprechen macht, sondern liefert. Faire Beratung, sauberer Prüfstandslauf, ehrliche Einschätzung.', source: 'Google'},
+        {name: 'Sandra M.', vehicle: 'VW Tiguan 2.0 TDI', text: 'Auch als Nicht-Tuning-Enthusiastin wurde ich ernst genommen. Klare Empfehlung — legal und sauber.', source: 'Facebook'}
+      ]; %>
+      <% reviews.forEach(function(r) { %>
+      <div class="card p-8 flex flex-col gap-6">
+        <div class="flex items-center justify-between">
+          <span class="text-burnt tracking-widest text-sm">★★★★★</span>
+          <span class="font-mono text-xs text-text-muted uppercase tracking-wider"><%= r.source %></span>
         </div>
-        <blockquote class="text-text-secondary text-sm leading-relaxed mb-6">
-          &ldquo;Professionelle Beratung, saubere Arbeit am Prüfstand und ein spürbares Ergebnis. Stefan hat sich wirklich Zeit genommen, alles zu erklären. Die TÜV-Eintragung lief reibungslos.&rdquo;
-        </blockquote>
-        <div class="flex items-center justify-between pt-4 border-t border-border-subtle">
-          <div>
-            <p class="text-text-primary text-sm font-medium">Markus W.</p>
-            <p class="text-text-muted text-xs mt-0.5">VW Golf 7 GTI</p>
-          </div>
-          <span class="label-caps text-text-muted text-[10px]">Google</span>
+        <p class="text-text-primary text-sm leading-relaxed flex-1">„<%= r.text %>"</p>
+        <div class="pt-4 border-t border-border-subtle">
+          <p class="font-condensed uppercase tracking-wider text-sm text-text-primary"><%= r.name %></p>
+          <p class="font-mono text-xs text-titan mt-1"><%= r.vehicle %></p>
         </div>
       </div>
-
-      <!-- Review 2 -->
-      <div class="card" data-reveal data-delay="100">
-        <div class="flex items-center gap-1 mb-4">
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        </div>
-        <blockquote class="text-text-secondary text-sm leading-relaxed mb-6">
-          &ldquo;Endlich ein Tuner, der nicht nur Versprechen macht, sondern liefert. Vorher-Nachher-Messung am Prüfstand, alles dokumentiert. So muss das sein.&rdquo;
-        </blockquote>
-        <div class="flex items-center justify-between pt-4 border-t border-border-subtle">
-          <div>
-            <p class="text-text-primary text-sm font-medium">Thomas K.</p>
-            <p class="text-text-muted text-xs mt-0.5">Audi RS3 8V</p>
-          </div>
-          <span class="label-caps text-text-muted text-[10px]">Google</span>
-        </div>
-      </div>
-
-      <!-- Review 3 -->
-      <div class="card" data-reveal data-delay="200">
-        <div class="flex items-center gap-1 mb-4">
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        </div>
-        <blockquote class="text-text-secondary text-sm leading-relaxed mb-6">
-          &ldquo;Auch als Nicht-Tuning-Enthusiastin wurde ich ernst genommen. Klare Empfehlung für alle, die mehr aus ihrem Fahrzeug herausholen wollen&nbsp;— legal und sauber.&rdquo;
-        </blockquote>
-        <div class="flex items-center justify-between pt-4 border-t border-border-subtle">
-          <div>
-            <p class="text-text-primary text-sm font-medium">Sandra M.</p>
-            <p class="text-text-muted text-xs mt-0.5">VW Tiguan 2.0 TDI</p>
-          </div>
-          <span class="label-caps text-text-muted text-[10px]">Facebook</span>
-        </div>
-      </div>
-
+      <% }); %>
     </div>
   </div>
 </section>
 
 
 <!-- ============================================
-     SEKTION 8 — NETZWERK & TRUST
+     CTA BAND — AMG-Rot Conversion Block
      ============================================ -->
-<section class="section-spacing bg-bg-secondary" id="netzwerk">
-  <div class="container-vmax">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+<section class="relative py-24 lg:py-32 bg-bg-secondary overflow-hidden border-t border-border-subtle">
+  <div class="absolute inset-0 bg-carbon-weave opacity-[0.04]"></div>
 
-      <!-- Linke Spalte -->
-      <div class="lg:col-span-5" data-reveal>
-        <span class="label-caps text-accent block mb-4">Das Netzwerk</span>
-        <h2 class="font-display text-3xl md:text-4xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05]">
-          Teil eines 28&nbsp;Jahre gewachsenen Netzwerks.
+  <div class="container-vmax relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-8">
+        <p class="label-caps text-titan mb-6">Kontakt</p>
+        <h2 class="font-display text-display-hero uppercase leading-[0.9] text-text-primary">
+          Dein Fahrzeug.<br>
+          Unser <span class="text-burnt">Prüfstand.</span>
         </h2>
       </div>
-
-      <!-- Rechte Spalte -->
-      <div class="lg:col-span-7 lg:pt-12" data-reveal data-delay="150">
-        <div class="space-y-6 text-text-secondary text-lg leading-relaxed">
-          <p>
-            VMAX Süd ist kein Einzelkämpfer. Wir sind Teil der VMAX Performance Gruppe&nbsp;— gegründet 1997 in Borken, Nordrhein-Westfalen. Was als spezialisierte Tuning-Werkstatt begann, ist heute ein bundesweites Netzwerk mit Standorten und Partnern in ganz Deutschland.
-          </p>
-          <p>
-            Das bedeutet für Sie: Zugang zu über zwei Jahrzehnten Erfahrung, erprobten Abstimmungen für hunderte Motorvarianten und eine Infrastruktur, die eine Ein-Mann-Werkstatt nicht bieten kann&nbsp;— bei gleichzeitig persönlicher Betreuung vor Ort.
-          </p>
-        </div>
-
-        <!-- Netzwerk-Logos / Standorte -->
-        <div class="mt-10 pt-8 border-t border-border-subtle">
-          <p class="label-caps text-text-muted mb-6">Standorte & Partner</p>
-          <div class="flex flex-wrap gap-8">
-            <div class="text-center">
-              <p class="font-display text-sm font-medium text-text-primary uppercase tracking-wide">VMAX</p>
-              <p class="text-text-muted text-xs mt-1">Borken · NRW</p>
-            </div>
-            <div class="w-px h-10 bg-border-subtle hidden sm:block"></div>
-            <div class="text-center">
-              <p class="font-display text-sm font-medium text-text-primary uppercase tracking-wide">VMAX Thüringen</p>
-              <p class="text-text-muted text-xs mt-1">Thüringen</p>
-            </div>
-            <div class="w-px h-10 bg-border-subtle hidden sm:block"></div>
-            <div class="text-center">
-              <p class="font-display text-sm font-medium text-accent uppercase tracking-wide">VMAX Süd</p>
-              <p class="text-text-muted text-xs mt-1">Westendorf · Bayern</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================
-     SEKTION 9 — STANDORT & KONTAKT
-     ============================================ -->
-<section class="section-spacing" id="standort">
-  <div class="container-vmax">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-
-      <!-- Links: Kontakt-Info -->
-      <div data-reveal>
-        <span class="label-caps text-accent block mb-4">Standort</span>
-        <h2 class="font-display text-3xl md:text-4xl lg:text-display-section font-medium uppercase tracking-tight leading-[1.05] mb-10">
-          Besuchen Sie uns in&nbsp;Westendorf.
-        </h2>
-
-        <div class="space-y-8">
-          <!-- Adresse -->
-          <div class="flex gap-4">
-            <div class="w-10 h-10 flex items-center justify-center border border-border-strong rounded-sm flex-shrink-0">
-              <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-text-primary font-medium"><%= address.street %></p>
-              <p class="text-text-secondary text-sm"><%= address.access %></p>
-              <p class="text-text-secondary text-sm"><%= address.zip %> <%= address.city %></p>
-            </div>
-          </div>
-
-          <!-- Telefon -->
-          <div class="flex gap-4">
-            <div class="w-10 h-10 flex items-center justify-center border border-border-strong rounded-sm flex-shrink-0">
-              <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
-              </svg>
-            </div>
-            <div>
-              <a href="tel:<%= phone %>" class="text-text-primary font-medium hover:text-accent transition-colors"><%= phone %></a>
-              <p class="text-text-muted text-sm mt-0.5">Direkter Draht zu Stefan Jung</p>
-            </div>
-          </div>
-
-          <!-- E-Mail -->
-          <div class="flex gap-4">
-            <div class="w-10 h-10 flex items-center justify-center border border-border-strong rounded-sm flex-shrink-0">
-              <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
-              </svg>
-            </div>
-            <div>
-              <a href="mailto:<%= email %>" class="text-text-primary font-medium hover:text-accent transition-colors"><%= email %></a>
-              <p class="text-text-muted text-sm mt-0.5">Anfragen und Terminwünsche</p>
-            </div>
-          </div>
-
-          <!-- Öffnungszeiten -->
-          <div class="flex gap-4">
-            <div class="w-10 h-10 flex items-center justify-center border border-border-strong rounded-sm flex-shrink-0">
-              <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-text-primary font-medium">Öffnungszeiten</p>
-              <p class="text-text-secondary text-sm mt-1"><%= hours.weekdays %></p>
-              <p class="text-text-secondary text-sm"><%= hours.saturday %></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="mt-10">
-          <a href="/kontakt" class="btn-primary">
-            Termin anfragen
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Rechts: Map -->
-      <div class="relative" data-reveal data-delay="150">
-        <div class="w-full h-[400px] lg:h-full min-h-[400px] bg-bg-tertiary border border-border-subtle overflow-hidden">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2671.5!2d10.7!3d48.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDIyJzQ4LjAiTiAxMMKwNDInMDAuMCJF!5e0!3m2!1sde!2sde!4v1"
-            width="100%" height="100%"
-            style="border:0; filter: invert(0.9) hue-rotate(180deg) saturate(0.3) brightness(0.8);"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="VMAX Süd Standort in Westendorf">
-          </iframe>
-        </div>
-        <!-- Map Overlay Label -->
-        <div class="absolute bottom-4 left-4 bg-bg-primary/90 backdrop-blur-sm px-4 py-2 border border-border-subtle">
-          <p class="text-xs font-medium text-text-primary">VMAX Süd</p>
-          <p class="text-[10px] text-text-muted"><%= address.zip %> <%= address.city %></p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================
-     SEKTION 10 — ABSCHLUSS-CTA
-     ============================================ -->
-<section class="bg-bg-secondary border-t border-border-subtle" id="cta-final">
-  <div class="container-vmax py-20 lg:py-28">
-    <div class="max-w-3xl mx-auto text-center" data-reveal>
-      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-medium uppercase tracking-tight leading-[1.05]">
-        Bereit für echte Leistung?
-      </h2>
-      <p class="mt-4 text-text-secondary text-lg max-w-xl mx-auto">
-        Einzelabstimmung. TÜV-Eintragung. Persönliche Betreuung. Vereinbaren Sie jetzt Ihren Termin bei VMAX Süd in Westendorf.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-        <a href="/kontakt" class="btn-primary">
-          Jetzt Termin anfragen
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      <div class="lg:col-span-4 flex flex-col gap-3 lg:items-end">
+        <a href="/kontakt" class="btn-cta">
+          Anfrage <span aria-hidden="true">→</span>
         </a>
-        <a href="tel:<%= phone %>" class="btn-ghost">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-          Direkt anrufen
-        </a>
+        <a href="tel:<%= phone %>" class="font-mono text-sm text-titan hover:text-text-primary transition-colors mt-1"><%= phone %></a>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ============================================
-     ANIMATIONS
-     ============================================ -->
-<script>
-(function() {
-  // --- Scroll Reveal with stagger ---
-  var revealElements = document.querySelectorAll('[data-reveal]');
-
-  function reveal() {
-    revealElements.forEach(function(el) {
-      if (el.getBoundingClientRect().top < window.innerHeight - 40) {
-        var delay = parseInt(el.dataset.delay || 0);
-        setTimeout(function() {
-          el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, delay);
-      }
-    });
-  }
-
-  revealElements.forEach(function(el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-  });
-
-  setTimeout(reveal, 80);
-  window.addEventListener('scroll', reveal, { passive: true });
-
-  // --- CountUp for [data-counter] ---
-  var counterEls = document.querySelectorAll('[data-counter]');
-  var countersAnimated = false;
-
-  function animateCounters() {
-    if (countersAnimated) return;
-    counterEls.forEach(function(counter) {
-      if (counter.getBoundingClientRect().top > window.innerHeight) return;
-      countersAnimated = true;
-      var target = parseInt(counter.dataset.counter);
-      var valueEl = counter.querySelector('.counter-value');
-      if (!valueEl) return;
-      countUp(valueEl, target, 2000);
-    });
-  }
-
-  function countUp(el, target, duration, prefix) {
-    var start = performance.now();
-    prefix = prefix || '';
-    function update(now) {
-      var progress = Math.min((now - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = prefix + Math.round(target * eased);
-      if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-  }
-
-  window.addEventListener('scroll', animateCounters, { passive: true });
-
-  // --- Hero background dyno draw-in ---
-  var heroDynoBg = document.getElementById('hero-dyno-bg');
-  if (heroDynoBg) {
-    setTimeout(function() {
-      heroDynoBg.style.transition = 'stroke-dashoffset 2.5s ease-out';
-      heroDynoBg.style.strokeDashoffset = '0';
-    }, 400);
-  }
-
-  // --- Panel dyno curve (scroll-triggered) ---
-  var dynoCurve = document.getElementById('dyno-stage');
-  var dynoLabel = document.getElementById('dyno-label');
-  var dynoAnimated = false;
-
-  function animateDyno() {
-    if (dynoAnimated || !dynoCurve) return;
-    if (window.pageYOffset > 80) {
-      dynoAnimated = true;
-      dynoCurve.style.transition = 'stroke-dashoffset 2s ease-out';
-      dynoCurve.style.strokeDashoffset = '0';
-      if (dynoLabel) {
-        setTimeout(function() {
-          dynoLabel.style.transition = 'opacity 0.5s ease';
-          dynoLabel.style.opacity = '1';
-        }, 1600);
-      }
-    }
-  }
-
-  window.addEventListener('scroll', animateDyno, { passive: true });
-})();
-</script>
 
 <%- include('../layouts/end') %>
+
+<script>
+  // 1) HERO LINE-REVEAL — staggered on load
+  (function() {
+    var lines = document.querySelectorAll('.line-reveal[data-reveal-line]');
+    if (!lines.length) return;
+    lines.forEach(function(el) {
+      var idx = parseInt(el.dataset.revealLine, 10) || 0;
+      setTimeout(function() { el.classList.add('is-visible'); }, 240 + idx * 140);
+    });
+  })();
+
+  // 2) SCROLL-REVEAL — any [data-reveal] becomes visible when near viewport
+  (function() {
+    var items = document.querySelectorAll('[data-reveal]');
+    if (!items.length || !('IntersectionObserver' in window)) {
+      items.forEach(function(el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '0px 0px -60px 0px' });
+    items.forEach(function(el) { io.observe(el); });
+  })();
+
+  // 3) MAGNETIC BUTTONS — cursor pull
+  (function() {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    document.querySelectorAll('.magnetic').forEach(function(el) {
+      var rect;
+      el.addEventListener('mouseenter', function() { rect = el.getBoundingClientRect(); });
+      el.addEventListener('mousemove', function(e) {
+        if (!rect) rect = el.getBoundingClientRect();
+        var x = (e.clientX - rect.left - rect.width/2) * 0.22;
+        var y = (e.clientY - rect.top - rect.height/2) * 0.28;
+        el.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)';
+      });
+      el.addEventListener('mouseleave', function() {
+        el.style.transform = '';
+        rect = null;
+      });
+    });
+  })();
+
+  // 4) TILT CARDS — 3D hover
+  (function() {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    document.querySelectorAll('.tilt-card').forEach(function(el) {
+      el.addEventListener('mousemove', function(e) {
+        var r = el.getBoundingClientRect();
+        var cx = (e.clientX - r.left) / r.width - 0.5;
+        var cy = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = 'perspective(1200px) rotateY(' + (cx * 6).toFixed(2) + 'deg) rotateX(' + (-cy * 6).toFixed(2) + 'deg) translateZ(0)';
+      });
+      el.addEventListener('mouseleave', function() {
+        el.style.transform = '';
+      });
+    });
+  })();
+
+  // 5) HERO SPOTLIGHT — burnt glow follows cursor
+  (function() {
+    var hero = document.getElementById('hero');
+    var spot = document.getElementById('hero-spotlight');
+    if (!hero || !spot || window.matchMedia('(pointer: coarse)').matches) return;
+    hero.addEventListener('mousemove', function(e) {
+      var r = hero.getBoundingClientRect();
+      spot.style.left = (e.clientX - r.left) + 'px';
+      spot.style.top = (e.clientY - r.top) + 'px';
+      spot.style.opacity = '1';
+    });
+    hero.addEventListener('mouseleave', function() { spot.style.opacity = '0'; });
+    spot.style.opacity = '0';
+  })();
+
+  // 6) FLAGSHIP SHOWCASE — auto-rotate + dots
+  (function() {
+    var container = document.getElementById('flagship-showcase');
+    if (!container) return;
+    var slides = container.querySelectorAll('.showcase-slide');
+    var dots = document.querySelectorAll('.showcase-dot');
+    var counter = document.getElementById('showcase-counter');
+    var idx = 0;
+    var paused = false;
+
+    function show(i) {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach(function(s, k) { s.classList.toggle('is-active', k === idx); });
+      dots.forEach(function(d, k) { d.classList.toggle('is-active', k === idx); });
+      if (counter) counter.textContent = String(idx+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+    }
+
+    dots.forEach(function(d, k) {
+      d.addEventListener('click', function() { show(k); paused = true; setTimeout(function(){ paused = false; }, 8000); });
+    });
+
+    setInterval(function() {
+      if (document.hidden || paused) return;
+      show(idx + 1);
+    }, 4000);
+  })();
+
+  // 7) DYNO ROTATOR — 5 cars, animated curve + crossfading numbers
+  (function() {
+    var dataEl = document.getElementById('dyno-data');
+    var rotator = document.getElementById('dyno-rotator');
+    if (!dataEl || !rotator) return;
+
+    var cars;
+    try { cars = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    if (!cars || !cars.length) return;
+
+    var stageCurve = document.getElementById('dyno-stage-curve');
+    var serieCurve = document.getElementById('dyno-serie-curve');
+    var stageLabelSvg = document.getElementById('dyno-stage-label-svg');
+    var serieLabel = document.getElementById('dyno-serie-label');
+    var stageHeader = document.getElementById('dyno-stage-label');
+    var modelEl = document.getElementById('dyno-model');
+    var engineEl = document.getElementById('dyno-engine');
+    var stockPSEl = document.getElementById('dyno-stockPS');
+    var tunedPSEl = document.getElementById('dyno-tunedPS');
+    var gainPSEl = document.getElementById('dyno-gainPS');
+    var stockNMEl = document.getElementById('dyno-stockNM');
+    var tunedNMEl = document.getElementById('dyno-tunedNM');
+    var gainNMEl = document.getElementById('dyno-gainNM');
+    var counterEl = document.getElementById('dyno-counter');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.dyno-dot'));
+
+    var idx = 0;
+    var visible = false;
+    var paused = false;
+
+    // Numeric crossfade with count animation
+    function setNum(el, target, duration) {
+      if (!el) return;
+      var start = parseInt(el.textContent.replace(/[^0-9-]/g,''), 10) || 0;
+      var sign = (target >= 0 ? '+' : '');
+      var prefix = (el.textContent.indexOf('+') === 0) ? sign : '';
+      var t0 = performance.now();
+      function step(now) {
+        var p = Math.min((now - t0) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        var v = Math.round(start + (target - start) * eased);
+        el.textContent = prefix + v;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function fadeOut(els) {
+      els.forEach(function(el) {
+        if (!el) return;
+        el.style.transition = 'opacity 200ms ease, transform 200ms ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-6px)';
+      });
+    }
+    function fadeIn(els) {
+      els.forEach(function(el) {
+        if (!el) return;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(6px)';
+        requestAnimationFrame(function() {
+          el.style.transition = 'opacity 280ms ease, transform 280ms ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      });
+    }
+
+    function render(i, animate) {
+      var c = cars[i];
+      if (!c) return;
+
+      // Update text content with crossfade
+      var textEls = [stageHeader, modelEl, engineEl];
+      if (animate) fadeOut(textEls);
+
+      setTimeout(function() {
+        if (stageHeader) stageHeader.textContent = c.stage.toUpperCase() + ' · KUNDENBEISPIEL';
+        if (modelEl) modelEl.textContent = c.model;
+        if (engineEl) engineEl.textContent = c.engine;
+        if (animate) fadeIn(textEls);
+      }, animate ? 200 : 0);
+
+      // Animate big numbers
+      setNum(stockPSEl, c.stockPS, 700);
+      setNum(tunedPSEl, c.tunedPS, 1100);
+      if (gainPSEl) { gainPSEl.textContent = '+' + c.gainPS; }
+      setNum(stockNMEl, c.stockNM, 700);
+      setNum(tunedNMEl, c.tunedNM, 1100);
+      if (gainNMEl) { gainNMEl.textContent = '+' + c.gainNM; }
+
+      // Update curves
+      if (serieCurve) serieCurve.setAttribute('d', c.seriePath);
+      if (serieLabel) serieLabel.textContent = 'SERIE · ' + c.stockPS;
+      if (stageCurve) {
+        stageCurve.setAttribute('d', c.stagePath);
+        stageCurve.style.transition = 'none';
+        stageCurve.style.strokeDashoffset = '600';
+        // Force reflow
+        void stageCurve.getBoundingClientRect();
+        stageCurve.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.22, 1, 0.36, 1)';
+        stageCurve.style.strokeDashoffset = '0';
+      }
+      if (stageLabelSvg) {
+        stageLabelSvg.style.opacity = '0';
+        stageLabelSvg.textContent = c.stage.toUpperCase() + ' · ' + c.tunedPS;
+        setTimeout(function() {
+          stageLabelSvg.style.transition = 'opacity 400ms ease';
+          stageLabelSvg.style.opacity = '1';
+        }, 1200);
+      }
+
+      // Dots
+      dots.forEach(function(d, di) {
+        if (di === i) {
+          d.classList.add('bg-burnt');
+          d.classList.remove('bg-border-strong');
+        } else {
+          d.classList.remove('bg-burnt');
+          d.classList.add('bg-border-strong');
+        }
+      });
+      if (counterEl) counterEl.textContent = String(i + 1).padStart(2, '0');
+
+      idx = i;
+    }
+
+    function next() { render((idx + 1) % cars.length, true); }
+
+    // Manueller Klick pausiert Auto-Rotation für 12 Sekunden, dann wieder weiter
+    var pauseUntil = 0;
+    dots.forEach(function(d) {
+      d.addEventListener('click', function() {
+        var i = parseInt(d.dataset.index, 10);
+        if (!isNaN(i)) render(i, true);
+        pauseUntil = performance.now() + 12000;
+      });
+    });
+
+    // Initial draw when section first comes into view (animated, nicht statisch)
+    function checkInView() {
+      if (visible) return;
+      var r = rotator.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.85 && r.bottom > 0) {
+        visible = true;
+        render(0, true);
+      }
+    }
+    window.addEventListener('scroll', checkInView, { passive: true });
+    checkInView();
+
+    // Auto-Rotation: läuft auch wenn Cursor über dem Bereich ist.
+    // Nur stoppen wenn Tab im Hintergrund oder kurz nach manuellem Klick.
+    setInterval(function() {
+      if (document.hidden) return;
+      if (!visible) return;
+      if (performance.now() < pauseUntil) return;
+      next();
+    }, 5000);
+  })();
+</script>

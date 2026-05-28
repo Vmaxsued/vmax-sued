@@ -1,88 +1,96 @@
-<footer class="bg-bg-primary border-t border-border-subtle">
+<footer class="bg-bg-primary border-t-2 border-border-strong relative">
+  <!-- Diagonal stripe band -->
+  <div class="stripe-band"></div>
+
   <div class="container-vmax py-16 lg:py-24">
 
-    <!-- Top: Logo + Columns -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+    <!-- Top: Mega Logo -->
+    <div class="mb-12 lg:mb-16 pb-10 border-b border-border-subtle">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div>
+          <p class="label-micro text-text-muted mb-5">Einzelabstimmung · TÜV-Eintragung · Westendorf</p>
+          <a href="/" class="inline-block" aria-label="Vmax Sued Startseite">
+            <img src="/images/logo.png" alt="Vmax Sued" class="h-28 md:h-40 lg:h-48 w-auto block" width="1776" height="592">
+          </a>
+        </div>
+        <div class="flex flex-col gap-3">
+          <a href="tel:<%= phone %>" class="btn-cta">
+            <%= phone %> <span aria-hidden="true">↗</span>
+          </a>
+          <a href="mailto:<%= email %>" class="btn-primary">
+            E-Mail schreiben
+          </a>
+        </div>
+      </div>
+    </div>
 
-      <!-- Brand -->
-      <div class="lg:col-span-1">
-        <a href="/" class="text-2xl font-display font-bold tracking-tight">
-          VMAX <span class="text-accent">SÜD</span>
-        </a>
-        <p class="mt-4 text-text-secondary text-sm leading-relaxed">
-          Einzelabstimmung statt Softwarepaket.<br>
-          TÜV-Kompetenz statt Versprechen.
+    <!-- Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+
+      <!-- Brand / Social -->
+      <div>
+        <h4 class="label-caps mb-5">Philosophie</h4>
+        <p class="text-text-secondary text-sm leading-relaxed">
+          Einzelabstimmung statt Softwarepaket. TÜV-Kompetenz statt Versprechen. Jedes Fahrzeug kommt mit Protokoll vom Prüfstand.
         </p>
-        <div class="flex gap-4 mt-6">
+        <div class="flex gap-3 mt-6">
           <a href="<%= social.facebook %>" target="_blank" rel="noopener noreferrer"
-             class="text-text-muted hover:text-accent transition-colors" aria-label="Facebook">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+             class="w-10 h-10 flex items-center justify-center border border-border-strong text-text-muted hover:border-burnt hover:text-burnt transition-colors" aria-label="Facebook">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
           <a href="<%= social.instagram %>" target="_blank" rel="noopener noreferrer"
-             class="text-text-muted hover:text-accent transition-colors" aria-label="Instagram">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+             class="w-10 h-10 flex items-center justify-center border border-border-strong text-text-muted hover:border-burnt hover:text-burnt transition-colors" aria-label="Instagram">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
         </div>
       </div>
 
       <!-- Leistungen -->
       <div>
-        <h4 class="label-caps mb-4">Leistungen</h4>
+        <h4 class="label-caps mb-5">Leistungen</h4>
         <ul class="space-y-3">
-          <li><a href="/chiptuning" class="text-text-secondary hover:text-text-primary transition-colors text-sm">Chiptuning</a></li>
-          <li><a href="/tuev-eintragung" class="text-text-secondary hover:text-text-primary transition-colors text-sm">TÜV-Eintragung</a></li>
-          <li><a href="/komplettumbauten" class="text-text-secondary hover:text-text-primary transition-colors text-sm">Komplettumbauten</a></li>
-          <li><a href="/b2b" class="text-text-secondary hover:text-text-primary transition-colors text-sm">B2B-Prüftechnik</a></li>
+          <li><a href="/chiptuning" class="font-condensed uppercase tracking-wider text-text-secondary hover:text-burnt transition-colors text-sm">Chiptuning</a></li>
+          <li><a href="/tuev-eintragung" class="font-condensed uppercase tracking-wider text-text-secondary hover:text-burnt transition-colors text-sm">TÜV-Eintragung</a></li>
+          <li><a href="/b2b" class="font-condensed uppercase tracking-wider text-text-secondary hover:text-burnt transition-colors text-sm">B2B-Prüftechnik</a></li>
         </ul>
       </div>
 
       <!-- Unternehmen -->
       <div>
-        <h4 class="label-caps mb-4">Unternehmen</h4>
+        <h4 class="label-caps mb-5">Unternehmen</h4>
         <ul class="space-y-3">
-          <li><a href="/team" class="text-text-secondary hover:text-text-primary transition-colors text-sm">Über uns</a></li>
-          <li><a href="/galerie" class="text-text-secondary hover:text-text-primary transition-colors text-sm">Galerie</a></li>
-          <li><a href="/kontakt" class="text-text-secondary hover:text-text-primary transition-colors text-sm">Kontakt</a></li>
+          <li><a href="/team" class="font-condensed uppercase tracking-wider text-text-secondary hover:text-burnt transition-colors text-sm">Team</a></li>
+          <li><a href="/galerie" class="font-condensed uppercase tracking-wider text-text-secondary hover:text-burnt transition-colors text-sm">Galerie</a></li>
+          <li><a href="/kontakt" class="font-condensed uppercase tracking-wider text-text-secondary hover:text-burnt transition-colors text-sm">Kontakt</a></li>
         </ul>
       </div>
 
       <!-- Kontakt -->
       <div>
-        <h4 class="label-caps mb-4">Kontakt</h4>
-        <address class="not-italic text-sm text-text-secondary space-y-2">
-          <p><%= address.street %></p>
+        <h4 class="label-caps mb-5">Standort</h4>
+        <address class="not-italic text-sm text-text-secondary space-y-1.5 font-mono">
+          <p class="text-text-primary"><%= address.street %></p>
+          <p class="text-text-muted text-xs"><%= address.access %></p>
           <p><%= address.zip %> <%= address.city %></p>
-          <p class="pt-2">
-            <a href="tel:<%= phone %>" class="hover:text-accent transition-colors"><%= phone %></a>
-          </p>
-          <p>
-            <a href="mailto:<%= email %>" class="hover:text-accent transition-colors"><%= email %></a>
-          </p>
-          <p class="pt-2 text-text-muted text-xs">
-            <%= hours.weekdays %><br>
-            <%= hours.saturday %>
-          </p>
+          <p class="text-text-muted text-xs"><%= address.region %></p>
         </address>
+        <div class="mt-4 pt-4 border-t border-border-subtle space-y-1 font-mono text-xs">
+          <p class="text-text-muted"><%= hours.weekdays %></p>
+          <p class="text-text-muted"><%= hours.saturday %></p>
+        </div>
       </div>
     </div>
 
     <!-- Bottom -->
-    <div class="mt-16 pt-8 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-text-muted text-xs">
-        &copy; <%= new Date().getFullYear() %> VMAX Süd &middot; Westendorf &middot; Schwaben
+    <div class="mt-14 pt-6 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="font-mono text-text-muted text-[11px] tracking-wider">
+        &copy; <%= new Date().getFullYear() %> Vmax Sued · WESTENDORF · 48.4267°N 10.8742°E
       </p>
       <div class="flex gap-6">
-        <a href="/impressum" class="text-text-muted hover:text-text-secondary transition-colors text-xs">Impressum</a>
-        <a href="/datenschutz" class="text-text-muted hover:text-text-secondary transition-colors text-xs">Datenschutz</a>
-        <a href="/agb" class="text-text-muted hover:text-text-secondary transition-colors text-xs">AGB</a>
+        <a href="/impressum" class="font-condensed uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors text-xs">Impressum</a>
+        <a href="/datenschutz" class="font-condensed uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors text-xs">Datenschutz</a>
+        <a href="/agb" class="font-condensed uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors text-xs">AGB</a>
       </div>
-    </div>
-
-    <!-- Serial -->
-    <div class="mt-6 text-center">
-      <p class="font-micro text-[8px] text-text-muted/30 tracking-[0.15em] uppercase">
-        REV. <%= new Date().getFullYear() %>.<%= String(new Date().getMonth()+1).padStart(2,'0') %> &middot; BUILD 1847 &middot; VMAX-SUED/WSDF &middot; 48.4267&deg;N 10.8742&deg;E
-      </p>
     </div>
   </div>
 </footer>

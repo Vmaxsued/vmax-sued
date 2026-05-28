@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 // Global template variables
 app.use((req, res, next) => {
   res.locals.currentPath = req.path;
-  res.locals.siteName = 'VMAX Süd';
+  res.locals.siteName = 'Vmax Sued';
   res.locals.siteUrl = process.env.SITE_URL || 'https://vmax-sued.com';
   res.locals.phone = '+49 1512 1858273';
   res.locals.phoneClean = '4915121858273';
@@ -78,7 +78,7 @@ app.use('/', dynamicRoutes);
 // 404
 app.use((req, res) => {
   res.status(404).render('pages/404', {
-    title: 'Seite nicht gefunden — VMAX Süd',
+    title: 'Seite nicht gefunden — Vmax Sued',
     description: 'Die angeforderte Seite existiert nicht.',
   });
 });
@@ -87,13 +87,13 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error('Server error:', err);
   res.status(500).render('pages/500', {
-    title: 'Fehler — VMAX Süd',
+    title: 'Fehler — Vmax Sued',
     description: 'Ein Fehler ist aufgetreten.',
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`VMAX Süd running on port ${PORT}`);
+  console.log(`Vmax Sued running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 

@@ -31,7 +31,7 @@ router.get('/tuning/:brand/:model', (req, res, next) => {
   const nmGain = vehicle.stage1.nm - vehicle.stock.nm;
 
   res.render('templates/vehicle-page', {
-    title: `${vehicle.brand} ${vehicle.model} Chiptuning — +${psGain} PS | VMAX Süd`,
+    title: `${vehicle.brand} ${vehicle.model} Chiptuning — +${psGain} PS | Vmax Sued`,
     description: `${vehicle.brand} ${vehicle.model} Chiptuning in Westendorf bei Augsburg. Einzelabstimmung auf dem Prüfstand: von ${vehicle.stock.ps} PS auf ${vehicle.stage1.ps} PS (Stage 1). TÜV-Eintragung möglich.`,
     vehicle,
     otherVehicles,
@@ -59,13 +59,13 @@ router.get('/tuning/:city', (req, res, next) => {
   if (!city) return next();
 
   res.render('templates/city-page', {
-    title: `Chiptuning ${city.name} — VMAX Süd | ${city.distance} entfernt`,
-    description: `Chiptuning und Leistungssteigerung für ${city.name} und Umgebung. VMAX Süd in Westendorf — nur ${city.distance} (${city.driveTime}) von ${city.name} entfernt.`,
+    title: `Chiptuning ${city.name} — Vmax Sued | ${city.distance} entfernt`,
+    description: `Chiptuning und Leistungssteigerung für ${city.name} und Umgebung. Vmax Sued in Westendorf — nur ${city.distance} (${city.driveTime}) von ${city.name} entfernt.`,
     city,
     vehicles: vehicles.slice(0, 6).map(v => ({ ...v, brandSlug: v.brand.toLowerCase().replace(/\s+/g, '-').replace(/š/g, 's') })),
     schema: {
       name: `Chiptuning ${city.name}`,
-      description: `Professionelles Chiptuning für Kunden aus ${city.name}. Einzelabstimmung auf dem Prüfstand bei VMAX Süd in Westendorf — ${city.distance} entfernt.`,
+      description: `Professionelles Chiptuning für Kunden aus ${city.name}. Einzelabstimmung auf dem Prüfstand bei Vmax Sued in Westendorf — ${city.distance} entfernt.`,
     },
     breadcrumbs: [
       { name: 'Chiptuning', path: '/chiptuning' },

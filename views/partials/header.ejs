@@ -1,80 +1,79 @@
-<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="site-header">
-  <div class="container-vmax flex items-center justify-between h-20">
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent" id="site-header">
+  <div class="container-vmax flex items-center justify-between h-20 lg:h-24">
 
     <!-- Logo -->
-    <a href="/" class="relative z-50 flex items-center gap-3 group">
-      <span class="text-2xl font-display font-bold tracking-tight text-text-primary">
-        VMAX <span class="text-accent">SÜD</span>
-      </span>
+    <a href="/" class="relative z-50 flex items-center gap-3 group" aria-label="Vmax Sued Startseite">
+      <img src="/images/logo.png" alt="Vmax Sued" class="h-12 lg:h-14 w-auto block transition-transform duration-300 group-hover:scale-[1.03]" width="1776" height="592">
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-8" aria-label="Hauptnavigation">
-      <a href="/chiptuning" class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/chiptuning' ? 'text-text-primary' : '' %>">
+    <nav class="hidden lg:flex items-center gap-7" aria-label="Hauptnavigation">
+      <a href="https://www.vmax.de" target="_blank" rel="noopener noreferrer" class="font-condensed uppercase tracking-[0.1em] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 inline-flex items-center gap-1.5">
+        Tuning
+        <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+      <a href="/chiptuning" class="font-condensed uppercase tracking-[0.1em] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/chiptuning' ? '!text-burnt' : '' %>">
         Chiptuning
       </a>
-      <a href="/tuev-eintragung" class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/tuev-eintragung' ? 'text-text-primary' : '' %>">
-        TÜV-Eintragung
+      <a href="/tuev-eintragung" class="font-condensed uppercase tracking-[0.1em] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/tuev-eintragung' ? '!text-burnt' : '' %>">
+        TÜV
       </a>
-      <a href="/komplettumbauten" class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/komplettumbauten' ? 'text-text-primary' : '' %>">
-        Komplettumbauten
-      </a>
-      <a href="/b2b" class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/b2b' ? 'text-text-primary' : '' %>">
+      <a href="/b2b" class="font-condensed uppercase tracking-[0.1em] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/b2b' ? '!text-burnt' : '' %>">
         B2B
       </a>
-      <a href="/galerie" class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/galerie' ? 'text-text-primary' : '' %>">
+      <a href="/galerie" class="font-condensed uppercase tracking-[0.1em] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 <%= currentPath === '/galerie' ? '!text-burnt' : '' %>">
         Galerie
       </a>
-      <a href="/kontakt" class="btn-primary text-sm py-3 px-6">
-        Termin anfragen
+      <span class="w-px h-5 bg-border-strong mx-1"></span>
+      <a href="tel:<%= phone %>" class="font-mono text-xs text-titan hover:text-text-primary transition-colors" data-cursor="CALL">
+        <%= phone %>
+      </a>
+      <a href="/kontakt" class="btn-cta text-xs py-3 px-6">
+        Termin <span aria-hidden="true">→</span>
       </a>
     </nav>
 
     <!-- Mobile Menu Toggle -->
     <button class="lg:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5"
             id="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
-      <span class="block w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center" id="burger-top"></span>
-      <span class="block w-6 h-0.5 bg-text-primary transition-all duration-300" id="burger-mid"></span>
-      <span class="block w-4 h-0.5 bg-text-primary transition-all duration-300 origin-center" id="burger-bot"></span>
+      <span class="block w-6 h-[2px] bg-text-primary transition-all duration-300 origin-center" id="burger-top"></span>
+      <span class="block w-6 h-[2px] bg-text-primary transition-all duration-300" id="burger-mid"></span>
+      <span class="block w-4 h-[2px] bg-burnt transition-all duration-300 origin-center" id="burger-bot"></span>
     </button>
   </div>
 
   <!-- Mobile Menu Overlay -->
   <div class="fixed inset-0 bg-bg-primary/98 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" id="mobile-menu">
-    <nav class="flex flex-col items-center gap-8" aria-label="Mobile Navigation">
-      <a href="/" class="text-3xl font-display font-medium text-text-primary hover:text-accent transition-colors">Start</a>
-      <a href="/chiptuning" class="text-3xl font-display font-medium text-text-primary hover:text-accent transition-colors">Chiptuning</a>
-      <a href="/tuev-eintragung" class="text-3xl font-display font-medium text-text-primary hover:text-accent transition-colors">TÜV-Eintragung</a>
-      <a href="/komplettumbauten" class="text-3xl font-display font-medium text-text-primary hover:text-accent transition-colors">Komplettumbauten</a>
-      <a href="/b2b" class="text-3xl font-display font-medium text-text-primary hover:text-accent transition-colors">B2B</a>
-      <a href="/galerie" class="text-3xl font-display font-medium text-text-primary hover:text-accent transition-colors">Galerie</a>
-      <a href="/kontakt" class="btn-primary text-lg mt-4">Termin anfragen</a>
+    <nav class="flex flex-col items-center gap-6" aria-label="Mobile Navigation">
+      <a href="/" class="font-display text-4xl uppercase text-text-primary hover:text-burnt transition-colors">Start</a>
+      <a href="https://www.vmax.de" target="_blank" rel="noopener noreferrer" class="font-display text-4xl uppercase text-text-primary hover:text-burnt transition-colors inline-flex items-center gap-2">Tuning <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      <a href="/chiptuning" class="font-display text-4xl uppercase text-text-primary hover:text-burnt transition-colors">Chiptuning</a>
+      <a href="/tuev-eintragung" class="font-display text-4xl uppercase text-text-primary hover:text-burnt transition-colors">TÜV</a>
+      <a href="/b2b" class="font-display text-4xl uppercase text-text-primary hover:text-burnt transition-colors">B2B</a>
+      <a href="/galerie" class="font-display text-4xl uppercase text-text-primary hover:text-burnt transition-colors">Galerie</a>
+      <div class="h-px w-16 bg-border-strong my-2"></div>
+      <a href="/kontakt" class="btn-cta mt-2">Termin anfragen →</a>
     </nav>
-    <div class="absolute bottom-12 text-text-muted text-sm">
-      <a href="tel:<%= phone %>" class="hover:text-accent transition-colors"><%= phone %></a>
+    <div class="absolute bottom-10 flex flex-col items-center gap-2 label-micro">
+      <span class="text-text-muted">Direktkontakt</span>
+      <a href="tel:<%= phone %>" class="font-mono text-burnt text-sm tracking-wider"><%= phone %></a>
     </div>
   </div>
 </header>
 
 <script>
-  // Header scroll effect
   (function() {
     const header = document.getElementById('site-header');
-    let lastScroll = 0;
-
     window.addEventListener('scroll', function() {
-      const currentScroll = window.pageYOffset;
-
-      if (currentScroll > 80) {
-        header.classList.add('bg-bg-primary/95', 'backdrop-blur-md', 'border-b', 'border-border-subtle');
+      if (window.pageYOffset > 40) {
+        header.classList.add('bg-bg-primary/95', 'backdrop-blur-md', 'border-border-subtle');
+        header.classList.remove('border-transparent');
       } else {
-        header.classList.remove('bg-bg-primary/95', 'backdrop-blur-md', 'border-b', 'border-border-subtle');
+        header.classList.remove('bg-bg-primary/95', 'backdrop-blur-md', 'border-border-subtle');
+        header.classList.add('border-transparent');
       }
-
-      lastScroll = currentScroll;
     }, { passive: true });
 
-    // Mobile menu
     const toggle = document.getElementById('mobile-toggle');
     const menu = document.getElementById('mobile-menu');
     const burgerTop = document.getElementById('burger-top');
@@ -85,7 +84,6 @@
     toggle.addEventListener('click', function() {
       isOpen = !isOpen;
       toggle.setAttribute('aria-expanded', isOpen);
-
       if (isOpen) {
         menu.classList.remove('opacity-0', 'pointer-events-none');
         menu.classList.add('opacity-100');

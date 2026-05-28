@@ -3,29 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= typeof title !== 'undefined' ? title : 'VMAX Süd' %></title>
+  <title><%= typeof title !== 'undefined' ? title : 'Vmax Sued' %></title>
   <meta name="description" content="<%= typeof description !== 'undefined' ? description : '' %>">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'VMAX Süd' %>">
+  <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Vmax Sued' %>">
   <meta property="og:description" content="<%= typeof description !== 'undefined' ? description : '' %>">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<%= siteUrl %><%= currentPath %>">
-  <meta property="og:site_name" content="VMAX Süd">
+  <meta property="og:site_name" content="Vmax Sued">
   <meta property="og:locale" content="de_DE">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'VMAX Süd' %>">
+  <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Vmax Sued' %>">
   <meta name="twitter:description" content="<%= typeof description !== 'undefined' ? description : '' %>">
 
   <!-- Canonical -->
   <link rel="canonical" href="<%= siteUrl %><%= currentPath === '/' ? '' : currentPath %>">
 
-  <!-- Fonts: Bodoni Moda (Display) + Space Mono (Micro) + Inter (Body) + JetBrains Mono -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/images/logo-mark.png">
+
+  <!-- Fonts: Anton (Display) + Oswald (Condensed) + Inter (Body) + JetBrains Mono (Data) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/main.css">
@@ -35,7 +39,7 @@
   {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "AutoRepair"],
-    "name": "VMAX Süd",
+    "name": "Vmax Sued",
     "description": "Chiptuning, Leistungssteigerung und TÜV-Eintragung in Westendorf bei Augsburg.",
     "url": "<%= siteUrl %>",
     "telephone": "<%= phone %>",
@@ -68,21 +72,5 @@
   <%- include('../partials/schema-service') %>
 </head>
 <body class="bg-bg-primary text-text-primary">
-  <!-- Film Grain Overlay -->
-  <div class="fixed inset-0 z-[45] pointer-events-none opacity-[0.05] mix-blend-overlay" aria-hidden="true">
-    <svg width="100%" height="100%"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
-  </div>
-
-  <!-- Custom Cursor (Desktop only) -->
-  <div class="hidden lg:block fixed z-[60] pointer-events-none" id="custom-cursor" style="display:none">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="opacity-60">
-      <line x1="12" y1="0" x2="12" y2="10" stroke="#F59E0B" stroke-width="0.5"/>
-      <line x1="12" y1="14" x2="12" y2="24" stroke="#F59E0B" stroke-width="0.5"/>
-      <line x1="0" y1="12" x2="10" y2="12" stroke="#F59E0B" stroke-width="0.5"/>
-      <line x1="14" y1="12" x2="24" y2="12" stroke="#F59E0B" stroke-width="0.5"/>
-    </svg>
-    <span class="absolute left-7 top-1/2 -translate-y-1/2 font-micro text-[8px] text-accent uppercase tracking-widest whitespace-nowrap" id="cursor-label"></span>
-  </div>
-
   <%- include('../partials/header') %>
   <main>

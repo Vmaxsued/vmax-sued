@@ -12,7 +12,6 @@ const staticPages = [
   { path: '/',                priority: '1.0', changefreq: 'weekly' },
   { path: '/chiptuning',      priority: '0.9', changefreq: 'monthly' },
   { path: '/tuev-eintragung', priority: '0.9', changefreq: 'monthly' },
-  { path: '/komplettumbauten',priority: '0.9', changefreq: 'monthly' },
   { path: '/b2b',             priority: '0.9', changefreq: 'monthly' },
   { path: '/galerie',         priority: '0.6', changefreq: 'weekly' },
   { path: '/team',            priority: '0.7', changefreq: 'monthly' },

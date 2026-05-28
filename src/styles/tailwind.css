@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 /* ============================================
-   VMAX SÜD — Design System v3
-   "Prüfstandprotokoll trifft Magazin"
-   Accent: Bernstein #F59E0B
-   Display: Bodoni Moda (Serif) · Body: Inter
-   Mono: JetBrains Mono · Micro: Space Mono
+   Vmax Sued — Design System v4
+   "Akrapovič × AMG"
+   Accent: Titan #B8B5A8 · Burnt #C87533 · CTA #C8102E
+   Display: Anton · Sub: Oswald · Body: Inter · Data: JetBrains Mono
    ============================================ */
 
 @layer base {
@@ -17,15 +16,16 @@
     --bg-tertiary: #1C1C1C;
     --border-subtle: #2A2A2A;
     --border-strong: #3A3A3A;
+    --border-titan: #4A4842;
     --text-primary: #F5F5F5;
     --text-secondary: #A8A8A8;
     --text-muted: #6B6B6B;
-    --accent: #F59E0B;
-    --accent-hover: #D97706;
-    --accent-hot: #FB923C;
-    --accent-glow: rgba(245, 158, 11, 0.15);
-    --accent-success: #4ADE80;
-    --error: #EF4444;
+    --titan: #B8B5A8;
+    --titan-dark: #8A8680;
+    --burnt: #C87533;
+    --burnt-hover: #A85E24;
+    --cta: #C8102E;
+    --cta-hover: #9E0C22;
   }
 
   html {
@@ -40,19 +40,23 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+  h1, h2, h3 {
+    @apply font-display uppercase;
+  }
+
+  h4, h5, h6 {
+    @apply font-condensed uppercase tracking-wide;
   }
 
   ::selection {
-    background: rgba(245, 158, 11, 0.3);
+    background: rgba(200, 16, 46, 0.35);
     color: #F5F5F5;
   }
 
-  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: #0A0A0A; }
-  ::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 0; }
-  ::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
+  ::-webkit-scrollbar-thumb { background: #3A3A3A; border-radius: 0; }
+  ::-webkit-scrollbar-thumb:hover { background: #C87533; }
 }
 
 @layer components {
@@ -64,124 +68,366 @@
     @apply py-section-mobile lg:py-section;
   }
 
-  /* Mono stempel-label */
-  .label-mono {
-    @apply font-micro text-micro uppercase text-text-muted tracking-[0.12em];
-  }
-
-  /* Caption label — Inter */
+  /* Labels */
   .label-caps {
-    @apply text-caption uppercase tracking-[0.12em] font-medium text-text-muted font-sans;
+    @apply text-caption uppercase tracking-[0.18em] font-semibold text-titan font-sans;
   }
 
+  .label-micro {
+    @apply text-micro uppercase tracking-[0.2em] font-medium text-text-muted font-sans;
+  }
+
+  /* Buttons — CTA is AMG-Red, used sparingly */
+  .btn-cta {
+    @apply inline-flex items-center justify-center gap-3 px-9 py-4
+           bg-cta text-white font-condensed font-semibold uppercase tracking-[0.12em] text-sm
+           border border-cta transition-all duration-200
+           hover:bg-cta-hover hover:border-cta-hover
+           active:scale-[0.98];
+    box-shadow: 0 0 0 0 var(--cta);
+  }
+  .btn-cta:hover {
+    box-shadow: 0 12px 40px -10px var(--cta);
+  }
+
+  /* Primary — Titan ghost, default for most actions */
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-8 py-4 bg-accent font-sans
-           text-bg-primary font-semibold text-sm tracking-wide transition-all duration-300
-           hover:bg-accent-hover active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-3 px-9 py-4
+           bg-transparent text-text-primary font-condensed font-medium uppercase tracking-[0.12em] text-sm
+           border border-titan transition-all duration-200
+           hover:bg-titan hover:text-bg-primary active:scale-[0.98];
   }
 
+  /* Ghost — subtle, for tertiary actions */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 px-8 py-4 border border-border-strong
-           text-text-primary font-sans font-medium text-sm tracking-wide
-           transition-all duration-300 hover:border-accent/40
-           hover:text-white active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-3 px-9 py-4
+           bg-transparent text-text-secondary font-condensed font-medium uppercase tracking-[0.12em] text-sm
+           border border-border-strong transition-all duration-200
+           hover:border-burnt hover:text-text-primary active:scale-[0.98];
   }
 
+  /* Card — heavier, angular, no rounded corners */
   .card {
     @apply bg-bg-tertiary border border-border-subtle
-           transition-all duration-400 hover:-translate-y-1
-           hover:border-accent/30;
+           transition-all duration-300
+           hover:border-burnt hover:-translate-y-0.5;
   }
 
+  .card-carbon {
+    @apply bg-bg-carbon border-2 border-border-subtle
+           transition-all duration-300
+           hover:border-titan;
+  }
+
+  /* Mono numeric emphasis */
   .mono-value {
-    @apply font-mono text-accent font-medium;
+    @apply font-mono text-burnt font-medium;
   }
 
+  .mono-titan {
+    @apply font-mono text-titan font-medium;
+  }
+
+  /* Dividers — heavier than before */
   .divider {
-    @apply border-t border-border-subtle;
+    @apply border-t border-border-strong;
+  }
+
+  .divider-titan {
+    @apply border-t-2 border-titan/30;
   }
 
   .full-bleed {
     @apply w-screen relative left-1/2 right-1/2 -mx-[50vw];
   }
 
-  /* Corner brackets — monitor frame */
-  .corner-brackets {
-    position: relative;
+  /* AMG-style diagonal stripe accent — angled slashes */
+  .slash-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
   }
-  .corner-brackets::before,
-  .corner-brackets::after {
+  .slash-accent::before {
+    content: '';
+    width: 3px;
+    height: 22px;
+    background: var(--cta);
+    transform: skewX(-18deg);
+  }
+  .slash-accent::after {
+    content: '';
+    width: 3px;
+    height: 22px;
+    background: var(--titan);
+    transform: skewX(-18deg);
+  }
+
+  /* Diagonal stripe pattern — for section dividers */
+  .stripe-band {
+    height: 12px;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--cta) 0 4px,
+      transparent 4px 12px,
+      var(--titan) 12px 16px,
+      transparent 16px 24px
+    );
+    opacity: 0.4;
+  }
+
+  /* Data block — hard-edged key/value */
+  .data-block {
+    @apply flex flex-col gap-1 border-l-2 border-titan pl-4 py-1;
+  }
+  .data-block .data-label {
+    @apply label-micro;
+  }
+  .data-block .data-value {
+    @apply font-display text-3xl md:text-4xl text-text-primary leading-none;
+  }
+
+  /* Section marker — mono, top-right of hero */
+  .section-marker {
+    @apply font-mono text-xs text-titan/40 tracking-[0.2em];
+  }
+
+  /* Headline with burnt underline */
+  .headline-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .headline-underline::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: #3A3A3A;
-    pointer-events: none;
-  }
-  .corner-brackets::before {
-    top: -1px;
-    left: -1px;
-    border-top: 1px solid;
-    border-left: 1px solid;
-  }
-  .corner-brackets::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
+    left: 0;
+    bottom: -8px;
+    width: 48px;
+    height: 3px;
+    background: var(--burnt);
   }
 
-  /* Tab-leader dots for spec sheets */
-  .spec-row {
-    @apply flex items-baseline font-mono text-xs gap-2;
-  }
-  .spec-row .spec-label {
-    @apply text-text-muted whitespace-nowrap;
-  }
-  .spec-row .spec-dots {
-    @apply flex-1 border-b border-dotted border-border-subtle mb-[3px];
-  }
-  .spec-row .spec-value {
-    @apply text-text-primary whitespace-nowrap;
+  /* Input — angular dark fields */
+  .input-field {
+    @apply w-full bg-bg-carbon border-2 border-border-subtle px-4 py-3.5
+           text-text-primary font-sans text-sm
+           transition-colors duration-200
+           focus:outline-none focus:border-burnt placeholder:text-text-muted;
   }
 
-  /* Stamp element */
-  .stamp {
-    @apply font-micro uppercase tracking-[0.1em] text-text-muted/20 border border-text-muted/10 rounded-full
-           inline-flex items-center justify-center;
-    transform: rotate(-3deg);
+  /* Tag pill — technical spec style */
+  .tag {
+    @apply inline-flex items-center gap-2 px-3 py-1.5
+           border border-border-strong text-text-secondary
+           font-mono text-xs uppercase tracking-wider;
+  }
+  .tag-burnt {
+    @apply border-burnt/50 text-burnt;
+  }
+  .tag-titan {
+    @apply border-titan/40 text-titan;
   }
 
-  /* Section number marker */
-  .section-marker {
-    @apply font-micro text-text-muted/30 tracking-[0.2em] text-center;
+  /* Number marker — big mono step numbers */
+  .step-number {
+    @apply font-mono text-5xl md:text-6xl text-burnt/80 font-light leading-none;
   }
 
-  /* Ruler tick line above headlines */
-  .ruler-line {
+  /* ============ WOW LAYER ============ */
+
+  /* Line reveal — each line slides up from mask on load/scroll */
+  .line-reveal {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.05em;
+  }
+  .line-reveal > span {
+    display: block;
+    transform: translateY(115%);
+    transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .line-reveal.is-visible > span {
+    transform: translateY(0);
+  }
+
+  /* Headline sweep reveal — burnt wipe across */
+  .sweep-reveal {
+    position: relative;
+    display: inline-block;
+  }
+  .sweep-reveal > span {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0ms 520ms;
+  }
+  .sweep-reveal::after {
+    content: '';
+    position: absolute;
+    inset: -4px -8px;
+    background: var(--burnt);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 520ms cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .sweep-reveal.is-visible::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+    animation: sweep-out 520ms cubic-bezier(0.77, 0, 0.175, 1) 520ms forwards;
+  }
+  .sweep-reveal.is-visible > span {
+    opacity: 1;
+  }
+  @keyframes sweep-out {
+    0% { transform: scaleX(1); transform-origin: right center; }
+    100% { transform: scaleX(0); transform-origin: right center; }
+  }
+
+  /* Fade-up on scroll — simple variant */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 800ms ease-out, transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mega marquee section — giant Anton text scrolling */
+  .mega-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 28px 0;
+    border-top: 2px solid var(--border-strong);
+    border-bottom: 2px solid var(--border-strong);
+    background: var(--bg-primary);
+  }
+  .mega-marquee-track {
     display: flex;
-    gap: 4px;
-    align-items: flex-end;
-    margin-bottom: 12px;
+    gap: 56px;
+    white-space: nowrap;
+    width: max-content;
+    animation: mega-marquee-roll 36s linear infinite;
+    will-change: transform;
   }
-  .ruler-line .tick {
-    width: 1px;
-    background: #3A3A3A;
+  .mega-marquee:hover .mega-marquee-track {
+    animation-play-state: paused;
   }
-  .ruler-line .tick:nth-child(5n) {
-    height: 10px;
+  .mega-marquee-item {
+    flex-shrink: 0;
+    font-family: 'Anton', 'Oswald', 'Impact', sans-serif;
+    font-size: clamp(72px, 14vw, 180px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 56px;
   }
-  .ruler-line .tick:not(:nth-child(5n)) {
-    height: 5px;
+  .mega-marquee-item .dot {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 0;
+    background: var(--cta);
+    transform: rotate(45deg);
+  }
+  .mega-marquee-item.is-stroke {
+    -webkit-text-stroke: 2px var(--titan);
+    color: transparent;
+  }
+  @keyframes mega-marquee-roll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Tilt card wrapper */
+  .tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  /* Magnetic container */
+  .magnetic {
+    display: inline-block;
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  /* Placeholder tag */
+  .tag-placeholder {
+    @apply inline-flex items-center gap-1.5 px-2 py-1
+           border border-dashed border-burnt/60 text-burnt
+           font-mono text-[10px] uppercase tracking-[0.18em];
+  }
+  .tag-placeholder::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--burnt);
+    animation: glow-pulse 2.4s ease-in-out infinite;
+  }
+
+  /* Showcase rotator */
+  .showcase-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 280ms ease, transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .showcase-slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+    transition-delay: 120ms;
+  }
+  .showcase-dot {
+    width: 24px;
+    height: 2px;
+    background: var(--border-strong);
+    transition: background 300ms, width 300ms;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+  }
+  .showcase-dot.is-active {
+    background: var(--burnt);
+    width: 40px;
+  }
+
+  /* Spotlight blob — follows cursor in hero */
+  .spotlight {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 117, 51, 0.14) 0%, rgba(200, 117, 51, 0) 60%);
+    pointer-events: none;
+    filter: blur(40px);
+    transform: translate3d(-50%, -50%, 0);
+    transition: opacity 300ms;
+    z-index: 1;
   }
 }
 
 @layer utilities {
-  .text-gradient-accent {
-    background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
+  .text-gradient-burnt {
+    background: linear-gradient(135deg, #D4974E 0%, #8A4A1A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .text-stroke-titan {
+    -webkit-text-stroke: 1px var(--titan);
+    color: transparent;
   }
 
   .scrollbar-hide {
@@ -190,5 +436,10 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Carbon weave subtle background */
+  .bg-carbon-weave {
+    background-image: repeating-linear-gradient(45deg, #0F0F0F 0 2px, #141414 2px 4px);
   }
 }

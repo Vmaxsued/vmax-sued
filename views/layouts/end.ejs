@@ -1,44 +1,5 @@
   </main>
   <%- include('../partials/footer') %>
   <%- include('../partials/whatsapp-button') %>
-
-  <!-- Custom cursor logic (desktop only) -->
-  <script>
-  (function() {
-    if (window.innerWidth < 1024) return;
-    var cursor = document.getElementById('custom-cursor');
-    var label = document.getElementById('cursor-label');
-    if (!cursor) return;
-
-    var active = false;
-    document.addEventListener('mousemove', function(e) {
-      if (!active) return;
-      cursor.style.left = e.clientX - 12 + 'px';
-      cursor.style.top = e.clientY - 12 + 'px';
-    });
-
-    var interactives = document.querySelectorAll('a[href], button, [data-cursor]');
-    interactives.forEach(function(el) {
-      el.addEventListener('mouseenter', function() {
-        active = true;
-        cursor.style.display = '';
-        document.body.style.cursor = 'none';
-        var text = el.dataset.cursor || '';
-        if (!text) {
-          if (el.href && el.href.includes('/kontakt')) text = 'CONTACT';
-          else if (el.href && el.href.includes('tel:')) text = 'CALL';
-          else if (el.tagName === 'BUTTON') text = 'ACTION';
-          else text = 'VIEW';
-        }
-        label.textContent = text + ' \u2192';
-      });
-      el.addEventListener('mouseleave', function() {
-        active = false;
-        cursor.style.display = 'none';
-        document.body.style.cursor = '';
-      });
-    });
-  })();
-  </script>
 </body>
 </html>
