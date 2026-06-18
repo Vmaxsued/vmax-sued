@@ -77,6 +77,42 @@
                     class="w-full bg-bg-tertiary border border-border-subtle text-text-primary px-4 py-3 text-sm placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors">
                 </div>
               </div>
+
+              <!-- Fahrzeugschein-Upload (Pflicht) -->
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <label for="v-fahrzeugschein" class="block text-sm text-text-secondary">Fahrzeugschein *</label>
+                  <button type="button" id="info-fahrzeugschein-btn" aria-label="Was wir genau brauchen"
+                    class="w-4 h-4 rounded-full border border-text-muted text-text-muted hover:border-burnt hover:text-burnt transition-colors flex items-center justify-center text-[10px] font-semibold leading-none">i</button>
+                </div>
+
+                <label for="v-fahrzeugschein"
+                  class="block w-full bg-bg-tertiary border-2 border-dashed border-border-strong hover:border-burnt cursor-pointer transition-colors px-4 py-6 text-center">
+                  <svg class="w-6 h-6 mx-auto mb-2 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  <span id="v-fahrzeugschein-label" class="block text-sm text-text-primary font-medium">Foto vom Fahrzeugschein hochladen</span>
+                  <span class="block text-xs text-text-muted mt-1">JPG, PNG oder PDF · max. 8 MB</span>
+                  <input type="file" id="v-fahrzeugschein" name="fahrzeugschein"
+                    accept="image/jpeg,image/png,image/heic,application/pdf"
+                    required class="sr-only">
+                </label>
+
+                <!-- Erklärung -->
+                <p class="mt-3 text-xs text-text-muted leading-relaxed">
+                  Wir brauchen den Fahrzeugschein (Zulassungsbescheinigung Teil I, am liebsten die <span class="text-text-secondary">eingeklappte Seite mit den technischen Daten</span>), um einen so genauen Kostenvoranschlag wie möglich erstellen zu können — jedes Fahrzeug ist individuell. Wer sich unwohl fühlt, kann <span class="text-text-secondary">Name und Adresse vor dem Foto abdecken</span>.
+                </p>
+
+                <!-- Info-Popover (versteckt, JS toggelt) -->
+                <div id="info-fahrzeugschein-box"
+                  class="hidden mt-3 border border-burnt/40 bg-bg-tertiary p-4 rounded-sm">
+                  <p class="text-xs text-text-primary font-medium mb-2">Was wir brauchen — und was nicht</p>
+                  <ul class="text-xs text-text-secondary space-y-1 list-disc list-inside">
+                    <li>Wichtig: die <span class="text-text-primary">eingeklappte Seite</span> mit Motor-Code, HSN/TSN, Hubraum, Leistung in kW</li>
+                    <li>Foto scharf, alle Felder lesbar</li>
+                    <li>Persönliche Daten (Name, Anschrift) können gerne überdeckt werden</li>
+                    <li>Wir speichern den Schein nur für die Angebotserstellung und löschen ihn danach</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
             <div class="mt-8 flex justify-end">
@@ -312,6 +348,30 @@
     if (n === 4) buildSummary();
   }
 
+  // Fahrzeugschein: Info-Toggle + Datei-Label
+  var infoBtn = document.getElementById('info-fahrzeugschein-btn');
+  var infoBox = document.getElementById('info-fahrzeugschein-box');
+  if (infoBtn && infoBox) {
+    infoBtn.addEventListener('click', function() {
+      infoBox.classList.toggle('hidden');
+    });
+  }
+  var fzInput = document.getElementById('v-fahrzeugschein');
+  var fzLabel = document.getElementById('v-fahrzeugschein-label');
+  if (fzInput && fzLabel) {
+    fzInput.addEventListener('change', function() {
+      if (fzInput.files && fzInput.files[0]) {
+        var f = fzInput.files[0];
+        var kb = Math.round(f.size / 1024);
+        fzLabel.textContent = '✓ ' + f.name + ' (' + kb + ' KB)';
+        fzLabel.classList.add('text-success');
+      } else {
+        fzLabel.textContent = 'Foto vom Fahrzeugschein hochladen';
+        fzLabel.classList.remove('text-success');
+      }
+    });
+  }
+
   // Service radio visual feedback
   document.querySelectorAll('.service-option').forEach(function(opt) {
     var radio = opt.querySelector('input[type="radio"]');
@@ -334,6 +394,17 @@
       if (currentStep === 1) {
         if (!document.getElementById('v-brand').value) { highlight('v-brand'); return; }
         if (!document.getElementById('v-model').value.trim()) { highlight('v-model'); return; }
+        var fz = document.getElementById('v-fahrzeugschein');
+        if (!fz.files || !fz.files[0]) {
+          highlight('v-fahrzeugschein');
+          var lbl = document.querySelector('label[for="v-fahrzeugschein"]');
+          if (lbl) { lbl.classList.add('border-error'); setTimeout(function(){ lbl.classList.remove('border-error'); }, 2000); }
+          return;
+        }
+        if (fz.files[0].size > 8 * 1024 * 1024) {
+          alert('Datei zu groß (max. 8 MB). Bitte komprimieren oder anderes Format wählen.');
+          return;
+        }
       }
       if (currentStep === 2) {
         var checked = document.querySelector('input[name="service"]:checked');
@@ -405,26 +476,27 @@
     errBox.classList.add('hidden');
 
     var service = document.querySelector('input[name="service"]:checked');
+    var fz = document.getElementById('v-fahrzeugschein');
 
-    var payload = {
-      vehicle: {
-        brand: document.getElementById('v-brand').value,
-        model: document.getElementById('v-model').value,
-        year: document.getElementById('v-year').value,
-        engine: document.getElementById('v-engine').value,
-      },
-      service: service ? service.value : '',
-      name: document.getElementById('c-name').value.trim(),
-      email: document.getElementById('c-email').value.trim(),
-      phone: document.getElementById('c-phone').value.trim(),
-      message: document.getElementById('c-message').value.trim(),
-      privacy: document.getElementById('c-privacy').checked,
-    };
+    // FormData für Datei-Upload (multipart/form-data)
+    var fd = new FormData();
+    fd.append('vehicle_brand', document.getElementById('v-brand').value);
+    fd.append('vehicle_model', document.getElementById('v-model').value);
+    fd.append('vehicle_year', document.getElementById('v-year').value);
+    fd.append('vehicle_engine', document.getElementById('v-engine').value);
+    fd.append('service', service ? service.value : '');
+    fd.append('name', document.getElementById('c-name').value.trim());
+    fd.append('email', document.getElementById('c-email').value.trim());
+    fd.append('phone', document.getElementById('c-phone').value.trim());
+    fd.append('message', document.getElementById('c-message').value.trim());
+    fd.append('privacy', document.getElementById('c-privacy').checked ? 'true' : 'false');
+    if (fz.files && fz.files[0]) {
+      fd.append('fahrzeugschein', fz.files[0]);
+    }
 
     fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: fd, // Browser setzt Content-Type incl. boundary automatisch
     })
     .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
     .then(function(result) {

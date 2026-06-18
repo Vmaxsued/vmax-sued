@@ -14,7 +14,7 @@ if (process.env.SMTP_HOST) {
   });
 }
 
-async function sendContactMail({ vehicle, service, name, email, phone, message }) {
+async function sendContactMail({ vehicle, service, name, email, phone, message, attachment }) {
   const subject = `Neue Anfrage: ${service} — ${vehicle.brand} ${vehicle.model}`;
 
   const text = [
@@ -75,6 +75,9 @@ async function sendContactMail({ vehicle, service, name, email, phone, message }
   if (!transporter) {
     console.log('SMTP not configured — logging mail to console:');
     console.log(text);
+    if (attachment) {
+      console.log(`(Anhang: ${attachment.filename}, ${attachment.contentType}, ${attachment.content.length} bytes)`);
+    }
     return { messageId: 'dev-' + Date.now() };
   }
 
@@ -85,6 +88,7 @@ async function sendContactMail({ vehicle, service, name, email, phone, message }
     subject,
     text,
     html,
+    attachments: attachment ? [attachment] : undefined,
   });
 }
 

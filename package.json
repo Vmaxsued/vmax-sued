@@ -12,7 +12,12 @@
     "generate:vehicles": "node scripts/generate-vehicle-pages.js",
     "generate:cities": "node scripts/generate-city-pages.js"
   },
-  "keywords": ["chiptuning", "tuning", "augsburg", "vmax"],
+  "keywords": [
+    "chiptuning",
+    "tuning",
+    "augsburg",
+    "vmax"
+  ],
   "author": "VMAX Süd",
   "license": "PRIVATE",
   "dependencies": {
@@ -22,6 +27,7 @@
     "express": "^4.21.0",
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
+    "multer": "^2.2.0",
     "nodemailer": "^6.9.15"
   },
   "devDependencies": {
