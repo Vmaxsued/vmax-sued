@@ -17,98 +17,169 @@
       Tuningteil-Zulassung:<br class="hidden md:block"> <span class="text-text-secondary">Vom Prototyp zum fertigen Gutachten.</span>
     </h1>
     <p class="mt-6 text-lg text-text-secondary max-w-2xl">
-      Sie wollen ein Produkt auf den deutschen und weltweiten Markt bringen? Wir liefern Prüfstandsmessungen und aufbereitete Daten — von der Erstprüfung bis zur <span class="text-text-primary">ABE</span>, zum <span class="text-text-primary">Teilegutachten</span> oder zur <span class="text-text-primary">ECE-Typgenehmigung</span> durch akkreditierte Stellen.
+      Wählen Sie Produkt und Zielmarkt — und sehen Sie sofort, welcher Zulassungsweg gilt, welche Prüfstandsmessungen nötig sind und wie aufwendig der Weg zum fertigen Gutachten ist.
     </p>
   </div>
 </section>
 
-<!-- Drei Kernpunkte -->
-<section class="section-spacing bg-bg-secondary border-b border-border-subtle">
+<!-- Zulassungs-Navigator -->
+<section class="section-spacing" id="navigator">
   <div class="container-vmax">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="border border-border-subtle bg-bg-tertiary p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-burnt text-sm font-medium">01</span>
-          <div class="h-px flex-1 bg-border-subtle"></div>
-        </div>
-        <h2 class="font-display text-sm uppercase tracking-tight text-text-primary mb-3">Welches Gutachten?</h2>
-        <p class="text-text-secondary text-sm leading-relaxed">ABE, Teilegutachten oder ECE-Typgenehmigung — abhängig von Produkt und Zielmarkt. Wir klären das mit Ihnen, bevor wir anfangen.</p>
+    <span class="label-caps text-burnt block mb-4">Zulassungs-Navigator</span>
+    <h2 class="font-display text-2xl md:text-display-card uppercase tracking-tight text-text-primary mb-10">
+      Welches Gutachten braucht Ihr Tuningteil?
+    </h2>
+
+    <div class="border border-border-subtle bg-bg-secondary">
+      <!-- Tool-Header -->
+      <div class="flex items-center gap-3 px-6 py-4 border-b border-border-subtle">
+        <span class="w-2 h-2 rounded-full bg-burnt shadow-[0_0_10px_theme(colors.burnt)]"></span>
+        <span class="font-mono text-xs tracking-widest text-text-muted uppercase">Erstorientierung für Hersteller &amp; Importeure</span>
       </div>
-      <div class="border border-border-subtle bg-bg-tertiary p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-burnt text-sm font-medium">02</span>
-          <div class="h-px flex-1 bg-border-subtle"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+
+        <!-- Inputs -->
+        <div class="p-6 lg:p-8 lg:border-r border-border-subtle space-y-8">
+
+          <!-- Produktkategorie -->
+          <div>
+            <span class="font-mono text-xs tracking-widest uppercase text-text-muted block mb-4">01 — <span class="text-burnt">Produktkategorie</span></span>
+            <div class="flex flex-wrap gap-2" id="cat"></div>
+          </div>
+
+          <!-- Zielmarkt -->
+          <div>
+            <span class="font-mono text-xs tracking-widest uppercase text-text-muted block mb-4">02 — <span class="text-burnt">Zielmarkt</span></span>
+            <div class="flex border border-border-subtle" id="market"></div>
+          </div>
+
+          <!-- Fahrzeug-Umfang -->
+          <div>
+            <span class="font-mono text-xs tracking-widest uppercase text-text-muted block mb-4">03 — <span class="text-burnt">Fahrzeug-Umfang</span></span>
+            <div class="flex border border-border-subtle" id="scope"></div>
+          </div>
         </div>
-        <h2 class="font-display text-sm uppercase tracking-tight text-text-primary mb-3">Alle Messungen aus einer Hand</h2>
-        <p class="text-text-secondary text-sm leading-relaxed">Leistung, Abgas (Euro 0–7), Geräusch, Bremse, Festigkeit. Prüfstandsdaten und Dokumentation aufbereitet für Ihre Sachverständigen-Unterlagen.</p>
-      </div>
-      <div class="border border-border-subtle bg-bg-tertiary p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-burnt text-sm font-medium">03</span>
-          <div class="h-px flex-1 bg-border-subtle"></div>
+
+        <!-- Result -->
+        <div class="p-6 lg:p-8 flex flex-col gap-6" id="result">
+
+          <div>
+            <p class="font-mono text-xs tracking-widest uppercase text-text-muted mb-2">Empfohlener Zulassungsweg</p>
+            <p class="font-display text-xl md:text-2xl uppercase tracking-tight text-text-primary leading-tight" id="docOut">
+              <span class="text-text-muted">Bitte oben eine Produktkategorie wählen.</span>
+            </p>
+            <p class="text-text-secondary text-sm mt-2" id="marketOut"></p>
+          </div>
+
+          <!-- Path Track -->
+          <div id="trackWrap" class="hidden">
+            <p class="font-mono text-xs tracking-widest uppercase text-text-muted mb-4">Weg zum Gutachten</p>
+            <div class="relative flex justify-between mb-6" id="track">
+              <div class="absolute top-[9px] left-[9px] right-[9px] h-[2px] bg-border-subtle"></div>
+              <div class="absolute top-[9px] left-[9px] h-[2px] bg-burnt transition-all duration-700 ease-out" id="trackFill" style="width:0"></div>
+              <div class="station relative z-10 flex flex-col items-center flex-1 text-center">
+                <div class="node w-5 h-5 rounded-full bg-bg-tertiary border-2 border-border-subtle mb-2 transition-all duration-300"></div>
+                <span class="cap text-[10px] text-text-muted leading-tight max-w-[8ch] transition-colors duration-300">Erst­prüfung &amp; Messung</span>
+              </div>
+              <div class="station relative z-10 flex flex-col items-center flex-1 text-center">
+                <div class="node w-5 h-5 rounded-full bg-bg-tertiary border-2 border-border-subtle mb-2 transition-all duration-300"></div>
+                <span class="cap text-[10px] text-text-muted leading-tight max-w-[8ch] transition-colors duration-300">Daten­aufbereitung</span>
+              </div>
+              <div class="station relative z-10 flex flex-col items-center flex-1 text-center">
+                <div class="node w-5 h-5 rounded-full bg-bg-tertiary border-2 border-border-subtle mb-2 transition-all duration-300"></div>
+                <span class="cap text-[10px] text-text-muted leading-tight max-w-[8ch] transition-colors duration-300">Akkreditierte Prüfstelle</span>
+              </div>
+              <div class="station relative z-10 flex flex-col items-center flex-1 text-center">
+                <div class="node w-5 h-5 rounded-full bg-bg-tertiary border-2 border-border-subtle mb-2 transition-all duration-300"></div>
+                <span class="cap text-[10px] text-text-muted leading-tight max-w-[8ch] transition-colors duration-300">Fertiges Gutachten</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messungen -->
+          <div id="testsWrap" class="hidden">
+            <p class="font-mono text-xs tracking-widest uppercase text-text-muted mb-3">Erforderliche Messungen bei Vmax Sued</p>
+            <div id="testsOut" class="space-y-0 divide-y divide-border-subtle"></div>
+          </div>
+
+          <!-- Aufwand -->
+          <div id="effortWrap" class="hidden">
+            <div class="flex justify-between items-baseline mb-2">
+              <span class="font-mono text-xs tracking-widest uppercase text-text-muted">Aufwand-Indikator</span>
+              <span class="font-display text-sm uppercase tracking-tight" id="effortVal">—</span>
+            </div>
+            <div class="flex gap-1.5">
+              <div class="h-1.5 flex-1 bg-border-subtle transition-colors duration-300" id="e1"></div>
+              <div class="h-1.5 flex-1 bg-border-subtle transition-colors duration-300" id="e2"></div>
+              <div class="h-1.5 flex-1 bg-border-subtle transition-colors duration-300" id="e3"></div>
+            </div>
+          </div>
+
+          <p class="text-text-muted text-xs leading-relaxed border-l-2 border-border-strong pl-3">
+            Orientierung, keine Rechtsberatung. Der finale Genehmigungsweg wird im Einzelfall mit der akkreditierten Prüfstelle festgelegt.
+          </p>
+
+          <a id="cta" href="mailto:stefan_jung@vmax-sued.com?subject=B2B-Anfrage%20Tuningteil-Zulassung" class="btn-primary inline-flex items-center justify-center gap-2 mt-auto">
+            Projekt anfragen
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
         </div>
-        <h2 class="font-display text-sm uppercase tracking-tight text-text-primary mb-3">NDA-fähig</h2>
-        <p class="text-text-secondary text-sm leading-relaxed">Diskretion bei Vorserien- und Prototypenteilen ist für uns Standard. Vertraulichkeitsvereinbarungen auf Anfrage.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Erklärblock: ABE vs. Teilegutachten vs. ECE -->
-<section class="section-spacing">
+<!-- Erklärblock -->
+<section class="section-spacing bg-bg-secondary border-t border-border-subtle">
   <div class="container-vmax">
-    <div class="max-w-4xl">
-      <span class="label-caps text-burnt block mb-4">Zulassungswege im Überblick</span>
-      <h2 class="font-display text-2xl md:text-display-card uppercase tracking-tight text-text-primary mb-4">
-        ABE, Teilegutachten oder ECE — wo liegt der Unterschied?
-      </h2>
-      <p class="text-text-secondary text-lg leading-relaxed mb-10 max-w-3xl">
-        Wer Tuningteile zulassen lassen möchte, stößt schnell auf drei unterschiedliche Wege. Welcher passt, hängt von Produkt, Zielmarkt und geplantem Vertriebsweg ab. Eine falsche Wahl kostet Zeit und Geld — deshalb klären wir das am Anfang, nicht am Ende.
-      </p>
+    <span class="label-caps text-burnt block mb-4">Grundlagen</span>
+    <h2 class="font-display text-2xl md:text-display-card uppercase tracking-tight text-text-primary mb-4">
+      ABE, Teilegutachten oder ECE — wo liegt der Unterschied?
+    </h2>
+    <p class="text-text-secondary text-lg leading-relaxed max-w-3xl mb-10">
+      Wer Tuningteile zulassen lassen möchte, stößt schnell auf drei unterschiedliche Wege. Welcher passt, hängt von Produkt, Zielmarkt und geplantem Vertriebsweg ab.
+    </p>
 
-      <div class="space-y-6">
-        <div class="border border-border-subtle bg-bg-tertiary p-6 md:p-8">
-          <div class="flex flex-col md:flex-row md:items-start gap-6">
-            <div class="md:w-48 flex-shrink-0">
-              <p class="font-mono text-burnt text-xs uppercase tracking-wider mb-1">§ 22 StVZO</p>
-              <h3 class="font-display text-xl uppercase tracking-tight text-text-primary">ABE</h3>
-              <p class="text-text-muted text-xs mt-1">Allgemeine Betriebserlaubnis</p>
-            </div>
-            <div class="flex-1 text-text-secondary text-sm leading-relaxed space-y-3">
-              <p>Die ABE ist eine bundesweit gültige Vorabgenehmigung für ein bestimmtes Bauteil an definierten Fahrzeugtypen. Erteilt vom Kraftfahrt-Bundesamt (KBA). Der Endkunde kann das Teil — sofern im Lieferumfang der ABE beschrieben — ohne zusätzliche Einzelabnahme einbauen lassen.</p>
-              <p><span class="text-text-primary">Geeignet für:</span> Serienteile mit breiter Fahrzeugabdeckung, bei denen der Hersteller eine starke Marktposition und die nötige Datenbasis hat. Hoher Aufwand in der Erstprüfung, danach aber maximaler Komfort für Endkunden und Händler.</p>
-              <p><span class="text-text-primary">Unser Part:</span> Prüfstandsmessungen, Abgas- und Geräuschdaten, Dokumentation — alle Unterlagen, die der Sachverständige für den KBA-Antrag benötigt.</p>
-            </div>
+    <div class="space-y-6 max-w-4xl">
+      <div class="border border-border-subtle bg-bg-tertiary p-6 md:p-8">
+        <div class="flex flex-col md:flex-row md:items-start gap-6">
+          <div class="md:w-48 flex-shrink-0">
+            <p class="font-mono text-burnt text-xs uppercase tracking-wider mb-1">§ 22 StVZO · DE</p>
+            <h3 class="font-display text-xl uppercase tracking-tight text-text-primary">ABE</h3>
+            <p class="text-text-muted text-xs mt-1">Allgemeine Betriebserlaubnis</p>
+          </div>
+          <div class="flex-1 text-text-secondary text-sm leading-relaxed space-y-2">
+            <p>Bundesweit gültige Vorabgenehmigung für ein Bauteil an definierten Fahrzeugtypen. Erteilt vom Kraftfahrt-Bundesamt. Der Endkunde baut das Teil oft ohne Einzelabnahme ein.</p>
+            <p><span class="text-text-primary">Geeignet für:</span> Serienteile mit breiter Fahrzeugabdeckung. Hoher Initialaufwand, danach maximaler Komfort für Endkunden und Handel.</p>
           </div>
         </div>
+      </div>
 
-        <div class="border border-border-subtle bg-bg-tertiary p-6 md:p-8">
-          <div class="flex flex-col md:flex-row md:items-start gap-6">
-            <div class="md:w-48 flex-shrink-0">
-              <p class="font-mono text-burnt text-xs uppercase tracking-wider mb-1">§ 19.3 StVZO</p>
-              <h3 class="font-display text-xl uppercase tracking-tight text-text-primary">Teilegutachten</h3>
-              <p class="text-text-muted text-xs mt-1">Einzelabnahme beim Sachverständigen</p>
-            </div>
-            <div class="flex-1 text-text-secondary text-sm leading-relaxed space-y-3">
-              <p>Das Teilegutachten bestätigt die technische Unbedenklichkeit eines Bauteils für bestimmte Fahrzeuge. Jeder Endkunde muss das Teil danach noch beim Sachverständigen (GTÜ, Dekra, TÜV) in den Fahrzeugschein eintragen lassen — diesen Schritt übernehmen wir auf Wunsch komplett.</p>
-              <p><span class="text-text-primary">Geeignet für:</span> Den häufigsten Weg bei Fahrwerk, Felgen, Auspuffanlagen und Leistungssteigerungen. Geringerer Initialaufwand als eine ABE, trotzdem rechtssicherer Vertrieb in Deutschland.</p>
-              <p><span class="text-text-primary">Unser Part:</span> Prüfstandsmessung, Datenaufbereitung und Koordination mit Partner-Sachverständigen. Die <a href="/tuev-eintragung" class="text-burnt hover:underline">TÜV-Eintragung</a> beim Endkunden übernehmen wir auf Wunsch.</p>
-            </div>
+      <div class="border border-border-subtle bg-bg-tertiary p-6 md:p-8">
+        <div class="flex flex-col md:flex-row md:items-start gap-6">
+          <div class="md:w-48 flex-shrink-0">
+            <p class="font-mono text-burnt text-xs uppercase tracking-wider mb-1">§ 19.3 StVZO · DE</p>
+            <h3 class="font-display text-xl uppercase tracking-tight text-text-primary">Teilegutachten</h3>
+            <p class="text-text-muted text-xs mt-1">Abnahme beim Sachverständigen</p>
+          </div>
+          <div class="flex-1 text-text-secondary text-sm leading-relaxed space-y-2">
+            <p>Bestätigt die technische Unbedenklichkeit eines Bauteils. Der Endkunde lässt das Teil beim Sachverständigen (GTÜ, Dekra, TÜV) eintragen. <a href="/tuev-eintragung" class="text-burnt hover:underline">Diesen Schritt übernehmen wir auf Wunsch komplett &rarr;</a></p>
+            <p><span class="text-text-primary">Geeignet für:</span> Häufigster Weg bei Fahrwerk, Felgen, Auspuffanlagen und Leistungssteigerungen.</p>
           </div>
         </div>
+      </div>
 
-        <div class="border border-border-subtle bg-bg-tertiary p-6 md:p-8">
-          <div class="flex flex-col md:flex-row md:items-start gap-6">
-            <div class="md:w-48 flex-shrink-0">
-              <p class="font-mono text-burnt text-xs uppercase tracking-wider mb-1">UNECE-Regelung</p>
-              <h3 class="font-display text-xl uppercase tracking-tight text-text-primary">ECE-Typgenehmigung</h3>
-              <p class="text-text-muted text-xs mt-1">z. B. R90 Bremsen, R59 Auspuff</p>
-            </div>
-            <div class="flex-1 text-text-secondary text-sm leading-relaxed space-y-3">
-              <p>Die ECE-Typgenehmigung ist kein nationales, sondern ein internationales Regelwerk der UNECE. Eine einmal erteilte Genehmigung gilt in 60+ Unterzeichnerstaaten — der einzige Weg für den Export über Deutschland und Europa hinaus.</p>
-              <p><span class="text-text-primary">Geeignet für:</span> Tuningteil-Hersteller mit Export-Ambitionen. R90 für Bremsbeläge/-scheiben, R59 für Schalldämpfer, R112/R123 für Scheinwerfer — je nach Produktkategorie greifen unterschiedliche Regelungen.</p>
-              <p><span class="text-text-primary">Unser Part:</span> Technische Grundlagenmessungen, Datenaufbereitung für den Antragssteller. Die eigentliche ECE-Genehmigung erteilen akkreditierte technische Dienste.</p>
-            </div>
+      <div class="border border-border-subtle bg-bg-tertiary p-6 md:p-8">
+        <div class="flex flex-col md:flex-row md:items-start gap-6">
+          <div class="md:w-48 flex-shrink-0">
+            <p class="font-mono text-burnt text-xs uppercase tracking-wider mb-1">UNECE · INT</p>
+            <h3 class="font-display text-xl uppercase tracking-tight text-text-primary">ECE-Typgenehmigung</h3>
+            <p class="text-text-muted text-xs mt-1">z. B. R90 Bremsen, R59 Auspuff</p>
+          </div>
+          <div class="flex-1 text-text-secondary text-sm leading-relaxed space-y-2">
+            <p>Internationales Regelwerk der UNECE, gültig in 60+ Unterzeichnerstaaten. Der Weg für Export über Deutschland und Europa hinaus.</p>
+            <p><span class="text-text-primary">Geeignet für:</span> Hersteller mit Export-Ambitionen. Märkte außerhalb des UNECE-Abkommens (z. B. USA) brauchen einen eigenen Nachweis.</p>
           </div>
         </div>
       </div>
@@ -117,11 +188,10 @@
 </section>
 
 <!-- FAQ -->
-<section class="section-spacing bg-bg-secondary">
+<section class="section-spacing">
   <div class="container-vmax max-w-3xl">
     <span class="label-caps text-burnt block mb-4">Häufige Fragen</span>
     <h2 class="font-display text-2xl md:text-display-card uppercase tracking-tight mb-10">Tuningteil-Zulassung — FAQ</h2>
-
     <div class="space-y-4">
       <% faq.forEach(function(item) { %>
       <div class="border border-border-subtle bg-bg-tertiary">
@@ -152,4 +222,183 @@
 </section>
 
 <%- include('../partials/faq-script') %>
+
+<script>
+(function(){
+  const CATEGORIES = {
+    abgas:     { label:'Abgasanlage / Sportauspuff',           tests:['geraeusch','abgas','leistung'],    deDoc:'ABE oder Teilegutachten (§&thinsp;19.3 StVZO)', ece:'ECE-R59 – Austausch-Schalldämpferanlage', base:2 },
+    leistung:  { label:'Leistungssteigerung / Kennfeldoptimierung', tests:['leistung','abgas','geraeusch'], deDoc:'Teilegutachten (§&thinsp;19.3 StVZO)',          ece:'EU-Typgenehmigung je Variante',             base:3 },
+    fahrwerk:  { label:'Fahrwerk (Federn / Gewindefahrwerk)',  tests:['festigkeit','bremsen'],            deDoc:'Teilegutachten + Festigkeitsnachweis',           ece:'überwiegend national',                      base:2 },
+    felgen:    { label:'Felgen / Räder',                       tests:['festigkeit','bremsen'],            deDoc:'Teilegutachten / Festigkeitsgutachten',          ece:'überwiegend national',                      base:2 },
+    bremsen:   { label:'Bremsanlage',                          tests:['bremsen','festigkeit'],            deDoc:'Teilegutachten',                                 ece:'ECE-R90 – Austausch-Bremsbauteile',         base:3 },
+    ansaugung: { label:'Ansaugung / Luftfilter',               tests:['leistung','abgas','geraeusch'],    deDoc:'ABE oder Teilegutachten',                        ece:'überwiegend national',                      base:1 },
+    karosserie:{ label:'Karosserie / Aero / Anbauteile',       tests:['festigkeit'],                      deDoc:'Teilegutachten (§&thinsp;19.3 StVZO)',           ece:'überwiegend national',                      base:1 }
+  };
+  const TESTS = {
+    leistung:  'Leistungsmessung am Prüfstand',
+    abgas:     'Abgas- &amp; Emissionsmessung (Euro 0–7)',
+    geraeusch: 'Geräuschmessung nach StVZO',
+    festigkeit:'Festigkeit &amp; Fahrversuch',
+    bremsen:   'Bremsenprüfung'
+  };
+  const MARKETS = {
+    de:  { label:'Nur Deutschland', add:0, note:'Erstellung durch akkreditierte Stelle in DE — GTÜ / Dekra / TÜV Süd.' },
+    eu:  { label:'EU-weit',         add:1, note:'EU-/EG-Typgenehmigung, sofern eine Regelung existiert — sonst nationaler Weg je Mitgliedsstaat.' },
+    welt:{ label:'Weltweit',        add:2, note:'ECE gilt in 60+ UNECE-Staaten. Märkte außerhalb (z. B. USA: FMVSS / EPA / CARB) brauchen einen eigenen Nachweis.' }
+  };
+  const SCOPE = {
+    single:   { label:'Ein Modell',  add:0 },
+    multi:    { label:'Mehrere',     add:1 },
+    universal:{ label:'Universal',   add:2 }
+  };
+
+  const state = { cat:null, market:'de', scope:'single' };
+
+  // ---- build chip buttons ----
+  const catEl = document.getElementById('cat');
+  Object.entries(CATEGORIES).forEach(([k,v]) => {
+    const b = document.createElement('button');
+    b.className = 'font-condensed text-sm uppercase tracking-wide px-3 py-2 border border-border-subtle bg-bg-tertiary text-text-muted hover:text-text-primary hover:border-burnt transition-colors cursor-pointer';
+    b.textContent = v.label;
+    b.setAttribute('aria-pressed','false');
+    b.dataset.k = k;
+    b.onclick = () => { state.cat = k; syncChips(); render(); };
+    catEl.appendChild(b);
+  });
+
+  // ---- build segment buttons ----
+  buildSeg('market', MARKETS, 'market');
+  buildSeg('scope',  SCOPE,   'scope');
+
+  function buildSeg(id, obj, key) {
+    const el = document.getElementById(id);
+    Object.entries(obj).forEach(([k,v], i, arr) => {
+      const b = document.createElement('button');
+      b.className = 'flex-1 font-condensed text-xs uppercase tracking-wide py-2.5 px-3 text-text-muted hover:text-text-primary transition-colors cursor-pointer' + (i < arr.length-1 ? ' border-r border-border-subtle' : '');
+      b.textContent = v.label;
+      b.dataset.k = k;
+      b.dataset.key = key;
+      b.setAttribute('aria-pressed', state[key] === k ? 'true' : 'false');
+      b.onclick = () => { state[key] = k; syncSeg(id, key); render(); };
+      el.appendChild(b);
+    });
+  }
+
+  function syncChips() {
+    document.querySelectorAll('#cat button').forEach(b => {
+      const on = b.dataset.k === state.cat;
+      b.setAttribute('aria-pressed', on ? 'true':'false');
+      b.classList.toggle('bg-burnt',       on);
+      b.classList.toggle('border-burnt',   on);
+      b.classList.toggle('text-bg-primary',on);
+      b.classList.toggle('font-semibold',  on);
+      b.classList.toggle('bg-bg-tertiary', !on);
+      b.classList.toggle('text-text-muted',!on);
+    });
+  }
+
+  function syncSeg(id, key) {
+    document.querySelectorAll('#'+id+' button').forEach(b => {
+      const on = b.dataset.k === state[key];
+      b.setAttribute('aria-pressed', on ? 'true':'false');
+      b.classList.toggle('bg-burnt',        on);
+      b.classList.toggle('text-bg-primary', on);
+      b.classList.toggle('font-semibold',   on);
+      b.classList.toggle('text-text-muted', !on);
+    });
+  }
+
+  function render() {
+    if (!state.cat) return;
+    const c = CATEGORIES[state.cat];
+    const m = MARKETS[state.market];
+    const s = SCOPE[state.scope];
+
+    // doc
+    let doc;
+    if (state.market === 'de')   doc = c.deDoc;
+    else if (state.market === 'eu') doc = 'EU-Typgenehmigung, sonst: ' + c.deDoc;
+    else doc = (c.ece.includes('ECE')||c.ece.includes('EU')) ? c.ece + ' + nationale Ergänzung' : 'Nationaler Weg (' + c.deDoc + ') je Zielmarkt';
+
+    document.getElementById('docOut').innerHTML = doc;
+    document.getElementById('marketOut').textContent = m.note;
+
+    // tests
+    const tOut = document.getElementById('testsOut');
+    tOut.innerHTML = '';
+    c.tests.forEach(t => {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-3 py-2.5 text-sm text-text-secondary';
+      row.innerHTML = '<span class="w-5 h-5 bg-burnt text-bg-primary flex-shrink-0 grid place-items-center font-mono text-xs font-bold">✓</span>' + TESTS[t];
+      tOut.appendChild(row);
+    });
+
+    // effort
+    const score = c.base + m.add + s.add;
+    let level, lit, color;
+    if (score <= 2)      { level='Niedrig'; lit=1; color='text-success'; bc='bg-success'; }
+    else if (score <= 4) { level='Mittel';  lit=2; color='text-burnt';   bc='bg-burnt';   }
+    else                 { level='Hoch';    lit=3; color='text-error';   bc='bg-error';   }
+
+    const ev = document.getElementById('effortVal');
+    ev.textContent = level;
+    ev.className = 'font-display text-sm uppercase tracking-tight ' + color;
+    [1,2,3].forEach(i => {
+      const el = document.getElementById('e'+i);
+      el.className = 'h-1.5 flex-1 transition-colors duration-300 ' + (i <= lit ? bc : 'bg-border-subtle');
+    });
+
+    // show hidden elements
+    ['trackWrap','testsWrap','effortWrap'].forEach(id => {
+      document.getElementById(id).classList.remove('hidden');
+    });
+
+    // animate track
+    animateTrack();
+
+    // cta mailto
+    const body = encodeURIComponent('Produkt: '+c.label+'\nZielmarkt: '+m.label+'\nFahrzeug-Umfang: '+s.label+'\n\nKurzbeschreibung:\n');
+    document.getElementById('cta').href = 'mailto:stefan_jung@vmax-sued.com?subject=' + encodeURIComponent('B2B-Anfrage Zulassung: '+c.label) + '&body=' + body;
+  }
+
+  let timers = [];
+  function animateTrack() {
+    timers.forEach(clearTimeout); timers = [];
+    const stations = document.querySelectorAll('.station');
+    const fill = document.getElementById('trackFill');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    stations.forEach(s => {
+      s.querySelector('.node').classList.remove('bg-burnt','border-burnt','shadow-[0_0_0_4px_rgba(200,117,51,0.2)]');
+      s.querySelector('.node').classList.add('bg-bg-tertiary','border-border-subtle');
+      s.querySelector('.cap').classList.remove('text-text-primary');
+      s.querySelector('.cap').classList.add('text-text-muted');
+    });
+    fill.style.width = '0';
+
+    if (reduced) {
+      fill.style.transition = 'none';
+      fill.style.width = 'calc(100% - 20px)';
+      stations.forEach(s => activateStation(s));
+      return;
+    }
+
+    fill.style.transition = 'width 0.8s cubic-bezier(0.4,0,0.2,1)';
+    requestAnimationFrame(() => { fill.style.width = 'calc(100% - 20px)'; });
+    stations.forEach((s, i) => {
+      timers.push(setTimeout(() => activateStation(s), 120 + i * 200));
+    });
+  }
+
+  function activateStation(s) {
+    const node = s.querySelector('.node');
+    const cap  = s.querySelector('.cap');
+    node.classList.remove('bg-bg-tertiary','border-border-subtle');
+    node.classList.add('bg-burnt','border-burnt','shadow-[0_0_0_4px_rgba(200,117,51,0.2)]');
+    cap.classList.remove('text-text-muted');
+    cap.classList.add('text-text-primary');
+  }
+})();
+</script>
+
 <%- include('../layouts/end') %>
