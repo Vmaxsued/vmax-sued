@@ -78,7 +78,7 @@ router.get('/b2b', (req, res) => {
     breadcrumbs: [{ name: 'B2B-Prüftechnik', path: '/b2b' }],
     faq: [
       { q: 'Wie läuft ein B2B-Projekt typischerweise ab?', a: 'Erstkontakt, Sichtung der Unterlagen, Angebotserstellung, Prüfstandsmessung vor Ort, Datenaufbereitung. Die Erstellung der finalen Gutachten erfolgt durch unsere Partner-Sachverständigen.' },
-      { q: 'Arbeitet ihr auch mit Unternehmen außerhalb Bayerns?', a: 'Die Messungen finden an unserem Standort in Westendorf statt.' },
+      { q: 'Arbeitet ihr auch mit Unternehmen außerhalb Bayerns?', a: 'Ja. Unser B2B-Service ist bundesweit verfügbar.' },
       { q: 'Ist Vertraulichkeit bei Produktentwicklungen gewährleistet?', a: 'Selbstverständlich. Wir unterzeichnen auf Wunsch NDAs und behandeln alle Projektdetails vertraulich.' },
     ],
   });
