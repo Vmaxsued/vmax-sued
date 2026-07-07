@@ -1,14 +1,8 @@
-// Mailer — leitet Kontakt-Anfragen via Web3Forms an Stefan weiter.
-// Web3Forms ist ein serverless Form-Backend:
-//  - kein eigener SMTP nötig
-//  - kein Domain-Setup
-//  - 250 Mails/Monat im Free-Tier
-//  - der Access Key wird beim Onboarding erzeugt und gehört zu einer Empfänger-Mail
-// Doc: https://docs.web3forms.com/
+const { Resend } = require('resend');
 
-const WEB3FORMS_ACCESS_KEY =
-  process.env.WEB3FORMS_ACCESS_KEY || '5c3a711c-0182-4560-89e7-c9991b4e9008';
-const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+const resend = new Resend(process.env.RESEND_API_KEY || 're_BFmQ16LM_EwMHNo1hsNGw7QsxL9QzUfZz');
+const TO_EMAIL = 'stefan_jung@vmax-sued.com';
+const FROM_EMAIL = 'kontakt@vmax-sued.com';
 
 function escapeHtml(s) {
   return String(s)
@@ -22,32 +16,6 @@ function escapeHtml(s) {
 async function sendContactMail({ vehicle, service, name, email, phone, message, attachment }) {
   const subject = `Neue Anfrage: ${service} — ${vehicle.brand} ${vehicle.model}`;
 
-  // Plain-Text-Version als Fallback
-  const plainText = [
-    '=== NEUE ANFRAGE ÜBER VMAX-SUED.COM ===',
-    '',
-    'FAHRZEUG',
-    `  Marke:    ${vehicle.brand}`,
-    `  Modell:   ${vehicle.model}`,
-    `  Baujahr:  ${vehicle.year || '—'}`,
-    `  Motor:    ${vehicle.engine || '—'}`,
-    '',
-    'GEWÜNSCHTER SERVICE',
-    `  ${service}`,
-    '',
-    'KONTAKTDATEN',
-    `  Name:     ${name}`,
-    `  E-Mail:   ${email}`,
-    `  Telefon:  ${phone || '—'}`,
-    '',
-    'NACHRICHT',
-    `  ${message || '—'}`,
-    '',
-    attachment ? `(Fahrzeugschein-Anhang: ${attachment.filename})` : '(Kein Fahrzeugschein-Anhang)',
-    '=========================================',
-  ].join('\n');
-
-  // HTML-Mail mit Branding
   const htmlBody = `
     <div style="font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background: #141414; color: #F5F5F5;">
       <div style="background: #0A0A0A; padding: 24px 32px; border-bottom: 2px solid #C87533;">
@@ -82,43 +50,29 @@ async function sendContactMail({ vehicle, service, name, email, phone, message, 
     </div>
   `;
 
-  // Web3Forms erwartet multipart/form-data wenn ein File dabei ist,
-  // sonst tut's auch JSON. Wir nutzen FormData für beide Fälle.
-  const form = new FormData();
-  form.append('access_key', WEB3FORMS_ACCESS_KEY);
-  form.append('subject', subject);
-  form.append('from_name', 'Vmax Sued Kontaktformular');
-  form.append('replyto', email);
-  form.append('name', name);
-  form.append('email', email);
-  form.append('phone', phone || '');
-  form.append('message', plainText);
-  form.append('html', htmlBody);
-  // Anti-Spam: leeres Botpot-Feld
-  form.append('botcheck', '');
+  const payload = {
+    from: `Vmax Sued Kontaktformular <${FROM_EMAIL}>`,
+    to: TO_EMAIL,
+    reply_to: email,
+    subject,
+    html: htmlBody,
+  };
 
   if (attachment && attachment.content && attachment.content.length > 0) {
-    const blob = new Blob([attachment.content], {
-      type: attachment.contentType || 'application/octet-stream',
-    });
-    form.append('attachment', blob, attachment.filename || 'fahrzeugschein');
+    payload.attachments = [{
+      filename: attachment.filename || 'fahrzeugschein',
+      content: attachment.content,
+    }];
   }
 
-  let res;
-  try {
-    res = await fetch(WEB3FORMS_ENDPOINT, { method: 'POST', body: form });
-  } catch (err) {
-    console.error('[mailer] Web3Forms-Request fehlgeschlagen:', err.message);
+  const { data, error } = await resend.emails.send(payload);
+
+  if (error) {
+    console.error('[mailer] Resend-Fehler:', error);
     throw new Error('Versand fehlgeschlagen. Bitte später erneut versuchen.');
   }
 
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || data.success === false) {
-    console.error('[mailer] Web3Forms-Antwort:', res.status, data);
-    throw new Error(data.message || 'Web3Forms hat die Anfrage abgelehnt.');
-  }
-
-  return { messageId: 'web3forms-' + Date.now() };
+  return { messageId: data.id };
 }
 
 module.exports = { sendContactMail };
